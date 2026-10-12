@@ -7,6 +7,47 @@ page.
 This project uses [semantic versioning](https://semver.org/); the major version
 tracks the specification revision it was built against.
 
+## [1.6.5] — 2026-10-12
+
+The first view is renamed after the whole design, the One Phase walk opens two rounds in turn with a
+leader that follows the round being opened, the type takes a step up throughout, and the design
+figure’s footer keeps only the two notations it explains.
+
+### Changed
+
+- **The first view is FEILIAN, not HAIFA.** The iteration is drawn the way the submission sketches
+  it: IV feeds a chain of three compression calls labelled **CF**, each fed from above by its
+  message block — the last one spelled out `M_l ‖ 0*`, the final message piece plus zero padding —
+  and from below by its tweak **tw**, the specification's own notation, replacing *salt* — and the
+  chain leaves as `h_{l+1}`. The blocks take the specification's uppercase **M**. The sub-captions
+  move into the figure's footer line.
+- **One Phase opens two rounds, one after the other.** The walk lights round 1 and opens the
+  absorbing round R̂⊕ below it — SubColumn, ShiftRow, the two message halves, AddConstant — then
+  lights round 2 and opens a plain round **R** in the same viewport: the same five steps, no
+  message feeds, the caption swapping to *one round R — a plain round, expanded*. Rounds 3 and 4
+  follow along the chain. Fourteen steps in all.
+- **Type is a step larger throughout.** The lead paragraphs go from 15.5 to 17px; the Updates list
+  matches the body text at 17px (its dates and rules step up with it); the timeline, review cards,
+  the benchmark table (whose inline 13.5px override is gone), table captions, references and the
+  download-card subtitles all take a notch; paragraph spacing above and below the lead widens.
+- **Type inside the design figure steps up too.** Labels 12 → 14px, sub-labels 9.6 → 11px,
+  operation tags 11 → 13px, the node glyphs 10.5 → 12.5px, and the sub- and superscripts move with
+  them. As the opened-round captions widen, the magnifier leading each one re-seats just ahead of its
+  caption, and the caption line itself drops 4px so the enlarged ascenders keep clear of the
+  leader's arrowhead.
+- **The dashed leader now follows the round being opened.** One Phase opens round 1 and then round 2
+  in the same viewport, but the leader tying the viewport to the chain hung under round 1 only — so
+  while a plain round **R** was open it pointed at the wrong box. A second leader now hangs under
+  round 2 and the two swap with the caption; both stay dashed, the dashes being what marks an
+  enlargement. The in-figure line under the phase bracket shortens to *five phases · 20 rounds* to
+  clear the new leader — the full sentence stays in the view's caption below the figure.
+- **The figure's footer keeps only the notations it glosses.** The FEILIAN view's footer carried
+  the block size and round count, the padding note, the tweak's fields, the feed-forward identity
+  and the three digest lengths, across two lines. Only `0*` and `tw` are labels inside that view,
+  so the footer is cut to a single line — *0* = zero padding only · tw = (ver, flag, t₀, t₁)
+  enters every call* — and everything else stays where it already reads in full: the view
+  captions under the figure and the introduction.
+
 ## [1.6.4] — 2026-10-12
 
 The page is re-cut into five chapters and the design figure is rebuilt around the specification's own hierarchy: HAIFA structure, compress function, phase, round, SubColumn.

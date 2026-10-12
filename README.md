@@ -6,7 +6,7 @@ Institute of Commercial Cryptography Standards (ICCS), China.
 **Live site — <https://pennybenny.github.io/FEILIAN/>**
 
 The page is organised as five chapters: an **introduction** to the design — with a four-view
-interactive figure (the HAIFA structure, the compress function, one phase with its absorbing round
+interactive figure (the FEILIAN iteration, the compress function, one phase with two of its rounds
 drawn out inside it, and SubColumn), closing with a short **Updates** list whose dated lines link to
 the release packages — a **live demo** that computes digests in the browser, the
 **documents** (both release packages, each checksummed, holding the specification, the erratum and
@@ -31,7 +31,7 @@ the page renders and the demo runs identically offline, from `file://`, and from
 
 | § | Section | What it covers |
 |---|---|---|
-| 1 | Introduction | The design in brief — 1024-bit state and block, the tweakable ARX permutation, Davies–Meyer — with a **four-view interactive figure**: the HAIFA structure (message blocks, chaining value, salt), the compress function (five phases, the tweak, the feed-forward), one phase (the absorbing round and the three rounds that follow it, with that absorbing round opened up underneath), and SubColumn; closing with a short **Updates** list — one dated line per release, each linking to its package in §3 |
+| 1 | Introduction | The design in brief — 1024-bit state and block, the tweakable ARX permutation, Davies–Meyer — with a **four-view interactive figure**: the FEILIAN iteration (message blocks, chaining value, tweak), the compress function (five phases, the tweak, the feed-forward), one phase (four rounds, with round 1 and round 2 opened up underneath), and SubColumn; closing with a short **Updates** list — one dated line per release, each linking to its package in §3 |
 | 2 | Live demo | A JavaScript port of the compression function running in the page: text / hex / bit-string input, 512 / 768 / 1024 output, a known-answer self-test against the Appendix B vectors, and the timings it measures itself |
 | 3 | Documents | Both **release packages** — **v1.0.1** (specification, erratum and all implementations in one archive) and the original **v1.0** — each with its SHA-256; and the **revision history of the submission** |
 | 4 | Performance | The cost the specification reports: software benchmarks on three platforms, FPGA throughput by architecture, and cycles per byte against BLAKE-64 / SHA-512 / SHA-3-512 |
@@ -175,7 +175,7 @@ The component analysis:
 
 The submission's overview page, if you need to point at it:
 
-> *FEILIAN — Submission Overview* (v1.6.4), <https://pennybenny.github.io/FEILIAN/>
+> *FEILIAN — Submission Overview* (v1.6.5), <https://pennybenny.github.io/FEILIAN/>
 
 ---
 
@@ -187,5 +187,5 @@ recorded in [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Release history
 
-See [`CHANGELOG.md`](CHANGELOG.md). Current release: **v1.6.4** (12 October 2026), tracking
+See [`CHANGELOG.md`](CHANGELOG.md). Current release: **v1.6.5** (12 October 2026), tracking
 specification **v1.0.1** (8 October 2026).
