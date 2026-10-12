@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FEILIAN — Introduction, Live Demo, Artifacts and Analysis</title>
+<title>FEILIAN — Introduction, Live Demo, Documents, Performance and Analysis</title>
 <meta name="description" content="FEILIAN, the 1024-bit ARX hash function submitted to the NGCC-CH programme: its design and reported performance, a live in-browser digest demo, the released documents and implementations, and the independent third-party analyses of it.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://pennybenny.github.io/FEILIAN/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FEILIAN — Submission Overview">
-<meta property="og:title" content="FEILIAN — Introduction, Live Demo, Artifacts and Analysis">
-<meta property="og:description" content="An introduction to the FEILIAN hash function (NGCC-CH) and its reported performance, a live in-browser digest demo, the artifacts that document it, and the independent third-party analyses it has received.">
+<meta property="og:title" content="FEILIAN — Introduction, Live Demo, Documents, Performance and Analysis">
+<meta property="og:description" content="An introduction to the FEILIAN hash function (NGCC-CH) and its reported performance, a live in-browser digest demo, the documents that record it, and the independent third-party analyses it has received.">
 <meta property="og:url" content="https://pennybenny.github.io/FEILIAN/">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FEILIAN — Introduction, Live Demo, Artifacts and Analysis">
-<meta name="twitter:description" content="Introduction, a live in-browser hash demo, downloadable artifacts, and the third-party security analyses of the FEILIAN hash function.">
+<meta name="twitter:title" content="FEILIAN — Introduction, Live Demo, Documents, Performance and Analysis">
+<meta name="twitter:description" content="Introduction, a live in-browser hash demo, downloadable documents, and the third-party security analyses of the FEILIAN hash function.">
 <!-- Scholarly indexing metadata for the underlying specification. -->
 <meta name="citation_title" content="FEILIAN: A Hash Function Proposal (submitted specification, version 1.0.1, 8 October 2026)">
 <meta name="citation_author" content="Lei Wang">
@@ -45,6 +45,7 @@
   a:hover{text-decoration:underline}
   .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
   h2,h3,h4{line-height:1.25}
+  h3{font-size:19px}
 
   #prog{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad);z-index:100;transition:width .12s linear}
 
@@ -53,20 +54,15 @@
   .rv.d1{transition-delay:.06s}.rv.d2{transition-delay:.12s}.rv.d3{transition-delay:.18s}.rv.d4{transition-delay:.24s}
 
   header.hero{position:relative;color:#fff;background:#17293f;
-              border-bottom:1px solid #0e1c2c;padding:66px 0 58px}
+              border-bottom:1px solid #0e1c2c;padding:54px 0 48px}
   header.hero .wrap{position:relative;z-index:2}
-  .kicker{display:inline-flex;align-items:center;gap:8px;letter-spacing:.16em;text-transform:uppercase;
-          font-size:11px;font-weight:600;color:#c2cfdd;
-          border:1px solid rgba(194,207,221,.26);background:rgba(194,207,221,.07);
-          padding:6px 12px;border-radius:20px;margin:0 0 18px}
-  .kicker .dot{width:7px;height:7px;border-radius:50%;background:#8aabcc}
-  header.hero h1{margin:0 0 14px;font-size:60px;font-weight:800;letter-spacing:-.02em;line-height:1}
+  header.hero h1{margin:0;font-size:60px;font-weight:800;letter-spacing:-.02em;line-height:1}
   header.hero h1 span{color:#fff}
-  header.hero p.sub{margin:0;font-size:17px;color:#c6d1de;max-width:640px}
+  header.hero p.sub{margin:14px 0 0;font-size:17px;color:#c6d1de;max-width:640px}
   .btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;
        padding:11px 20px;border-radius:10px;cursor:pointer;border:1px solid transparent;transition:.2s}
 
-  .dl-sub{font-size:13px;color:var(--ink-soft);margin:6px 0 10px;min-height:36px}
+  .dl-sub{font-size:14px;color:var(--ink-soft);margin:6px 0 10px;min-height:38px}
   .dl-meta{font-size:11.5px;color:var(--ink-soft);margin:0 0 14px;word-break:break-all;line-height:1.5}
   .dl-btn{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;
           padding:9px 16px;border-radius:9px;border:1px solid var(--accent);
@@ -74,7 +70,6 @@
   .dl-btn:hover{background:#16304f;text-decoration:none;transform:translateY(-1px)}
   .dl-btn.off{border-color:var(--line2);background:transparent;color:var(--ink-soft);cursor:not-allowed}
   .dl-btn.off:hover{transform:none;background:transparent}
-
 
   nav.toc{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);
           border-bottom:1px solid var(--line)}
@@ -84,7 +79,7 @@
   nav.toc a.on{background:var(--accent);color:#fff}
 
   section{padding:56px 0 8px}
-  .eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--p2);margin:0 0 8px}
+  .eyebrow{font-size:17px;font-weight:700;letter-spacing:.115em;text-transform:uppercase;color:var(--accent);margin:0 0 17px}
   section h2{font-size:30px;margin:0 0 10px;letter-spacing:-.015em}
   .lead{color:var(--ink-soft);margin:8px 0 22px;max-width:840px;font-size:15.5px}
 
@@ -94,6 +89,7 @@
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
   .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   .grid-auto{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+  #dlgrid{grid-template-columns:1fr}
   .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
   @media(max-width:900px){.grid3,.grid4{grid-template-columns:1fr 1fr}}
   @media(max-width:640px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
@@ -126,14 +122,6 @@
               color:var(--ink-soft);text-decoration:none}
   td.k .altid:hover{color:var(--accent);text-decoration:underline}
 
-  .note{background:#fbf8ef;border:1px solid #e9dfc6;border-left:4px solid var(--med);border-radius:10px;
-        padding:13px 17px;font-size:13.5px;margin:16px 0}
-  .note b{color:var(--med)}
-  .callout{background:var(--accent-soft);border:1px solid #d9e1ea;border-radius:10px;padding:15px 18px;margin:16px 0;font-size:14px}
-  .callout.warn{background:#f9ecea;border-color:#e6c2bd}
-  .callout.ok{background:#ebf3ef;border-color:#c2dcd0}
-  .callout h4{margin:0 0 8px;font-size:14px}
-
   figure{margin:18px 0}
   figure svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--line);border-radius:14px}
   figcaption{font-size:12.5px;color:var(--ink-soft);margin-top:9px;text-align:center}
@@ -147,20 +135,28 @@
   .chartfig svg{display:block;width:100%;height:auto;background:transparent;border:0;border-radius:0}
   .chartfig .barg,
   .chartfig .serg,
-  .chartfig .pt{transition:transform .2s cubic-bezier(.2,.7,.3,1),opacity .2s,filter .2s}
+  .chartfig .pt,
+  .chartfig .lgg{transition:transform .2s cubic-bezier(.2,.7,.3,1),opacity .2s,filter .2s}
   .chartfig .ln{transition:stroke-width .2s}
+  .chartfig .lgg text{transition:fill .2s}
   /* a fat invisible twin of each series line: the drawn stroke is 2-3px, which
      is far too thin to hit with a pointer */
   .chartfig .hit{fill:none;stroke:transparent;stroke-width:15;stroke-linecap:round}
   @media(hover:hover){
     .chartfig .barg:hover{transform:scale(1.07);filter:brightness(1.12)}
     .chartfig .pt:hover{transform:scale(2.1)}
-    .chartfig .serg:hover .ln{stroke-width:4.6}
-    .chartfig:has(.barg:hover) .barg:not(:hover),
-    .chartfig:has(.serg:hover) .serg:not(:hover){opacity:.32}
+    /* The line chart carries one pointer state for the whole figure. The script
+       sets `hl` on the pair the pointer is on — a series and its name in the
+       legend — and `sync` while the pointer is anywhere inside, so the label and
+       the line can never disagree. */
+    .chartfig .serg.hl .ln{stroke-width:4.6}
+    .chartfig .lgg.hl text{fill:var(--accent)}
+    .chartfig .lgg.hl line{stroke-width:3.4}
+    .chartfig.sync .serg:not(.hl),
+    .chartfig.sync .lgg:not(.hl){opacity:.32}
+    .chartfig:has(.barg:hover) .barg:not(:hover){opacity:.32}
   }
-  @media(prefers-reduced-motion:reduce){.chartfig .barg,.chartfig .serg,.chartfig .pt,.chartfig .ln{transition:none}}
-
+  @media(prefers-reduced-motion:reduce){.chartfig .barg,.chartfig .serg,.chartfig .pt,.chartfig .lgg,.chartfig .ln{transition:none}}
 
   ul.tight{margin:8px 0;padding-left:19px}
   ul.tight li{margin:5px 0}
@@ -175,6 +171,19 @@
                  background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
   .tl li.mute::before{background:#c2c9d3;box-shadow:0 0 0 3px #f1f3f6}
   .tl li .d{display:block;font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--p2);letter-spacing:.02em}
+
+  /* Updates -- the dated releases, each line pointing at its package in Documents */
+  .upd-h{margin:22px 0 8px;font-size:15.5px;font-weight:700;color:var(--ink)}
+  .upd{list-style:none;margin:0;padding:0;max-width:840px}
+  .upd li{position:relative;padding:0 0 10px 18px;font-size:13.5px;line-height:1.7;color:var(--ink-soft)}
+  .upd li:last-child{padding-bottom:0}
+  .upd li::before{content:"";position:absolute;left:2px;top:9px;width:4px;height:4px;border-radius:50%;background:var(--accent)}
+  .upd .d{font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--p2);letter-spacing:.02em;margin-right:8px}
+  .upd a{color:var(--accent);white-space:nowrap}
+  /* the down arrow is the "this line points into Documents" hint */
+  .upd a .jmp{display:inline-block;margin-left:5px;font-weight:700;line-height:1;transition:transform .18s ease}
+  @media(hover:hover){.upd a:hover .jmp,.upd a:focus-visible .jmp{transform:translateY(3px)}}
+  @media(prefers-reduced-motion:reduce){.upd a .jmp{transition:none}}
 
   .revcard{display:flex;flex-direction:column}
   .revcard .who{font-size:12px;color:var(--ink-soft);margin:0 0 10px;font-family:var(--mono);font-size:11.5px}
@@ -198,10 +207,7 @@
                                padding-top:9px;border-top:1px dashed var(--line)}
   }
 
-  .steps{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:6px 0 14px}
-  .stepbtn{border:1px solid var(--line2);background:#fff;border-radius:9px;width:38px;height:38px;
-           font-size:16px;cursor:pointer;color:var(--ink);transition:.2s}
-  .stepbtn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+  .steps{margin:6px 0 14px}
   .stepcap{font-size:13.5px;color:var(--ink-soft)}
   .stepcap b{color:var(--ink)}
   /* ---------- interactive design figure ---------- */
@@ -236,6 +242,17 @@
   #designfig .dg-lb.on,#designfig .dg-sb.on{fill:var(--accent)}
   #designfig .dg-dash{fill:none;stroke:#cbd1d9;stroke-width:1.4;stroke-dasharray:4 4;transition:.55s}
   #designfig .dg-dash.on{stroke:var(--accent);stroke-dasharray:7 4}
+  /* the leader and its arrowhead stay dashed at all times: the dashes are what
+     says the round below is an enlargement of this one step of the phase */
+  /* the enlarged round is held in a viewport, not a box: four corner brackets
+     delimit it without competing with the solid phase boxes above */
+  #designfig path.dgb{fill:none;stroke:var(--accent);stroke-width:1.6;
+    stroke-linecap:round;stroke-linejoin:round;transition:stroke .55s}
+  /* magnifier leading the caption of the enlarged round */
+  #designfig .dgm{fill:none;stroke:var(--accent);stroke-width:1.7;stroke-linecap:round}
+  /* elision on the HAIFA chain: three dots sitting on the broken leader */
+  #designfig .dgd{fill:#6f7885;transition:fill .55s}
+  #designfig .dgn.on .dgd{fill:var(--accent)}
   #designfig .mf{fill:none;stroke:#cbd1d9;stroke-width:1.4;transition:.55s}
   #designfig polygon.mf{stroke:none;fill:#cbd1d9}
   #designfig .mf.on{stroke:var(--p2)}
@@ -278,6 +295,16 @@
   #designfig .dgn.on .dg-sb{fill:var(--accent)}
   #designfig .dgn .dg-reg{fill:none;stroke:#ccd2da;stroke-width:1.3;stroke-dasharray:5 5;transition:.4s}
   #designfig .dgn.on .dg-reg{stroke:var(--accent);stroke-dasharray:none}
+  /* HAIFA structure view: stages light up one at a time */
+  #designfig .hfa{opacity:.3;transition:opacity .5s ease}
+  #designfig .hfa.on{opacity:1}
+  #designfig .hfa.on .dg-lb{fill:var(--accent)}
+  #designfig .hfa.on .cfblk{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2.2}
+  /* one-phase view: the four rounds light up in turn */
+  #designfig .phn{opacity:.3;transition:opacity .5s ease}
+  #designfig .phn.on{opacity:1}
+  #designfig .phn.on .dg-lb{fill:var(--accent)}
+  #designfig .phn.on .cfblk{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2.2}
 
   .bar-row{display:grid;grid-template-columns:132px 1fr 100px;align-items:center;gap:12px;margin:8px 0;font-size:13px}
   .bar-track{background:#f2f4f7;border-radius:6px;height:22px;overflow:hidden}
@@ -394,9 +421,8 @@
 <!-- ================= HERO ================= -->
 <header class="hero">
   <div class="wrap">
-    <p class="kicker"><span class="dot"></span> NGCC-CH Submission</p>
     <h1><span>FEILIAN</span></h1>
-    <p class="sub">A 1024-bit ARX hash function submitted to the Next-generation Commercial Cryptographic Algorithms programme.</p>
+    <p class="sub">A hash function submitted to the Next-generation Commercial Cryptographic Algorithms programme.</p>
   </div>
 </header>
 
@@ -405,9 +431,9 @@
   <div class="wrap">
     <a href="#introduction">Introduction</a>
     <a href="#demo">Live demo</a>
-    <a href="#downloads">Downloads</a>
+    <a href="#documents">Documents</a>
+    <a href="#performance">Performance</a>
     <a href="#analysis">Third-party analysis</a>
-    <a href="#sources">Sources</a>
   </div>
 </nav>
 
@@ -416,31 +442,106 @@
 <!-- ================= INTRODUCTION ================= -->
 <section id="introduction">
   <p class="eyebrow rv">01 — Introduction</p>
-  <h2 class="rv">What FEILIAN is</h2>
   <p class="lead rv">FEILIAN is a candidate submitted to the Next-generation Commercial Cryptographic Algorithms programme (NGCC-CH): a tweakable ARX permutation in Davies–Meyer mode over a 1024-bit state and message block. The three digest lengths share that state, keeping a different amount of output, so one core serves the whole family.</p>
 
-  <div class="grid4">
-    <div class="card stat lift rv d1"><div class="v" data-count="1024" data-suffix="-bit">0</div><div class="l">Chaining state &amp; message block</div></div>
-    <div class="card stat lift rv d2"><div class="v" data-count="20">0</div><div class="l">Rounds across 5 phases</div></div>
-    <div class="card stat lift rv d3"><div class="v" data-count="40">0</div><div class="l">SubColumn · ShiftRow layers</div></div>
-    <div class="card stat lift rv d4"><div class="v" data-count="3">0</div><div class="l">Digest sizes · 512 / 768 / 1024</div></div>
-  </div>
+  <p class="upd-h rv"><b>Updates</b></p>
+  <ul class="upd rv">
+    <li><span class="d">2026-10-08</span> Specification <b>v1.0.1</b> (69&nbsp;pp.) issued with a three-page erratum &mdash; the corrections of Tables&nbsp;1&ndash;2 and five further passages made after the assessments; published as <a href="#dl-v101">release package v1.0.1<span class="jmp" aria-hidden="true">&#8595;</span></a>.</li>
+    <li><span class="d">2026-06-30</span> Original submission <b>v1.0</b> (68&nbsp;pp.), the revision examined by the assessments; published as <a href="#dl-v100">release package v1.0<span class="jmp" aria-hidden="true">&#8595;</span></a>.</li>
+  </ul>
 
-  <div class="card rv" id="designfig" style="margin-top:18px">
-    <h3 style="margin-top:0">The design in four views</h3>
+  <div class="card rv" id="designfig">
+    <h3 style="margin-top:0">The design in picture views</h3>
 
     <div class="stagebar" role="tablist" aria-label="Design views">
-      <button class="stagetab on" data-stg="0" role="tab" aria-selected="true">Compression function</button>
-      <button class="stagetab" data-stg="1" role="tab" aria-selected="false">One round</button>
-      <button class="stagetab" data-stg="2" role="tab" aria-selected="false">SubColumn</button>
-      <button class="stagetab" data-stg="3" role="tab" aria-selected="false">ARX S-box</button>
+      <button class="stagetab on" data-stg="0" role="tab" aria-selected="true" title="HAIFA structure">HAIFA</button>
+      <button class="stagetab" data-stg="1" role="tab" aria-selected="false" title="Compress function">Compress Function</button>
+      <button class="stagetab" data-stg="2" role="tab" aria-selected="false" title="One phase, with its absorbing round expanded">One Phase</button>
+      <button class="stagetab" data-stg="3" role="tab" aria-selected="false" title="SubColumn">SubColumn</button>
     </div>
 
     <figure style="margin:4px 0 0">
-      <svg viewBox="0 0 700 300" id="dsvg" role="img" aria-label="Four interactive views of the FEILIAN design: the compression function, one round, SubColumn, and the ARX S-box">
+      <svg viewBox="0 0 700 300" id="dsvg" role="img" aria-label="Four interactive views of the FEILIAN design: the HAIFA structure, the compress function, one phase with its absorbing round expanded, and SubColumn">
 
-        <!-- ================= VIEW 1 — COMPRESSION FUNCTION ================= -->
-        <g class="stg on" id="stg0">
+        <!-- ================= VIEW 1 — HAIFA STRUCTURE ================= -->
+        <g class="stg on" id="stg0" data-view="0">
+          <text class="dg-sb mid" x="384" y="24">message, padded and split into 1024-bit blocks</text>
+
+          <g class="dgn hfa" data-hf="iv">
+            <text class="dg-lb end" x="102" y="151">IV</text>
+            <line class="dg-w" x1="106" y1="146" x2="125" y2="146"/>
+            <polygon class="dg-tip" points="132,146 125,142 125,150"/>
+          </g>
+
+          <g class="dgn hfa" data-hf="0">
+            <rect class="dg-box" x="132" y="44" width="126" height="34" rx="7"/>
+            <text class="dg-lb mid" x="195" y="66">m<tspan dy="3" font-size="8.5">0</tspan></text>
+            <line class="dg-w" x1="195" y1="78" x2="195" y2="112"/>
+            <polygon class="dg-tip" points="195,118 191,111 199,111"/>
+            <rect class="cfblk" x="132" y="118" width="126" height="56" rx="9"/>
+            <text class="dg-lb mid" x="195" y="144">F</text>
+            <text class="dg-sb mid" x="195" y="160">ARX permutation</text>
+            <line class="dg-w" x1="195" y1="212" x2="195" y2="181"/>
+            <polygon class="dg-tip" points="195,174 191,181 199,181"/>
+            <rect class="dg-box" x="132" y="212" width="126" height="34" rx="7"/>
+            <text class="dg-sb mid" x="195" y="234">salt<tspan dy="3" font-size="7">0</tspan></text>
+          </g>
+
+          <g class="dgn hfa" data-hf="1">
+            <line class="dg-w" x1="258" y1="146" x2="277" y2="146"/>
+            <circle class="dgd" cx="282.5" cy="146" r="1.15"/>
+            <circle class="dgd" cx="287" cy="146" r="1.15"/>
+            <circle class="dgd" cx="291.5" cy="146" r="1.15"/>
+            <line class="dg-w" x1="297" y1="146" x2="309" y2="146"/>
+            <polygon class="dg-tip" points="316,146 309,142 309,150"/>
+            <text class="dg-sb mid" x="287" y="138">h<tspan dy="3" font-size="7">1</tspan></text>
+            <rect class="dg-box" x="316" y="44" width="126" height="34" rx="7"/>
+            <text class="dg-lb mid" x="379" y="66">m<tspan dy="3" font-size="8.5">i</tspan></text>
+            <line class="dg-w" x1="379" y1="78" x2="379" y2="112"/>
+            <polygon class="dg-tip" points="379,118 375,111 383,111"/>
+            <rect class="cfblk" x="316" y="118" width="126" height="56" rx="9"/>
+            <text class="dg-lb mid" x="379" y="144">F</text>
+            <text class="dg-sb mid" x="379" y="160">20 rounds</text>
+            <line class="dg-w" x1="379" y1="212" x2="379" y2="181"/>
+            <polygon class="dg-tip" points="379,174 375,181 383,181"/>
+            <rect class="dg-box" x="316" y="212" width="126" height="34" rx="7"/>
+            <text class="dg-sb mid" x="379" y="234">salt<tspan dy="3" font-size="7">i</tspan></text>
+          </g>
+
+          <g class="dgn hfa" data-hf="2">
+            <line class="dg-w" x1="442" y1="146" x2="461" y2="146"/>
+            <circle class="dgd" cx="466.5" cy="146" r="1.15"/>
+            <circle class="dgd" cx="471" cy="146" r="1.15"/>
+            <circle class="dgd" cx="475.5" cy="146" r="1.15"/>
+            <line class="dg-w" x1="481" y1="146" x2="493" y2="146"/>
+            <polygon class="dg-tip" points="500,146 493,142 493,150"/>
+            <text class="dg-sb mid" x="471" y="138">h<tspan dy="3" font-size="7">i+1</tspan></text>
+            <rect class="dg-box" x="500" y="44" width="126" height="34" rx="7"/>
+            <text class="dg-lb mid" x="563" y="66">m<tspan dy="3" font-size="8.5">k&#8722;1</tspan></text>
+            <line class="dg-w" x1="563" y1="78" x2="563" y2="112"/>
+            <polygon class="dg-tip" points="563,118 559,111 567,111"/>
+            <rect class="cfblk" x="500" y="118" width="126" height="56" rx="9"/>
+            <text class="dg-lb mid" x="563" y="144">F</text>
+            <text class="dg-sb mid" x="563" y="160">pad &#8214; length</text>
+            <line class="dg-w" x1="563" y1="212" x2="563" y2="181"/>
+            <polygon class="dg-tip" points="563,174 559,181 567,181"/>
+            <rect class="dg-box" x="500" y="212" width="126" height="34" rx="7"/>
+            <text class="dg-sb mid" x="563" y="234">salt<tspan dy="3" font-size="7">k&#8722;1</tspan></text>
+          </g>
+
+          <g class="dgn hfa" data-hf="out">
+            <line class="dg-w" x1="626" y1="146" x2="663" y2="146"/>
+            <polygon class="dg-tip" points="670,146 663,142 663,150"/>
+            <text class="dg-lb" x="676" y="151">h<tspan dy="3" font-size="8.5">k</tspan></text>
+          </g>
+
+          <text class="dg-sb mid" x="384" y="278">one compression call per block, the block index and message length entering as the salt</text>
+          <text class="dg-sb mid" x="384" y="298">feed-forward h&#8242; = h &#8853; v&#8325; &#183; output truncated to 512 / 768 / 1024 bits</text>
+        </g>
+
+
+        <!-- ================= VIEW 2 — COMPRESS FUNCTION ================= -->
+        <g class="stg" id="stg1" data-view="1">
           <text class="dg-lb end mfin" x="330" y="19">m</text>
           <text class="dg-sb mfin" x="338" y="19">1024-bit</text>
           <line class="dg-w mfin" x1="348" y1="25" x2="348" y2="46"/>
@@ -469,15 +570,15 @@
           <circle cx="120" cy="118" r="3" fill="#c7cdd6"/>
 
           <rect class="cfblk" data-cf="0" x="161" y="96" width="62" height="44" rx="8"/>
-          <text class="dg-lb mid" data-cf="0" x="192" y="115">P&#8320;</text><text class="dg-sb mid" data-cf="0" x="192" y="131">msg @ 1</text>
+          <text class="dg-lb mid" data-cf="0" x="192" y="121">P&#8320;</text>
           <rect class="cfblk" data-cf="1" x="239" y="96" width="62" height="44" rx="8"/>
-          <text class="dg-lb mid" data-cf="1" x="270" y="115">P&#8321;</text><text class="dg-sb mid" data-cf="1" x="270" y="131">msg @ 5</text>
+          <text class="dg-lb mid" data-cf="1" x="270" y="121">P&#8321;</text>
           <rect class="cfblk" data-cf="2" x="317" y="96" width="62" height="44" rx="8"/>
-          <text class="dg-lb mid" data-cf="2" x="348" y="115">P&#8322;</text><text class="dg-sb mid" data-cf="2" x="348" y="131">msg @ 9</text>
+          <text class="dg-lb mid" data-cf="2" x="348" y="121">P&#8322;</text>
           <rect class="cfblk" data-cf="3" x="395" y="96" width="62" height="44" rx="8"/>
-          <text class="dg-lb mid" data-cf="3" x="426" y="115">P&#8323;</text><text class="dg-sb mid" data-cf="3" x="426" y="131">msg @ 13</text>
+          <text class="dg-lb mid" data-cf="3" x="426" y="121">P&#8323;</text>
           <rect class="cfblk" data-cf="4" x="473" y="96" width="62" height="44" rx="8"/>
-          <text class="dg-lb mid" data-cf="4" x="504" y="115">P&#8324;</text><text class="dg-sb mid" data-cf="4" x="504" y="131">msg @ 17</text>
+          <text class="dg-lb mid" data-cf="4" x="504" y="121">P&#8324;</text>
 
           <line class="dg-w" x1="225" y1="118" x2="232" y2="118"/><polygon class="dg-tip" points="239,118 232,114 232,122"/>
           <line class="dg-w" x1="303" y1="118" x2="310" y2="118"/><polygon class="dg-tip" points="317,118 310,114 310,122"/>
@@ -499,8 +600,65 @@
           <text class="dg-sb hfff mid" x="343" y="256">Davies&ndash;Meyer feed-forward &#8212; h&#8242; = h &#8853; v&#8325;</text>
         </g>
 
-        <!-- ================= VIEW 2 — ONE ROUND ================= -->
-        <g class="stg" id="stg1">
+        <!-- ================= VIEW 3 — ONE PHASE ================= -->
+        <g class="stg" id="stg2" data-view="2">
+          <g class="phn" data-ph="0">
+            <text class="dg-lb mid" x="126" y="44">m</text>
+            <text class="dg-sb mid" x="126" y="58">1024-bit block</text>
+            <line class="dg-w" x1="126" y1="64" x2="126" y2="92"/>
+            <polygon class="dg-tip" points="126,98 122,91 130,91"/>
+            <text class="dg-lb end" x="52" y="136">v</text>
+            <line class="dg-w" x1="56" y1="131" x2="60" y2="131"/>
+            <polygon class="dg-tip" points="65,131 59,127 59,135"/>
+            <rect class="cfblk" x="65" y="96" width="122" height="70" rx="9"/>
+            <text class="dg-lb mid" x="126" y="134">R&#770;<tspan dy="-5" font-size="8.5">&#8853;</tspan></text>
+            <text class="dg-sb mid" x="126" y="152">round 1 &#183; absorbs m</text>
+          </g>
+          <g class="phn" data-ph="1">
+            <line class="dg-w" x1="187" y1="131" x2="205" y2="131"/>
+            <polygon class="dg-tip" points="213,131 205,127 205,135"/>
+            <rect class="cfblk" x="213" y="96" width="122" height="70" rx="9"/>
+            <text class="dg-lb mid" x="274" y="138">R</text>
+            <text class="dg-sb mid" x="274" y="152">round 2</text>
+          </g>
+          <g class="phn" data-ph="2">
+            <line class="dg-w" x1="335" y1="131" x2="353" y2="131"/>
+            <polygon class="dg-tip" points="361,131 353,127 353,135"/>
+            <rect class="cfblk" x="361" y="96" width="122" height="70" rx="9"/>
+            <text class="dg-lb mid" x="422" y="138">R</text>
+            <text class="dg-sb mid" x="422" y="152">round 3</text>
+          </g>
+          <g class="phn" data-ph="3">
+            <line class="dg-w" x1="483" y1="131" x2="501" y2="131"/>
+            <polygon class="dg-tip" points="509,131 501,127 501,135"/>
+            <rect class="cfblk" x="509" y="96" width="122" height="70" rx="9"/>
+            <text class="dg-lb mid" x="570" y="138">R</text>
+            <text class="dg-sb mid" x="570" y="152">round 4</text>
+            <line class="dg-w" x1="633" y1="131" x2="652" y2="131"/>
+            <polygon class="dg-tip" points="659,131 652,127 652,135"/>
+            <text class="dg-lb" x="665" y="136">v&#8242;</text>
+          </g>
+          <line class="dg-w" x1="65" y1="196" x2="631" y2="196"/>
+          <line class="dg-w" x1="65" y1="189" x2="65" y2="203"/>
+          <line class="dg-w" x1="631" y1="189" x2="631" y2="203"/>
+          <text class="dg-lb mid" x="348" y="218">one phase P(v, m)</text>
+          <text class="dg-sb mid" x="348" y="238">five phases chain into the compression function &#8212; 20 rounds in all</text>
+
+          <line class="dg-dash expand" x1="126" y1="172" x2="126" y2="286"/>
+          <polygon class="dg-tip expand" points="126,292 122,285 130,285"/>
+          <g class="dgm" aria-hidden="true">
+            <circle cx="224" cy="293.1" r="5.6"/>
+            <line x1="228.1" y1="297.2" x2="232.4" y2="301.5"/>
+          </g>
+          <text class="dg-lb mid" x="372" y="298">one round R&#770;<tspan dy="-5" font-size="8.5">&#8853;</tspan><tspan dy="5">&#160;&#8212; the absorbing round, expanded</tspan></text>
+          <path class="dgb" d="M98 348V304h44"/>
+          <path class="dgb" d="M578 304h44v44"/>
+          <path class="dgb" d="M622 590v44h-44"/>
+          <path class="dgb" d="M142 634H98v-44"/>
+        </g>
+
+        <!-- ================= VIEW 4 — ONE ROUND ================= -->
+        <g class="stg" id="stg3" data-view="2" transform="translate(108,300) scale(0.75)">
           <text class="dg-lb mid" x="92" y="28">v</text>
           <text class="dg-lb mid" x="484" y="322">v&#8242;</text>
 
@@ -568,8 +726,8 @@
           <text class="dg-sb mid looparc" x="250" y="416">next round &#8635;</text>
         </g>
 
-        <!-- ================= VIEW 3 — SUBCOLUMN ================= -->
-        <g class="stg" id="stg2">
+        <!-- ================= VIEW 5 — SUBCOLUMN ================= -->
+        <g class="stg" id="stg4" data-view="3">
           <g class="dgn dgs1">
             <rect class="dg-reg" x="64" y="24" width="556" height="122" rx="14"/>
             <text class="dg-lb" x="76" y="42">S&#771;&#8321;</text>
@@ -581,7 +739,7 @@
             <line class="dg-w" x1="56" y1="128" x2="628" y2="128"/>
             <circle class="dg-node" cx="360" cy="128" r="9"/><text class="dg-glyph" x="360" y="132">+</text>
             <rect class="dg-box" x="388" y="120" width="56" height="16" rx="3"/>
-            <text class="dg-sb mid" x="416" y="132">&#8811; 63</text>
+            <text class="dg-sb mid" x="416" y="132">⋙ 63</text>
             <rect class="dg-box" x="452" y="80" width="58" height="30" rx="4"/>
             <text class="dg-sb mid" x="481" y="99">&#931;&#8321;</text>
             <line class="dg-w" x1="481" y1="80" x2="481" y2="70"/><polygon class="dg-tip" points="481,64 477,71 485,71"/>
@@ -603,7 +761,7 @@
             <line class="dg-w" x1="56" y1="288" x2="628" y2="288"/>
             <circle class="dg-node" cx="176" cy="288" r="9"/><text class="dg-glyph" x="176" y="292">+</text>
             <rect class="dg-box" x="204" y="280" width="56" height="16" rx="3"/>
-            <text class="dg-sb mid" x="232" y="292">&#8811; 8</text>
+            <text class="dg-sb mid" x="232" y="292">⋙ 8</text>
             <rect class="dg-box" x="286" y="240" width="58" height="30" rx="4"/>
             <text class="dg-sb mid" x="315" y="259">&#931;&#8320;</text>
             <line class="dg-w" x1="315" y1="240" x2="315" y2="222"/><polygon class="dg-tip" points="315,216 311,223 319,223"/>
@@ -616,104 +774,18 @@
           </g>
         </g>
 
-        <!-- ================= VIEW 4 — ARX S-BOX ================= -->
-        <g class="stg" id="stg3">
-          <g class="dgn">
-            <text class="dg-lb" x="24" y="44">S&#771;&#8320;</text>
-            <text class="dg-sb" x="24" y="60">&#931;&#8320;(b) = b &#8853; (b &#8811; 5) &#8853; (b &#8811; 48)</text>
-            <line class="dg-w" x1="24" y1="84" x2="270" y2="84"/>
-            <text class="dg-lb end" x="16" y="88">a</text><text class="dg-lb" x="278" y="88">a&#8242;</text>
-            <rect class="dg-box" x="72" y="76" width="16" height="16" rx="3"/><text class="dg-glyph" x="80" y="88">+</text>
-            <rect class="dg-box" x="212" y="76" width="16" height="16" rx="3"/><text class="dg-glyph" x="220" y="88">+</text>
-            <line class="dg-w" x1="24" y1="176" x2="270" y2="176"/>
-            <text class="dg-lb end" x="16" y="180">b</text><text class="dg-lb" x="278" y="180">b&#8242;</text>
-            <circle class="dg-node" cx="144" cy="176" r="8"/><text class="dg-glyph" x="144" y="180">+</text>
-            <rect class="dg-box" x="176" y="168" width="40" height="16" rx="3"/>
-            <text class="dg-sb mid" x="196" y="180">&#8811; 8</text>
-            <rect class="dg-box" x="200" y="112" width="40" height="22" rx="4"/>
-            <text class="dg-sb mid" x="220" y="127">&#931;&#8320;</text>
-            <line class="dg-w" x1="220" y1="112" x2="220" y2="97"/><polygon class="dg-tip" points="220,93 216,98 224,98"/>
-            <line class="dg-w" x1="230" y1="176" x2="230" y2="139"/><polygon class="dg-tip" points="230,135 226,140 234,140"/>
-            <line class="dg-w" x1="80" y1="176" x2="80" y2="97"/><polygon class="dg-tip" points="80,93 76,98 84,98"/>
-            <line class="dg-w" x1="144" y1="222" x2="144" y2="189"/><polygon class="dg-tip" points="144,185 140,190 148,190"/>
-            <text class="dg-lb end" x="136" y="232">s</text>
-          </g>
-          <g class="dgn">
-            <text class="dg-lb" x="376" y="44">S&#771;&#8321;</text>
-            <text class="dg-sb" x="376" y="60">&#931;&#8321;(b) = b &#8853; (b &#8811; 11) &#8853; (b &#8811; 40)</text>
-            <line class="dg-w" x1="376" y1="84" x2="622" y2="84"/>
-            <text class="dg-lb end" x="368" y="88">a</text><text class="dg-lb" x="630" y="88">a&#8242;</text>
-            <rect class="dg-box" x="424" y="76" width="16" height="16" rx="3"/><text class="dg-glyph" x="432" y="88">+</text>
-            <rect class="dg-box" x="564" y="76" width="16" height="16" rx="3"/><text class="dg-glyph" x="572" y="88">+</text>
-            <line class="dg-w" x1="376" y1="176" x2="622" y2="176"/>
-            <text class="dg-lb end" x="368" y="180">b</text><text class="dg-lb" x="630" y="180">b&#8242;</text>
-            <circle class="dg-node" cx="496" cy="176" r="8"/><text class="dg-glyph" x="496" y="180">+</text>
-            <rect class="dg-box" x="528" y="168" width="40" height="16" rx="3"/>
-            <text class="dg-sb mid" x="548" y="180">&#8811; 63</text>
-            <rect class="dg-box" x="552" y="112" width="40" height="22" rx="4"/>
-            <text class="dg-sb mid" x="572" y="127">&#931;&#8321;</text>
-            <line class="dg-w" x1="572" y1="112" x2="572" y2="97"/><polygon class="dg-tip" points="572,93 568,98 576,98"/>
-            <line class="dg-w" x1="582" y1="176" x2="582" y2="139"/><polygon class="dg-tip" points="582,135 578,140 586,140"/>
-            <line class="dg-w" x1="432" y1="176" x2="432" y2="97"/><polygon class="dg-tip" points="432,93 428,98 436,98"/>
-            <line class="dg-w" x1="496" y1="222" x2="496" y2="189"/><polygon class="dg-tip" points="496,185 492,190 500,190"/>
-            <text class="dg-lb end" x="488" y="232">s</text>
-          </g>
-        </g>
       </svg>
-      <figcaption>Figure 1 &middot; The design, redrawn from the specification's Figures 2.1&ndash;2.6 and 4.1.</figcaption>
     </figure>
 
     <div class="steps">
-      <button class="stepbtn" id="dprev" aria-label="previous view">&lsaquo;</button>
-      <button class="stepbtn" id="dnext" aria-label="next view">&rsaquo;</button>
-      <span class="stepcap" id="dcap">Compression function</span>
+      <span class="stepcap" id="dcap">HAIFA structure</span>
     </div>
-  </div>
-
-  <div class="card rv" style="margin-top:18px">
-    <h3 style="margin-top:0">Performance</h3>
-    <p style="color:var(--ink-soft);font-size:13.5px;margin:6px 0 14px">Chapter 5 of the specification reports the cost of the family. Everything below is reproduced from it; nothing here was measured locally. In cycles per byte FEILIAN-1024 settles level with SHA-512 on long messages, ahead of SHA-3-512 and behind BLAKE-64.</p>
-
-    <figure style="margin:6px 0 4px">
-      <div class="chartfig" id="cpbchart"></div>
-      <figcaption>Figure 2 · Cycles per byte, FEILIAN-1024 against BLAKE-64, SHA-512 and SHA-3-512 (specification Table 5.3).</figcaption>
-    </figure>
-
-    <table style="font-size:13.5px;margin-top:6px">
-      <thead><tr><th>Software benchmarks, FEILIAN-1024 (specification Table 5.2)</th><th>ISA</th><th>OS / compiler</th><th class="num">10 B</th><th class="num">100 B</th><th class="num">1 kB</th><th class="num">10 kB</th></tr></thead>
-      <tbody>
-        <tr><td class="k">Intel i7-10750H @2.60 GHz</td><td>AVX2</td><td>Windows 11 · GCC 16.1.0</td><td class="num">56.98</td><td class="num">5.77</td><td class="num">3.65</td><td class="num">3.57</td></tr>
-        <tr><td class="k">AMD Ryzen 9 8945HX @2.50 GHz</td><td>AVX2</td><td>Windows 11 · GCC 15.2.0</td><td class="num">44.15</td><td class="num">4.71</td><td class="num">3.09</td><td class="num">3.05</td></tr>
-        <tr><td class="k">Apple M2 Pro @3.50 GHz</td><td>NEON</td><td>macOS 26 · Clang 17.0.0</td><td class="num">55.76</td><td class="num">5.64</td><td class="num">4.19</td><td class="num">4.09</td></tr>
-      </tbody>
-    </table>
-    <p class="tblcap">Cycles per byte.</p>
-
-    <figure style="margin:16px 0 0">
-      <div class="chartfig" id="fpgachart"></div>
-      <figcaption>Figure 3 · FPGA throughput of FEILIAN-<i>f</i> by architecture (§5.5, Table 5.5).</figcaption>
-    </figure>
-  </div>
-
-  <div class="callout rv">
-    The security claims of specification Table 4.1 are <b>not</b> reproduced here; the analyses that address them are linked in <a href="#analysis">Third-party analysis ↓</a>.
-  </div>
-
-  <div class="card rv">
-    <h3 style="margin-top:0">Revision history of the submission</h3>
-    <ul class="tl">
-      <li><span class="d">2026-10-08</span><b>Specification v1.0.1</b> (69 pp.) and the three-page <b>erratum</b>, released together. The erratum lists the corrections of its Tables 1&ndash;2 and five further text changes made in response to the assessments.</li>
-      <li><span class="d">2026-09-27</span>M. Idrassi, <i>FEILIAN: technical assessment of the submitted specification and implementations</i>, v1.0.2 (14 pp., CC BY 4.0); ePrint 2026/2236 submitted the same day, approved 28 September.</li>
-      <li><span class="d">2026-09-26 · 09-23</span>M.-J. O. Saarinen publishes his FEILIAN report on ngcc.dev.</li>
-      <li class="mute"><span class="d">2026-06-30</span><b>Original submission v1.0</b> (68 pp.) — the revision examined by the third-party assessment.</li>
-    </ul>
   </div>
 </section>
 
 <!-- ================= LIVE DEMO ================= -->
 <section id="demo">
-  <p class="eyebrow rv">02 — Live demonstration</p>
-  <h2 class="rv">Hash it yourself, in this page</h2>
+  <p class="eyebrow rv">02 — Live demo</p>
 
   <div class="demo">
     <div class="demo-head">
@@ -783,33 +855,46 @@
 </section>
 
 <!-- ================= DOWNLOADS ================= -->
-<section id="downloads">
-  <p class="eyebrow rv">03 — Downloads</p>
-  <h2 class="rv">Artifacts</h2>
-  <p class="lead rv">The submission is distributed as a single <b>version 1.0.1 release package</b> (8 October 2026): the specification, the three-page erratum recording every change from v1.0, and the reference, optimized and RTL implementations, in one archive published byte-for-byte as distributed with its SHA-256. The erratum is also available on its own (<a href="files/FEILIAN_Erratum.pdf" target="_blank" rel="noopener">open the PDF</a>).</p>
+<section id="documents">
+  <p class="eyebrow rv">03 — Documents</p>
+  <p class="lead rv">Both revisions are published as release packages, byte-for-byte as distributed, with their SHA-256. <b>Version 1.0.1</b> (8 October 2026) supersedes <b>version 1.0</b> (30 June 2026), the original submission examined by the third-party assessment.</p>
   <div id="dlgrid" class="grid-auto rv"></div>
   <p class="tblcap rv" id="dlnote"></p>
 
-  <div style="margin-top:22px">
-    <div class="card rv">
-      <h3 style="margin-top:0">Which revision is which</h3>
-      <table style="font-size:13.5px">
-        <thead><tr><th>Revision</th><th class="num">Pages</th><th>SHA-256 (prefix)</th></tr></thead>
-        <tbody>
-          <tr><td>Examined by the assessment [2] (R1–R8)</td><td class="num">68</td><td class="mono">8e3a9a109f3188ab…</td></tr>
-          <tr><td><b>Distributed here — v1.0.1</b></td><td class="num">69</td><td class="mono">2d14bcf877eb9fbd…</td></tr>
-        </tbody>
-      </table>
-      <p class="tblcap">The technical assessment [2] reviewed the 30 June 2026 text; the copy released here is version 1.0.1 (8 October 2026).</p>
-      <div class="note" style="margin-bottom:0"><b>Read this first.</b> The tables on this page are a summary; where they and the specification disagree, the specification prevails.</div>
-    </div>
+  <div class="card rv" style="margin-top:18px">
+    <h3 style="margin-top:0">Revision history of the submission</h3>
+    <ul class="tl">
+      <li><span class="d">2026-10-08</span><b>Specification v1.0.1</b> (69 pp.) and the three-page <b>erratum</b>, released together. The erratum lists the corrections of its Tables 1&ndash;2 and five further text changes made in response to the assessments.</li>
+      <li class="mute"><span class="d">2026-06-30</span><b>Original submission v1.0</b> (68 pp.) — the revision examined by the third-party assessment.</li>
+    </ul>
   </div>
+</section>
+
+<!-- ================= PERFORMANCE ================= -->
+<section id="performance">
+  <p class="eyebrow rv">04 — Performance</p>
+  <p class="lead rv">What the family costs. Everything below is reproduced from the specification; nothing here was measured locally. In cycles per byte FEILIAN-1024 settles level with SHA-512 on long messages, ahead of SHA-3-512 and behind BLAKE-64.</p>
+
+  <table style="font-size:13.5px">
+    <thead><tr><th>Software benchmarks, FEILIAN-1024 (specification Table 5.2)</th><th>ISA</th><th>OS / compiler</th><th class="num">10 B</th><th class="num">100 B</th><th class="num">1 kB</th><th class="num">10 kB</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Intel i7-10750H @2.60 GHz</td><td>AVX2</td><td>Windows 11 · GCC 16.1.0</td><td class="num">56.98</td><td class="num">5.77</td><td class="num">3.65</td><td class="num">3.57</td></tr>
+      <tr><td class="k">AMD Ryzen 9 8945HX @2.50 GHz</td><td>AVX2</td><td>Windows 11 · GCC 15.2.0</td><td class="num">44.15</td><td class="num">4.71</td><td class="num">3.09</td><td class="num">3.05</td></tr>
+      <tr><td class="k">Apple M2 Pro @3.50 GHz</td><td>NEON</td><td>macOS 26 · Clang 17.0.0</td><td class="num">55.76</td><td class="num">5.64</td><td class="num">4.19</td><td class="num">4.09</td></tr>
+    </tbody>
+  </table>
+  <p class="tblcap">Cycles per byte.</p>
+
+  <p class="tblcap rv" style="margin:24px 0 8px">The same core, synthesised to hardware &mdash; throughput by architecture.</p>
+  <div class="chartfig rv" id="fpgachart"></div>
+
+  <p class="tblcap rv" style="margin:24px 0 8px">Back in software: cycles per byte against the other 512-bit-class hashes, across message lengths.</p>
+  <div class="chartfig rv" id="cpbchart"></div>
 </section>
 
 <!-- ================= THIRD-PARTY ANALYSIS ================= -->
 <section id="analysis">
-  <p class="eyebrow rv">04 &mdash; Third-party analysis</p>
-  <h2 class="rv">Independent reviews</h2>
+  <p class="eyebrow rv">05 — Third-party analysis</p>
   <p class="lead rv">Three independent sources have analysed this submission. Their documents are published by their authors, so this page links to them rather than restating their findings; none establishes a full-round break of the correctly encoded software hash.</p>
 
   <div class="revlist">
@@ -831,33 +916,14 @@
   </div>
 </section>
 
-
-<!-- ================= SOURCES ================= -->
-<section id="sources">
-  <p class="eyebrow rv">Sources</p>
-  <h2 class="rv">Documents referenced</h2>
-  <div class="card rv">
-    <div class="ref"><b>[1]</b> Lei Wang, Ling Song, Yaobin Shen, Kaixuan Wang, Zicheng Shi, Xin Yi. <i>FEILIAN: A Hash Function Proposal</i> — submitted to the Next-generation Cryptographic Algorithms Program, China. Version 1.0.1, 8 October 2026, 69 pp. The specification PDF inside the release package has SHA-256 <span class="mono">2d14bcf877eb9fbdb79fe573be078923445aec373270a16676ebd494ffabf0db</span>. <a href="#downloads">Download the package</a>. An erratum recording every change from v1.0 is issued with it and is also published <a href="files/FEILIAN_Erratum.pdf" target="_blank" rel="noopener">as a document of its own</a>.</div>
-    <div class="ref"><b>[2]</b> Mounir Idrassi (AM Crypto, Japan). <a href="https://github.com/amcrypto-jp/feilian-cryptanalysis"><i>FEILIAN: technical assessment of the submitted specification and implementations</i></a>, version 1.0.2, 27 September 2026, 14 pp. CC BY 4.0. Findings R1–R8.</div>
-    <div class="ref"><b>[3]</b> Markku-Juhani O. Saarinen. <a href="https://ngcc.dev/reports/hash-10.html"><i>FEILIAN</i></a>, personal report, ngcc.dev, entries dated 23 and 26 September 2026. Unaffiliated with NICCS; identifiers and editorial labels belong to that site. The designers' erratum cites this report as its own reference [2].</div>
-    <div class="ref"><b>[4]</b> Mounir Idrassi. <a href="https://eprint.iacr.org/2026/2236"><i>A Complete Classification of Whole-Output Linear Structures in FEILIAN-Type Components</i></a>, Cryptology ePrint Archive, Report 2026/2236, 2026. CC BY 4.0.</div>
-    <div class="ref"><b>[5]</b> E. Biham, O. Dunkelman. <a href="https://eprint.iacr.org/2007/278"><i>A Framework for Iterative Hash Functions — HAIFA</i></a>, IACR Cryptology ePrint Archive, Report 2007/278.</div>
-    <div class="ref"><b>[6]</b> J. Black, P. Rogaway, T. Shrimpton. <a href="https://doi.org/10.1007/3-540-45708-9_21"><i>Black-Box Analysis of the Block-Cipher-Based Hash-Function Constructions from PGV</i></a>, CRYPTO 2002, LNCS 2442.</div>
-    <div class="ref"><b>[7]</b> T. Ristenpart, H. Shacham, T. Shrimpton. <a href="https://doi.org/10.1007/978-3-642-20465-4_27"><i>Careful with Composition: Limitations of the Indifferentiability Framework</i></a>, EUROCRYPT 2011, LNCS 6632.</div>
-    <div class="ref"><b>[8]</b> J. Kelsey, B. Schneier. <a href="https://doi.org/10.1007/11426639_28"><i>Second Preimages on n-Bit Hash Functions for Much Less than 2ⁿ Work</i></a>, EUROCRYPT 2005, LNCS 3494.</div>
-    <div class="ref"><b>[9]</b> NIST. <a href="https://csrc.nist.gov/pubs/sp/800/22/r1/upd1/final"><i>SP 800-22 Rev. 1a — A Statistical Test Suite for Random and Pseudorandom Number Generators for Cryptographic Applications</i></a>.</div>
-    <div class="ref"><b>[10]</b> H. Krawczyk, P. Eronen. <a href="https://www.rfc-editor.org/rfc/rfc5869"><i>HMAC-based Extract-and-Expand Key Derivation Function (HKDF)</i></a>, RFC 5869, May 2010.</div>
-  </div>
-</section>
-
 </div>
 
 <footer>
   <div class="wrap">
-    <p><b>FEILIAN — Submission Overview</b> · release v1.6.3 · 12 October 2026</p>
+    <p><b>FEILIAN — Submission Overview</b> · release v1.6.4 · 12 October 2026</p>
     <p>Published for the FEILIAN submission to the NGCC-CH programme. Where this page and the specification disagree, the specification prevails. Timings shown by the live demo are JavaScript measurements in your browser, not those of the implementations.</p>
     <p>Page text and figures: <a href="LICENSE">CC BY 4.0</a>. The release package and the erratum are submission material, © its designers, redistributed as distributed — see <a href="NOTICE.md">NOTICE</a>.</p>
-    <p>Release package SHA-256 <span class="mono">23d3e6721563a27b15b39b14a3e3042b9c5da6925fb3d540464d85206de05d5c</span> · erratum <span class="mono">98e74ec289636cea…</span> · <a href="files/SHA256SUMS.txt">checksums</a> · <a href="https://github.com/PENNYBENNY/FEILIAN">source repository</a></p>
+    <p>Release package SHA-256 <span class="mono">23d3e6721563a27b15b39b14a3e3042b9c5da6925fb3d540464d85206de05d5c</span> · <a href="files/SHA256SUMS.txt">checksums</a> · <a href="https://github.com/PENNYBENNY/FEILIAN">source repository</a></p>
   </div>
 </footer>
 
@@ -871,7 +937,10 @@
 var DOWNLOADS = [
   {id:"v101", title:"Release package v1.0.1",
    sub:"Specification 1.0.1 (69 pp.) + erratum + reference, optimized and RTL implementations",
-   file:"files/FEILIAN-v1.0.1.zip", size:"856.0 KB", sha:"23d3e6721563a27b…", ready:true}
+   file:"files/FEILIAN-v1.0.1.zip", size:"856.0 KB", sha:"23d3e6721563a27b…", ready:true},
+  {id:"v100", title:"Release package v1.0",
+   sub:"Specification 1.0 (68 pp.) — the revision examined by the assessments — with the reference, optimized and RTL implementations, test vectors and IP statements",
+   file:"files/FEILIAN-v1.0.zip", size:"44.26 MB", sha:"876082a40ecf3b25…", ready:true}
 ];
 var DL_RELEASE = "";   /* optional mirror base, e.g. a release CDN prefix */
 /* DOWNLOADS:END */
@@ -900,7 +969,7 @@ var DL_RELEASE = "";   /* optional mirror base, e.g. a release CDN prefix */
       if(d.size)meta.push(d.size);
       meta.push(d.sha?('<span class="mono">'+d.sha+'</span>'):'checksum on publish');
       var c=document.createElement('div');
-      c.className='card lift rv';
+      c.className='card lift rv'; c.id='dl-'+d.id;   /* anchorable as #dl-<manifest id> */
       c.innerHTML='<h3 style="margin-top:0">'+d.title+'</h3>'+
         '<p class="dl-sub">'+d.sub+'</p>'+
         '<p class="dl-meta">'+meta.join(' · ')+'</p>'+
@@ -968,24 +1037,25 @@ var DL_RELEASE = "";   /* optional mirror base, e.g. a release CDN prefix */
     var reduce=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
     var BODY=[
-      'the compression function FEILIAN-<i>f</i>. The same 1024-bit block <span class="mono">m</span> is absorbed by all five phases; the tweak <span class="mono">tw</span> enters every round; the feed-forward XORs the incoming chaining value into the result, so <span class="mono">h&#8242; = h &#8853; v&#8325;</span>.',
-      'one round <span class="mono">R&#770;<sup>&#8853;</sup></span>: SubColumn, ShiftRow, SubColumn, ShiftRow, AddConstant, with one message half absorbed before each SubColumn.',
-      'SubColumn: two tweakable ARX S-boxes stacked. <span class="mono">S&#771;&#8321;</span> is driven by <span class="mono">s&#8321; = a&#8320;&#8242;</span>, <span class="mono">S&#771;&#8320;</span> by <span class="mono">s&#8320; = a&#8321; + b&#8321;</span>. Both tweaks are derived inside SubColumn &#8212; no external value enters.',
-      'the ARX S-box: addition, rotation and XOR only. <span class="mono">&#931;&#8320;</span> rotates by 5 and 48 after a rotation of 8; <span class="mono">&#931;&#8321;</span> rotates by 11 and 40 after a rotation of 63.'
+      'the HAIFA structure: the padded message is split into 1024-bit blocks and each block meets one compression call, the block index and the message length entering as the salt.',
+      'the compress function. The same 1024-bit block <span class="mono">m</span> is absorbed by all five phases; the tweak <span class="mono">tw</span> enters every round; the feed-forward XORs the incoming chaining value into the result, so <span class="mono">h&#8242; = h &#8853; v&#8325;</span>.',
+      'one phase <span class="mono">P(v, m)</span> &#8212; the absorbing round <span class="mono">R&#770;<sup>&#8853;</sup></span> takes the message in, three plain rounds <span class="mono">R</span> follow. Below, that absorbing round is opened up: SubColumn, ShiftRow, SubColumn, ShiftRow, AddConstant, one message half absorbed before each SubColumn. Five phases chain into the compression function &#8212; 20 rounds in all.',
+      'SubColumn: two tweakable ARX S-boxes stacked. <span class="mono">S&#771;&#8321;</span> is driven by <span class="mono">s&#8321; = a&#8320;&#8242;</span>, <span class="mono">S&#771;&#8320;</span> by <span class="mono">s&#8320; = a&#8321; + b&#8321;</span>. Both tweaks are derived inside SubColumn &#8212; no external value enters.'
     ];
     var STEPS=[
+      ['IV','block 0','block i','block k&#8722;1','output'],
       ['h enters','phase 0 absorbs m','phase 1','phase 2','phase 3','phase 4','feed-forward','h&#8242; out'],
-      ['state v','&#8853; m&#8320;&#8230;m&#8327; then SubColumn','ShiftRow','&#8853; m&#8328;&#8230;m&#8321;&#8325; then SubColumn','ShiftRow','AddConstant'],
-      ['S&#771;&#8320;','S&#771;&#8321;'],
+      ['round 1 of 4','round 2 of 4','round 3 of 4','round 4 of 4',
+       'the expanded round: state v','&#8853; m&#8320;&#8230;m&#8327; then SubColumn','ShiftRow','&#8853; m&#8328;&#8230;m&#8321;&#8325; then SubColumn','ShiftRow','AddConstant'],
       ['S&#771;&#8320;','S&#771;&#8321;']
     ];
-    var MAXK=[8,6,2,2], TICK=[1050,1550,3000,3000];
+    var MAXK=[5,8,10,2], TICK=[1300,1050,950,3000];
     /* Each view keeps its own natural proportions: VB is the tight box around the
        drawing, MW the widest it is allowed to grow. The figures are therefore
        centred at roughly their design size instead of being stretched to the full
        width of the card, which flattened the wide, sparse views. */
-    var VB=['48 2 600 262','0 12 672 412','32 16 624 300','0 28 652 214'];
-    var MW=[740,700,700,660];
+    var VB=['86 8 630 306','48 2 600 262','26 12 668 636','32 16 624 300'];
+    var MW=[730,740,700,700];
     function fit(s){
       if(!fig)return;
       fig.setAttribute('viewBox',VB[s]);
@@ -1027,20 +1097,35 @@ var DL_RELEASE = "";   /* optional mirror base, e.g. a release CDN prefix */
     });
 
     var G0=document.getElementById('stg0'), G1=document.getElementById('stg1'),
-        G2=document.getElementById('stg2'), G3=document.getElementById('stg3');
+        G2=document.getElementById('stg2'), G3=document.getElementById('stg3'),
+        G4=document.getElementById('stg4');
 
-    function r0(k){
+    function r0(k){                       /* HAIFA structure */
       if(!G0)return;
+      G0.querySelectorAll('.hfa').forEach(function(e){
+        var hf=e.getAttribute('data-hf');
+        var on = hf==='iv' ? k>=0 : (hf==='out' ? k>=4 : k>=parseInt(hf,10)+1);
+        e.classList.toggle('on',on);
+      });
+    }
+
+    function r1(k){                       /* compress function */
+      if(!G1)return;
       for(var i=0;i<5;i++){
-        var n=G0.querySelectorAll('[data-cf="'+i+'"]');
+        var n=G1.querySelectorAll('[data-cf="'+i+'"]');
         for(var j=0;j<n.length;j++){
           var e=n[j], tap=e.classList.contains('mf')||e.classList.contains('tf');
           e.classList.toggle('on', tap ? (k>=1&&k<=5&&(k-1)===i) : (k>=1&&(k-1)>=i));
         }
       }
-      G0.querySelectorAll('.hfin,.mfin').forEach(function(e){e.classList.toggle('on',k===0);});
-      G0.querySelectorAll('.hfff').forEach(function(e){e.classList.toggle('on',k>=6);});
-      G0.querySelectorAll('.hfo,.hfout').forEach(function(e){e.classList.toggle('on',k===7);});
+      G1.querySelectorAll('.hfin,.mfin').forEach(function(e){e.classList.toggle('on',k===0);});
+      G1.querySelectorAll('.hfff').forEach(function(e){e.classList.toggle('on',k>=6);});
+      G1.querySelectorAll('.hfo,.hfout').forEach(function(e){e.classList.toggle('on',k===7);});
+    }
+
+    function r2(k){
+      if(!G2)return;
+      G2.querySelectorAll('.phn').forEach(function(e,i){e.classList.toggle('on',k>=i);});
     }
 
     function srSet(grid,shift){
@@ -1055,39 +1140,49 @@ var DL_RELEASE = "";   /* optional mirror base, e.g. a release CDN prefix */
         }
       }
     }
-    function r1(k){
-      if(!G1)return;
-      G1.querySelectorAll('.opg').forEach(function(e,i){e.classList.toggle('on',k>=1+i);});
-      for(var i=0;i<MG.length;i++) MG[i].classList.toggle('on',k>=i);
-      var live=[k===1,k===3,k===5];
-      G1.querySelectorAll('.dop').forEach(function(e,i){e.classList.toggle('on',live[i]);});
-      G1.querySelectorAll('.opnd').forEach(function(e,i){e.classList.toggle('on',live[i]);});
-      srSet(MG[2],k>=2); srSet(MG[4],k>=4);
-      var t=document.getElementById('actint'); if(t)t.classList.toggle('on',k>=5);
-      G1.querySelectorAll('.looparc').forEach(function(e){e.classList.toggle('on',k>=5);});
-    }
-    function r2(k){
-      if(!G2)return;
-      G2.querySelector('.dgs0').classList.toggle('on',k===0);
-      G2.querySelector('.dgs1').classList.toggle('on',k===1);
-    }
     function r3(k){
       if(!G3)return;
-      G3.querySelectorAll('.dgn').forEach(function(e,i){e.classList.toggle('on',(i===0?k===0:k===1));});
+      G3.querySelectorAll('.opg').forEach(function(e,i){e.classList.toggle('on',k>=1+i);});
+      for(var i=0;i<MG.length;i++) MG[i].classList.toggle('on',k>=i);
+      var live=[k===1,k===3,k===5];
+      G3.querySelectorAll('.dop').forEach(function(e,i){e.classList.toggle('on',live[i]);});
+      G3.querySelectorAll('.opnd').forEach(function(e,i){e.classList.toggle('on',live[i]);});
+      srSet(MG[2],k>=2); srSet(MG[4],k>=4);
+      var t=document.getElementById('actint'); if(t)t.classList.toggle('on',k>=5);
+      G3.querySelectorAll('.looparc').forEach(function(e){e.classList.toggle('on',k>=5);});
+    }
+    function r4(k){
+      if(!G4)return;
+      G4.querySelector('.dgs0').classList.toggle('on',k===0);
+      G4.querySelector('.dgs1').classList.toggle('on',k===1);
     }
 
-    var RENDER=[r0,r1,r2,r3];
+    function r2m(k){                     /* one phase, then its absorbing round expanded */
+      r2(Math.min(k,3));
+      r3(k<=3 ? 0 : k-4);
+      /* the leader is dashed on the phase chain and stays dashed inside the
+         round: the dashes are what says "this is an enlargement" */
+      if(G2)G2.querySelectorAll('.expand').forEach(function(e){
+        e.classList.add('on');});
+    }
+
+    var RENDER=[r0,r1,r2m,r4];
     var dcap=document.getElementById('dcap');
     var stage=0, k=0, tid=null, visible=false;
 
-    function resetAll(){ r0(-1); r1(-1); r2(-1); r3(-1); }
+    function resetAll(){ r0(-1); r1(-1); r2(-1); r3(-1); r4(-1); }
     function paint(){ RENDER[stage](k); dcap.innerHTML='<b>'+STEPS[stage][k]+'</b> &middot; '+BODY[stage]; }
     function finalState(){
       resetAll();
-      if(G0)['[data-cf]','.hfin','.mfin','.hfff','.hfo','.hfout'].forEach(function(sel){
-        G0.querySelectorAll(sel).forEach(function(e){e.classList.add('on');});
+      if(G0)G0.querySelectorAll('.hfa').forEach(function(e){e.classList.add('on');});
+      if(G1)['[data-cf]','.hfin','.mfin','.hfff','.hfo','.hfout'].forEach(function(sel){
+        G1.querySelectorAll(sel).forEach(function(e){e.classList.add('on');});
       });
-      r1(5); r2(0); r3(0);
+      if(G2)G2.querySelectorAll('.phn').forEach(function(e){e.classList.add('on');});
+      /* resting state: accent, dashed -- the dashes say enlarged */
+      if(G2)G2.querySelectorAll('.expand').forEach(function(e){
+        e.classList.add('on');});
+      r3(5); r4(0);
     }
     function start(){
       if(reduce||!visible||tid)return;
@@ -1097,7 +1192,9 @@ var DL_RELEASE = "";   /* optional mirror base, e.g. a release CDN prefix */
     function goto(s){
       stop();
       fit(s);
-      root.querySelectorAll('.stg').forEach(function(e,i){e.classList.toggle('on',i===s);});
+      root.querySelectorAll('.stg').forEach(function(e){
+        e.classList.toggle('on',parseInt(e.getAttribute('data-view'),10)===s);
+      });
       root.querySelectorAll('.stagetab').forEach(function(e,i){
         e.classList.toggle('on',i===s); e.setAttribute('aria-selected',i===s?'true':'false');
       });
@@ -1109,8 +1206,6 @@ var DL_RELEASE = "";   /* optional mirror base, e.g. a release CDN prefix */
     root.querySelectorAll('.stagetab').forEach(function(tab,i){
       tab.addEventListener('click',function(){ goto(i); });
     });
-    document.getElementById('dprev').addEventListener('click',function(){ goto((stage+3)%4); });
-    document.getElementById('dnext').addEventListener('click',function(){ goto((stage+1)%4); });
 
     if(window.IntersectionObserver){
       new IntersectionObserver(function(es){
@@ -1118,7 +1213,7 @@ var DL_RELEASE = "";   /* optional mirror base, e.g. a release CDN prefix */
       },{threshold:.15}).observe(root);
     }else{ visible=true; }
 
-    root.querySelectorAll('.stg').forEach(function(e,i){e.classList.toggle('on',i===0);});
+    root.querySelectorAll('.stg').forEach(function(e){e.classList.toggle('on',e.getAttribute('data-view')==='0');});
     if(reduce){ finalState(); dcap.innerHTML='<b>'+STEPS[0][0]+'</b> &middot; '+BODY[0]; }
     else{ paint(); }
     fit(0);
@@ -1880,7 +1975,7 @@ schedule();
 })();
 })();
 
-/* ---------- Introduction · Figure 2: cycles/byte line chart (spec Table 5.3) ---------- */
+/* ---------- Performance · cycles/byte line chart (spec Table 5.3) ---------- */
 (function(){
   var host=document.getElementById('cpbchart'); if(!host)return;
   var LEN=[64,128,576,1024,1536,4096,64576];
@@ -1920,14 +2015,34 @@ schedule();
   });
   SERIES.forEach(function(se,i){
     var y=MT+14+i*24;
+    s.push('<g class="lgg">');
     s.push('<line x1="'+(ML+pw+18)+'" y1="'+y+'" x2="'+(ML+pw+40)+'" y2="'+y+'" stroke="'+se.color+'" stroke-width="'+(se.w===3?3:2.4)+'"/>');
     s.push('<text class="lg" x="'+(ML+pw+47)+'" y="'+(y+4)+'" fill="'+(se.w===3?'#1e3a5f':'#5b6470')+'">'+se.name+'</text>');
+    s.push('</g>');
   });
   s.push('</svg>');
   host.innerHTML=s.join('');
+
+  /* One pointer state for the whole figure: the four lines and the four legend
+     entries are paired by index, and pointing at either half of a pair lights
+     both and holds the other three back, so the label and the line always say
+     the same thing. */
+  var grps=[].slice.call(host.querySelectorAll('.serg'));
+  var legs=[].slice.call(host.querySelectorAll('.lgg'));
+  function setSync(i){
+    grps.forEach(function(g,j){g.classList.toggle('hl',j===i);});
+    legs.forEach(function(g,j){g.classList.toggle('hl',j===i);});
+    host.classList.toggle('sync',i!=null);
+  }
+  function wire(el,i){
+    el.addEventListener('pointerenter',function(){setSync(i);});
+    el.addEventListener('pointerleave',function(){setSync(null);});
+  }
+  grps.forEach(function(g,i){wire(g,i);});
+  legs.forEach(function(g,i){wire(g,i);});
 })();
 
-/* ---------- Introduction · Figure 3: FPGA throughput grouped bars (spec Table 5.5) ---------- */
+/* ---------- Performance · FPGA throughput grouped bars (spec Table 5.5) ---------- */
 (function(){
   var host=document.getElementById('fpgachart'); if(!host)return;
   var CAT=['[8SC]','[4SC]','[2SC]','[1SC]'];

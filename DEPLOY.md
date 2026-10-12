@@ -64,13 +64,15 @@ Two tables at the top of the script drive it:
 | `ASSETS` | yes, verbatim, plus a SHA-256 | no — the page links it from the text |
 
 `ASSETS` exists for documents the page opens directly instead of offering as a
-card. The erratum is the case in point: §3 links
-`files/FEILIAN_Erratum.pdf` with a plain `href`, which only works if the file is
-published on its own rather than left inside the archive. Such a link is
-same-origin, so it keeps working from `file://`, from Pages and from any mirror,
-and it survives a move to another host — which a `raw.githubusercontent.com` or
-GitHub Releases URL would not. Put the file in `files/` and give it an `ASSETS`
-row; do not link it from outside the repository.
+card: they are published and checksummed exactly like a package but get no card.
+Nothing uses it at present — the erratum used to be the case in point, linked
+straight from §3 while living in `files/`, but it now travels inside the release
+package alone. The table is kept because it is how such a document should be
+published if the page ever links one directly: a same-origin `href` keeps working
+from `file://`, from Pages and from any mirror, and survives a move to another
+host — which a `raw.githubusercontent.com` or GitHub Releases URL would not. Put
+the file in `files/` and give it an `ASSETS` row; do not link it from outside the
+repository.
 
 `files/` is reconciled to those two tables on every `--publish` — any file in
 `files/` that no row names is deleted from it. Add a `PACKAGES` row to publish

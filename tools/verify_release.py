@@ -5,7 +5,7 @@
 #    python tools/verify_release.py
 #        local checks: every checksum in files/SHA256SUMS.txt matches the file
 #        on disk, every artifact the page links to exists, and the page's
-#        navigation, section anchors and tags are structurally balanced.
+#        navigation and anchors (sections and download cards) and tags are structurally balanced.
 #
 #    python tools/verify_release.py --url https://example.github.io/FEILIAN/
 #        additionally fetches the deployed page and every listed artifact, and
@@ -92,9 +92,10 @@ def main():
         report(os.path.exists(os.path.join(REPO, rel.replace("/", os.sep))), f"{rel} exists")
     report(html.count("ready:false") == 0, "no artifact left unpublished",
            f"{html.count('ready:true')} ready")
-    # Documents the text links straight with an href, outside the manifest - the
-    # erratum linked straight from the downloads section. A dead one of these is
-    # and so is one that was published without being checksummed.
+    # Documents the text links straight with an href, outside the manifest: the
+    # checksum list, and anything published beside the packages for direct
+    # linking. A dead one of these is a broken link, and so is one published
+    # without being checksummed.
     direct = sorted(set(re.findall(r'href="(files/[^"]+)"', html)))
     report(bool(direct), "in-text document links found", f"{len(direct)}")
     for rel in direct:
@@ -118,8 +119,14 @@ def main():
     report(sorted(nav) == sorted(sec), "nav and sections correspond")
     # every in-page anchor anywhere on the page (hero, in-text cross-references,
     # sources) must resolve too - stronger than the nav-only check above.
+    # Anchor targets are not only sections. The download cards are built from the
+    # manifest with id="dl-<manifest id>" (see the downloads renderer), so every
+    # manifest id is a legal target too -- that is how the Updates lines jump to
+    # their package.
+    targets = set(re.findall(r'id="([A-Za-z0-9_-]+)"', html))
+    targets |= {"dl-" + m for m in re.findall(r'\{id:"([^"]+)"', html)}
     all_anchors = re.findall(r'href="#([A-Za-z0-9_-]+)"', html)
-    dangling = sorted(set(a for a in all_anchors if a not in sec))
+    dangling = sorted(set(a for a in all_anchors if a not in targets))
     report(not dangling, "every in-page anchor resolves",
            f"{len(set(all_anchors))} distinct" + (f", dangling: {dangling}" if dangling else ""))
     for tag in ("div", "section", "table", "pre", "svg"):

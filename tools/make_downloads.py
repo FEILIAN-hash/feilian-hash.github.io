@@ -4,8 +4,7 @@
 #  into the page's DOWNLOADS manifest.
 #
 #      files/FEILIAN-v1.0.1.zip   the version 1.0.1 release package
-#      files/FEILIAN_Erratum.pdf  the erratum, published on its own so that
-#                                 the downloads section can link the PDF directly
+#      files/FEILIAN-v1.0.zip     the original version 1.0 release package
 #      files/SHA256SUMS.txt       sha256sum -c compatible
 #
 #  A release package is assembled by the designers and shipped whole: it holds
@@ -51,19 +50,20 @@ PACKAGES = [
      "Specification 1.0.1 (69 pp.) + erratum + reference, "
      "optimized and RTL implementations",
      "FEILIAN-v1.0.1.zip", os.path.join("v1.0.1", "FEILIAN-v1.0.1.zip")),
+    ("v100", "Release package v1.0",
+     "Specification 1.0 (68 pp.) \u2014 the revision examined by the "
+     "assessments \u2014 with the reference, optimized and RTL "
+     "implementations, test vectors and IP statements",
+     "FEILIAN-v1.0.zip", os.path.join("v1.0", "FEILIAN-v1.0.zip")),
 ]
 
 # (id, title, subtitle, served filename, workspace-relative source)
 # Single documents published for direct linking, NOT offered as a download
-# card: the downloads section links the erratum PDF straight from the text, so it has to
-# exist on its own under files/ rather than only inside the archive. Same
+# card, because the page links them straight from the text with an href. Same
 # treatment as a package otherwise - copied verbatim and covered by
-# files/SHA256SUMS.txt, so verify_release.py keeps it honest.
-ASSETS = [
-    ("erratum", "Erratum",
-     "PDF \u00b7 corrections from v1.0 to v1.0.1 \u00b7 3 pp.",
-     "FEILIAN_Erratum.pdf", os.path.join("v1.0.1", "FEILIAN_Erratum.pdf")),
-]
+# files/SHA256SUMS.txt, so verify_release.py keeps them honest. The erratum
+# used to live here; it is now left inside the release package only.
+ASSETS = []
 
 
 def human(n):

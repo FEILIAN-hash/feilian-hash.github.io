@@ -20,11 +20,10 @@ sources below; where the page and the specification disagree, the specification 
 
 The designers released a three-page **erratum** together with version 1.0.1,
 recording every change from the June 2026 text. It is published byte-for-byte as
-released, both inside the version 1.0.1 release package
-(`files/FEILIAN-v1.0.1.zip`) and as a document of its own,
-`files/FEILIAN_Erratum.pdf`. The page links it directly rather
-than reproducing it. The edition published here is the revised
-one, which cites the ngcc.dev report as well as the technical assessment.
+released, inside the version 1.0.1 release package (`files/FEILIAN-v1.0.1.zip`);
+the page does not publish it as a document of its own, and does not reproduce it.
+The edition distributed here is the revised one, which cites the ngcc.dev report
+as well as the technical assessment.
 
 Designers / submitters, as printed on the specification's title page:
 
@@ -75,16 +74,16 @@ labels — including the entry names `hash-10-1` … `hash-10-5` — belong to t
 site and are not official competition assessments. This page cites it as prior
 work and as a publication venue, not as an authority.
 
-The page does not reproduce the reviewers' findings, and it no longer reproduces
-the designers' erratum either; it links to each document directly. Where a
+The page does not reproduce the reviewers' findings, and it does not reproduce the
+designers' erratum either; it links to each third-party document directly. Where a
 statement on the page and a source document disagree, the source document
 prevails.
 
 ## Rights in the files under `files/`
 
-`files/FEILIAN-v1.0.1.zip` and `files/FEILIAN_Erratum.pdf` are **submission
-material**. Copyright in the specification, in the erratum and in the
-implementations remains with their designers and submitters.
+`files/FEILIAN-v1.0.1.zip` is the **submission material**. Copyright in the
+specification, in the erratum and in the implementations remains with their
+designers and submitters.
 
 They are published here, as released, as part of the submission itself.
 **No licence to this material is granted or implied** beyond that publication.
@@ -103,13 +102,6 @@ not repacked — so its digest is the digest of the official artifact. Its SHA-2
 
 ```
 23d3e6721563a27b15b39b14a3e3042b9c5da6925fb3d540464d85206de05d5c  FEILIAN-v1.0.1.zip
-```
-
-The erratum is published on its own as well, byte-identical to the copy inside
-the package, so that the page can link it without the archive:
-
-```
-98e74ec289636cea9fafa56518240a55e1d2473ff6af5d07e0b311baec98e424  FEILIAN_Erratum.pdf
 ```
 
 The two documents inside the package, byte-identical to the copies released directly

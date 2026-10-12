@@ -1,11 +1,139 @@
 # Changelog
 
 All notable changes to this page are recorded here. The revision history of the
-submission itself — specification releases and the reports it has received — is
-the update log in §3 of the page.
+submission itself — its specification releases — is the update log in §3 of the
+page.
 
 This project uses [semantic versioning](https://semver.org/); the major version
 tracks the specification revision it was built against.
+
+## [1.6.4] — 2026-10-12
+
+The page is re-cut into five chapters and the design figure is rebuilt around the specification's own hierarchy: HAIFA structure, compress function, phase, round, SubColumn.
+
+### Added
+
+- **An *Updates* block under the introduction.** Two dated lines — the v1.0.1 release and its
+  erratum (8 October 2026), and the original v1.0 submission (30 June 2026) — each closing with a
+  link that jumps to that package's card in §3 Documents. The cards now carry an id (`#dl-v101`,
+  `#dl-v100`) to be the target of those links, and `tools/verify_release.py` counts them as valid
+  in-page anchors alongside the sections. Each link closes with a downward arrow in the accent
+  colour, nudged 3px down on hover, so the line reads as pointing into the page rather than off it;
+  the arrow is `aria-hidden`, and the nudge is dropped under `prefers-reduced-motion`.
+
+### Changed
+
+- **Both revisions of the submission are published.** `files/FEILIAN-v1.0.zip` (44.3 MB) joins
+  `files/FEILIAN-v1.0.1.zip`: the original v1.0 archive, as distributed on 30 June 2026 — the
+  revision the third-party assessments examined. §3 leads with the two packages rather than with
+  one, and `files/SHA256SUMS.txt` carries both digests. The published v1.0.1 bytes and digest are
+  untouched, and both archives are copied over verbatim, never repacked.
+- **The design figure is four views, not five.** *One Round* no longer has a tab of its own: the
+  absorbing round is shown inside the *One Phase* view, where it belongs — the phase chain on top,
+  the round it opens with drawn out below it and tied to it by a dashed leader. The figure steps
+  through the phase and then into that round, ten steps in all. The view's label under the viewport
+  is set at the same size as the phase label and marks the round the same way, so the sub-captions
+  line up across the figure; the download card's subtitle and §3's document lead are a notch
+  larger.
+- **Five chapters, in a new order**: Introduction, Live demo, Documents, Performance, Third-party
+  analysis. *Performance* was carved out of the introduction into a section of its own and placed
+  after the documents; *Downloads* became *Documents*; and the *Sources* chapter was removed — the
+  specification, the erratum and the three reviews are already linked where they are discussed.
+- **Every section now carries only its numbered label.** The descriptive `<h2>` was dropped from all
+  five sections (*What FEILIAN is*, *Hash it yourself, in this page*, *Artifacts*, *Independent
+  reviews*), and the `NN — Title` eyebrow was enlarged to serve as the section heading.
+- **The design figure is ordered from the whole to the part**: **HAIFA**, **Compress Function**,
+  **One Phase** and **SubColumn**. The HAIFA view leads because it is the
+  outermost picture — the padded message split into 1024-bit blocks, one compression call per block,
+  the block index and the message length entering as the salt — and it lights up block by block. The
+  compression function is drawn again, now labelled **Compress Function**, with the five phases
+  P₀…P₄, the tweak entering every round and the Davies–Meyer feed-forward; the `msg @ 1` … `msg @ 17`
+  annotations under those phases are gone, since the tab, the caption and the specification already
+  say what the view is. The round function keeps the specification's own name — **One Round** — but no longer takes a tab of
+  its own: it is the round that **One Phase** opens up. That view is what a phase is — the absorbing
+  round R̂⊕ followed by three plain rounds, four rounds to a phase, five phases to the compression
+  function — and the absorbing round is numbered as the first of the four. The **ARX S-box**
+  view is gone, since SubColumn already carries both S-boxes and their tweaks.
+- **Performance is reordered with small transitions**: the software benchmark table, then the FPGA
+  throughput bars, then the cycles-per-byte lines, each introduced by a one-line lead-in. All
+  `Figure N` captions are gone from the whole page; each chart's own axes and legend name what it
+  shows. The section's lead no longer opens by naming a chapter of the specification — it states the
+  cost of the family, and where the numbers come from, on its own.
+- **The cycles-per-byte chart carries one pointer state for the whole figure.** Its four lines and the
+  four entries of its legend are paired by index: pointing at a series or at its name in the legend
+  lights both, thickens that line and holds the other three back, so the label and the line can never
+  disagree.
+- **Revision history moved to §3 (Documents)** and reduced to the specification releases; the two
+  third-party report entries were dropped from the timeline, since the reviews have a chapter of
+  their own.
+- **Hero.** The `NGCC-CH Submission` kicker chip is gone and the wordmark stands alone; the one-line
+  standfirst is restored beneath it, no longer calling the design a *1024-bit ARX* hash but simply *a
+  hash function submitted to the Next-generation Commercial Cryptographic Algorithms programme*. The
+  padding stays tightened to suit the bare wordmark.
+- **The section labels are a notch larger.** The `NN — Title` eyebrow is set at 17px instead of 15px,
+  and the headings that open the blocks inside a section — *The design in picture views*, the two
+  download cards, *Revision history of the submission* — now carry an explicit 19px instead of the
+  browser's default for an `<h3>`, so the two tiers read as one scale rather than two.
+- **The enlarged round is introduced by a magnifier.** A small magnifier leads the
+  `one round R̂⊕ — the absorbing round, expanded` caption, drawn in the same accent as the leader and
+  the corner brackets it belongs to, and centred as one group with the caption.
+- **The HAIFA chain marks where it is elided.** Three dots are drawn on the axis of each of the two
+  leaders that join m₀, mᵢ and m_{k−1}, and the line is broken around them: the figure no longer
+  reads as three consecutive blocks, which is what an unbroken arrow between m₀ and mᵢ implied.
+- **The SubColumn rotations are written `⋙` (`\ggg`).** The two pre-rotations inside the
+  tweakable S-boxes were set with the `≫` sign and then with a three-ASCII-`>` stand-in; they now
+  read `⋙ 63` and `⋙ 8`. This is the three-chevron shape the specification's own font
+  actually draws at that spot, and it is what `\ggg` renders as. Note that the same font codes
+  the glyph as U+226B (the two-chevron `≫`), so text copied *out of* the PDF yields a different
+  character than the one printed there. The amounts are unchanged and are the specification's
+  (`b′₁ = b₁ ≫ 63`, `b′₀ = b₀ ≫ 8`).
+
+### Fixed
+
+- **The two download cards are stacked, not side by side.** §3's grid was `auto-fit minmax(300px)`,
+  which put v1.0.1 and v1.0 on one row as soon as the viewport was wide enough; the grid is now a
+  single column, so the newer revision is always above the older one and the cards run the same
+  width as the revision history below them.
+- **The `one round R̂⊕ — the absorbing round, expanded` label sits on one baseline.** A `dy`
+  on the superscript `<tspan>` shifts the text position for the rest of the run, so everything
+  after the em dash rode 5px high; the run now restores the baseline after the superscript.
+- **The phase → round hand-off stays dashed from start to finish.** In the *One Phase* view the
+  leader and its arrowhead are dashed throughout — while the walk is on the phase chain, and while
+  it is inside the round that the leader opens up. An earlier cut closed the leader into a solid
+  rule as the walk crossed into the round; that state is gone, so the animation, the resting frame,
+  reduced motion, print and a screenshot all agree: the dashes are what says *this is an
+  enlargement*, and they now say it the whole way through.
+- **The enlarged round sits in a viewport, not in a box.** Its four corners are marked by brackets
+  instead of by a closed dashed rectangle: the full frame read as one more box alongside the solid
+  phase boxes above it, while brackets delimit the round as a blown-up detail.
+- **The absorbing round is numbered.** Its box in the phase chain read `absorbs m` while its
+  neighbours read `round 2`, `round 3`, `round 4`, which left the first round of a phase looking
+  unnumbered; it now reads `round 1 · absorbs m`, its step caption opens on `round 1 of 4`, and the
+  chain walks 1 → 2 → 3 → 4.
+- **The HAIFA step caption names the block the figure draws.** The middle stop of the chain was
+  captioned `block 1` while the figure labels that block `mᵢ`; the caption now reads `block i`, so the
+  four stops — `IV`, `block 0`, `block i`, `block k−1` — line up with the subscripts on the boxes.
+- **The HAIFA chain carries the specification's own indices.** The state handed on between mᵢ
+  and m_{k−1} was labelled `h₂`; the specification iterates `h₀ ← IV`,
+  `h_{i+1} ← FEILIAN-f(h_i, M_i, tw)`, so that state is `h_{i+1}`, and the chain now reads
+  h₁ → h_{i+1} → h_k. The `h₁` label had been set as a Unicode subscript while `h_k` used a
+  `<tspan>`; both connector labels now share one subscript run, the same one the `salt` labels use.
+
+### Removed
+
+- **The `‹ ›` step buttons on the design figure.** A view is picked by its tab; the figure still steps
+  through itself and the caption under it still names the step, so the two buttons only duplicated the
+  tab bar. Their `.stepbtn` rules and their click bindings are gone with them.
+- **The erratum as a document of its own.** §3 no longer links `files/FEILIAN_Erratum.pdf` and no
+  longer offers it "on its own"; the file is retired from `files/`, the footer no longer prints its
+  digest, and the `ASSETS` table that published it is now empty. The erratum still travels inside the
+  release package, which is the unit the designers distribute.
+- **The "Which revision is which" table**, and with it the two notes that had accumulated around it:
+  the §1 callout pointing at the third-party analyses, and the §3 "Read this first" disclaimer. The
+  callout restated a link the page already carries in §5; the disclaimer restated the footer's
+  "where this page and the specification disagree, the specification prevails".
+
+No claim, number, date, version or link changed, and the digests already published are untouched. `tools/verify_release.py`: 24 / 24 local.
 
 ## [1.6.3] — 2026-10-12
 
