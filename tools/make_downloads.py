@@ -5,7 +5,7 @@
 #
 #      files/FEILIAN-v1.0.1.zip   the version 1.0.1 release package
 #      files/FEILIAN_Erratum.pdf  the erratum, published on its own so that
-#                                 section 05 can link the PDF directly
+#                                 the downloads section can link the PDF directly
 #      files/SHA256SUMS.txt       sha256sum -c compatible
 #
 #  A release package is assembled by the designers and shipped whole: it holds
@@ -48,14 +48,14 @@ INDEX = os.path.join(REPO, "index.html")
 # grid on the page lays itself out for however many rows there are.
 PACKAGES = [
     ("v101", "Release package v1.0.1",
-     "Specification 1.0.1 (69 pp.) + erratum v1.0\u2192v1.0.1 + reference, "
+     "Specification 1.0.1 (69 pp.) + erratum + reference, "
      "optimized and RTL implementations",
      "FEILIAN-v1.0.1.zip", os.path.join("v1.0.1", "FEILIAN-v1.0.1.zip")),
 ]
 
 # (id, title, subtitle, served filename, workspace-relative source)
 # Single documents published for direct linking, NOT offered as a download
-# card: section 05 links the erratum PDF straight from the text, so it has to
+# card: the downloads section links the erratum PDF straight from the text, so it has to
 # exist on its own under files/ rather than only inside the archive. Same
 # treatment as a package otherwise - copied verbatim and covered by
 # files/SHA256SUMS.txt, so verify_release.py keeps it honest.

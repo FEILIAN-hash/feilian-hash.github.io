@@ -7,6 +7,84 @@ the update log in §3 of the page.
 This project uses [semantic versioning](https://semver.org/); the major version
 tracks the specification revision it was built against.
 
+## [1.6.3] — 2026-10-12
+
+The design figure loses its Play button, the two Performance figures gain pointer-level detail, and the
+page copy across all five chapters is cut back.
+
+### Removed
+
+- **The Play button on the four-view design figure.** The four tabs select a view and the two arrow
+  buttons step between them; Play only started a 15-second timer that advanced the figure by itself,
+  which competes with the step-by-step animation the figure is built around. The button, its
+  `.stepbtn.play` rule, and the tour timer, its handler and its `dplay` binding behind it are gone.
+  The caption still names the current view.
+- **Copy that explained the apparatus rather than the submission.** A sentence describing how a figure is
+  drawn, how a number was measured, or how the page is arranged is not a statement about FEILIAN, and the
+  specification carries it. Removed: the Figure 1 caption's reading key (which colour tracks what, which
+  operand goes into which row); the whole note under the FPGA figure (synthesis tool and strategy, what lies
+  outside the measured block, a pointer to §5.1–5.2); the framing line of §1's design card, which repeated
+  the caption; the harness name in the Figure 2 caption and the board part numbers in the Figure 3 caption,
+  both already in that chart's own legend; the build flags and the trial statistics in the software table's
+  caption, which keeps its unit; the second half of the §1 callout; the cross-reference that closed the §3
+  revision note; and the footer sentence that listed what the page contains. The colour sentence under the
+  "One round" view went the same way, leaving the round's own sequence of operations.
+
+### Changed
+
+- **Page copy trimmed throughout.** Every standfirst, caption, note and footer paragraph was cut back to
+  what it alone carries: §1's lead, the Performance standfirst and the software table note, the
+  security-claims callout and the two revision-history entries; §3's lead, revision note and "read this
+  first" box; §4's lead; the footer; the `<meta name="description">`. The download card's subtitle drops
+  the `v1.0 → v1.0.1` arrow, since the card title already says v1.0.1. No claim, number, date, digest,
+  version or link changed — only clauses that restated a neighbour.
+- **The two Performance figures answer the pointer element by element** (Figure 2, cycles per byte;
+  Figure 3, FPGA throughput). Hovering one bar grows that bar — 1.07x about the shared baseline, its
+  value label rising with it — and holds the other seven back to a third opacity; hovering one series
+  thickens its own polyline to 4.6px; hovering one data point grows that point to 2.1x. Each series
+  carries an invisible 15px-wide twin of its line, because a 2-3px stroke is far too thin to point
+  at. Nothing scales the drawing as a whole: the figure is read at 1x and the pointer answers one
+  question at a time. The states sit inside `@media(hover:hover)`, so a touch screen gets the plain,
+  fully legible chart. A whole-figure magnifier was tried first and dropped — it enlarged everything
+  at once, which is the opposite of reading one number off a chart.
+
+## [1.6.2] — 2026-10-12
+
+The page is cut back to what the submission needs to say. The header loses its button row and its
+parameter chips, the erratum chapter is retired, and the "hash-10" designation is dropped throughout
+— it is an identifier that belongs to a third-party site, not one of the submission's own.
+
+### Changed
+
+- **Header.** The four-button jump row and the five parameter chips (`Revision`, `Designation`,
+  `Digest`, `State`, `Independent reviews`) are gone: the row repeated the navigation directly under
+  it, and the chips restated the specification's own parameter table. The standfirst is cut to a
+  single sentence, and the styles only those two rows used (`.cta`, `.btn.p`, `.btn.g`, `.chips`,
+  `.chip`) go with them.
+- **`hash-10` removed.** The identifier is the third-party site's own numbering, not a designation of
+  the submission. It is gone from the page title, the description and social metadata, the kicker,
+  the introduction lead, the revision history, the footer and the citation of the ngcc.dev report.
+  It survives only inside the two links to that report's URL — the address itself, not a label on
+  the page; the card that links it now reads `ngcc.dev`.
+- **§1 · the four-view figure.** The paragraph under the heading described all four views at once,
+  while the caption under the figure already names and explains whichever view is showing. The
+  paragraph is cut to its one-line framing.
+- **§3 · Downloads.** The lead no longer points at §05, and the note under the revision table no
+  longer introduces it.
+
+### Removed
+
+- **§5 · Erratum.** The chapter goes whole, with its navigation entry and every reference to it from
+  §3 and the sources. The erratum itself stays an artifact: it is inside the release package, it is
+  still published on its own as `files/FEILIAN_Erratum.pdf`, and §3 still links it. What is gone is
+  the chapter that reprinted what its three pages contain.
+
+### Notes
+
+- The page is now five sections — Introduction, Live demo, Downloads, Third-party analysis, Sources —
+  and the navigation matches it.
+- No digest, figure value or link target changed; `tools/verify_release.py` still reports 25 / 25.
+
 ## [1.6.1] — 2026-10-09
 
 Two of the figure's four views are redrawn against the specification's own diagrams, and the

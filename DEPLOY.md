@@ -64,7 +64,7 @@ Two tables at the top of the script drive it:
 | `ASSETS` | yes, verbatim, plus a SHA-256 | no — the page links it from the text |
 
 `ASSETS` exists for documents the page opens directly instead of offering as a
-card. The erratum of §5 is the case in point: the section links
+card. The erratum is the case in point: §3 links
 `files/FEILIAN_Erratum.pdf` with a plain `href`, which only works if the file is
 published on its own rather than left inside the archive. Such a link is
 same-origin, so it keeps working from `file://`, from Pages and from any mirror,

@@ -1,16 +1,15 @@
 # FEILIAN — Submission Overview
 
 **The overview page for FEILIAN**, the hash function submitted to the NGCC-CH programme of the
-Institute of Commercial Cryptography Standards (ICCS), China, under the designation `hash-10`.
+Institute of Commercial Cryptography Standards (ICCS), China.
 
 **Live site — <https://pennybenny.github.io/FEILIAN/>**
 
-The page is organised as five chapters: an **introduction** to the design — a four-view figure, the
+The page is organised as four chapters: an **introduction** to the design — a four-view figure, the
 performance the specification reports for it, and the revision history of the submission — a **live
 demonstration** that computes digests in the browser, the **downloads** (one checksummed release
-package), the **independent third-party analyses**, each linked to its own document, and the
-**erratum**, a pointer to the designers' record of every change from v1.0 to v1.0.1, published on
-its own and linked directly. Detailed specification tables are deliberately kept out of the page and
+package, with the erratum published beside it), and the **independent third-party analyses**, each
+linked to its own document. Detailed specification tables are deliberately kept out of the page and
 left to the PDF. The palette is deliberately plain — one accent colour and neutral greys — and every
 figure keeps its own proportions rather than being stretched to the width of the card.
 
@@ -33,7 +32,6 @@ the page renders and the demo runs identically offline, from `file://`, and from
 | 2 | Live demonstration | A JavaScript port of the compression function running in the page: text / hex / bit-string input, 512 / 768 / 1024 output, a known-answer self-test against the Appendix B vectors, and the timings it measures itself |
 | 3 | Downloads | One **version 1.0.1 release package** — specification, erratum and all implementations in a single archive — with its SHA-256, and a note on which revision is which |
 | 4 | Third-party analysis | The three independent sources, listed one per row and each linked to its own document. Their findings are not reproduced on the page |
-| 5 | Erratum | A pointer to the designers' erratum from v1.0 to v1.0.1: what the three pages cover — the specification typo corrections, the implementation corrections and the further text changes made in response to the community assessments — with the erratum linked directly as a PDF of its own |
 | — | Sources | Documents referenced |
 
 ---
@@ -43,7 +41,7 @@ the page renders and the demo runs identically offline, from `file://`, and from
 | Artifact | File | Contents | Size |
 |---|---|---|---|
 | Release package v1.0.1 | [`files/FEILIAN-v1.0.1.zip`](files/FEILIAN-v1.0.1.zip) | the whole of version 1.0.1 in one archive — specification (69 pp.), the three-page erratum from v1.0, the reference, optimized (AVX2/NEON) and RTL implementations, and the implementations README | 856 KB |
-| Erratum | [`files/FEILIAN_Erratum.pdf`](files/FEILIAN_Erratum.pdf) | the three-page erratum on its own, byte-identical to the copy inside the package — linked from §5, which is why it is not repacked into the archive only | 125 KB |
+| Erratum | [`files/FEILIAN_Erratum.pdf`](files/FEILIAN_Erratum.pdf) | the three-page erratum on its own, byte-identical to the copy inside the package — linked directly from §3, which is why it is not left inside the archive only | 125 KB |
 | Checksums | [`files/SHA256SUMS.txt`](files/SHA256SUMS.txt) | `sha256sum -c` compatible | — |
 
 ```
@@ -99,7 +97,7 @@ python -m http.server 8000     # then visit http://localhost:8000/
 index.html                    the entire site — single file, no dependencies
 files/                        the published release package and its checksums
   FEILIAN-v1.0.1.zip
-  FEILIAN_Erratum.pdf         published on its own so §5 can link it directly
+  FEILIAN_Erratum.pdf         published on its own so the page can link it directly
   SHA256SUMS.txt
 tools/
   make_downloads.py           copy a release package into files/ and rewrite the page's manifest
@@ -117,7 +115,7 @@ The download section of the page is generated from a manifest embedded between
 that block, so the page can never advertise a package that has not been published — an
 unpublished entry renders as a disabled button rather than a dead link.
 
-Documents that the text links directly rather than offering as a card — currently the erratum of §5 —
+Documents that the text links directly rather than offering as a card — currently the erratum —
 are published by the same script from its `ASSETS` table and covered by the same checksums; they are
 in `files/` so that the link is same-origin and keeps working wherever the page is served from.
 
@@ -125,7 +123,7 @@ in `files/` so that the link is same-origin and keeps working wherever the page 
 
 ## Provenance, authorship and licensing
 
-This page is **part of the submission**. It is the entry point published for the hash-10 submission:
+This page is **part of the submission**. It is the entry point published for the submission:
 the version 1.0.1 release package and the erratum published with it, and the third-party analyses the submission has received. Every parameter, test vector and measurement on the page is taken from the
 sources listed above; where the page and the specification disagree, the specification prevails.
 
@@ -170,7 +168,7 @@ The component analysis:
 
 The submission's overview page, if you need to point at it:
 
-> *FEILIAN (hash-10) — Submission Overview* (v1.6.1), <https://pennybenny.github.io/FEILIAN/>
+> *FEILIAN — Submission Overview* (v1.6.3), <https://pennybenny.github.io/FEILIAN/>
 
 ---
 
@@ -182,5 +180,5 @@ recorded in [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Release history
 
-See [`CHANGELOG.md`](CHANGELOG.md). Current release: **v1.6.1** (9 October 2026), tracking
+See [`CHANGELOG.md`](CHANGELOG.md). Current release: **v1.6.3** (12 October 2026), tracking
 specification **v1.0.1** (8 October 2026).

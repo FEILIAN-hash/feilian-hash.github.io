@@ -5,8 +5,7 @@ Provenance, authorship and rights for everything in this repository.
 ## What this repository is
 
 The **overview page of the FEILIAN submission** — the hash function submitted to the NGCC-CH
-programme of the Institute of Commercial Cryptography Standards (ICCS), China, under the designation
-`hash-10`.
+programme of the Institute of Commercial Cryptography Standards (ICCS), China.
 
 The page is **part of the submission**. It is the entry point published for the submission: the
 specification and the erratum as released, the implementations, and the third-party analyses the
@@ -16,15 +15,15 @@ sources below; where the page and the specification disagree, the specification 
 ## The specification
 
 > **FEILIAN: A Hash Function Proposal** — submitted to the Next-generation
-> Cryptographic Algorithms Program (NGCC), China. Designation `hash-10`.
+> Cryptographic Algorithms Program (NGCC), China.
 > Version 1.0.1, 8 October 2026, 69 pp.
 
 The designers released a three-page **erratum** together with version 1.0.1,
 recording every change from the June 2026 text. It is published byte-for-byte as
 released, both inside the version 1.0.1 release package
 (`files/FEILIAN-v1.0.1.zip`) and as a document of its own,
-`files/FEILIAN_Erratum.pdf`. Section 5 of the page points at it and links it
-directly rather than reproducing it. The edition published here is the revised
+`files/FEILIAN_Erratum.pdf`. The page links it directly rather
+than reproducing it. The edition published here is the revised
 one, which cites the ngcc.dev report as well as the technical assessment.
 
 Designers / submitters, as printed on the specification's title page:
@@ -107,7 +106,7 @@ not repacked — so its digest is the digest of the official artifact. Its SHA-2
 ```
 
 The erratum is published on its own as well, byte-identical to the copy inside
-the package, so that section 5 can link it without the archive:
+the package, so that the page can link it without the archive:
 
 ```
 98e74ec289636cea9fafa56518240a55e1d2473ff6af5d07e0b311baec98e424  FEILIAN_Erratum.pdf

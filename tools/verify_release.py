@@ -93,7 +93,7 @@ def main():
     report(html.count("ready:false") == 0, "no artifact left unpublished",
            f"{html.count('ready:true')} ready")
     # Documents the text links straight with an href, outside the manifest - the
-    # erratum of section 05. A dead one of these is invisible to the check above,
+    # erratum linked straight from the downloads section. A dead one of these is
     # and so is one that was published without being checksummed.
     direct = sorted(set(re.findall(r'href="(files/[^"]+)"', html)))
     report(bool(direct), "in-text document links found", f"{len(direct)}")

@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FEILIAN (hash-10) — Introduction, Live Demo, Artifacts and Analysis</title>
-<meta name="description" content="FEILIAN (hash-10), the hash function submitted to the NGCC-CH programme: the design and its reported performance, a live in-browser digest demo, the documents and implementations released with it, and the independent third-party security analyses it has received, each linked to its source.">
+<title>FEILIAN — Introduction, Live Demo, Artifacts and Analysis</title>
+<meta name="description" content="FEILIAN, the 1024-bit ARX hash function submitted to the NGCC-CH programme: its design and reported performance, a live in-browser digest demo, the released documents and implementations, and the independent third-party analyses of it.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://pennybenny.github.io/FEILIAN/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FEILIAN — Submission Overview">
-<meta property="og:title" content="FEILIAN (hash-10) — Introduction, Live Demo, Artifacts and Analysis">
-<meta property="og:description" content="An introduction to the FEILIAN hash function (NGCC-CH, hash-10) and its reported performance, a live in-browser digest demo, the artifacts that document it, and the independent third-party analyses it has received.">
+<meta property="og:title" content="FEILIAN — Introduction, Live Demo, Artifacts and Analysis">
+<meta property="og:description" content="An introduction to the FEILIAN hash function (NGCC-CH) and its reported performance, a live in-browser digest demo, the artifacts that document it, and the independent third-party analyses it has received.">
 <meta property="og:url" content="https://pennybenny.github.io/FEILIAN/">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FEILIAN (hash-10) — Introduction, Live Demo, Artifacts and Analysis">
-<meta name="twitter:description" content="Introduction, a live in-browser hash demo, downloadable artifacts, and the third-party security analyses of the FEILIAN hash function (hash-10).">
+<meta name="twitter:title" content="FEILIAN — Introduction, Live Demo, Artifacts and Analysis">
+<meta name="twitter:description" content="Introduction, a live in-browser hash demo, downloadable artifacts, and the third-party security analyses of the FEILIAN hash function.">
 <!-- Scholarly indexing metadata for the underlying specification. -->
 <meta name="citation_title" content="FEILIAN: A Hash Function Proposal (submitted specification, version 1.0.1, 8 October 2026)">
 <meta name="citation_author" content="Lei Wang">
@@ -63,13 +63,8 @@
   header.hero h1{margin:0 0 14px;font-size:60px;font-weight:800;letter-spacing:-.02em;line-height:1}
   header.hero h1 span{color:#fff}
   header.hero p.sub{margin:0;font-size:17px;color:#c6d1de;max-width:640px}
-  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
   .btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;
        padding:11px 20px;border-radius:10px;cursor:pointer;border:1px solid transparent;transition:.2s}
-  .btn.p{background:#fff;color:#17293f;box-shadow:0 6px 18px -8px rgba(0,0,0,.45)}
-  .btn.p:hover{transform:translateY(-2px);text-decoration:none}
-  .btn.g{background:transparent;color:#d8e1ec;border-color:rgba(216,225,236,.30)}
-  .btn.g:hover{background:rgba(255,255,255,.10);text-decoration:none}
 
   .dl-sub{font-size:13px;color:var(--ink-soft);margin:6px 0 10px;min-height:36px}
   .dl-meta{font-size:11.5px;color:var(--ink-soft);margin:0 0 14px;word-break:break-all;line-height:1.5}
@@ -80,10 +75,6 @@
   .dl-btn.off{border-color:var(--line2);background:transparent;color:var(--ink-soft);cursor:not-allowed}
   .dl-btn.off:hover{transform:none;background:transparent}
 
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-  .chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:8px;
-        padding:6px 11px;font-size:12px;font-family:var(--mono);color:#d6dfe9}
-  .chip b{color:#9db6d0;font-weight:600}
 
   nav.toc{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);
           border-bottom:1px solid var(--line)}
@@ -147,6 +138,30 @@
   figure svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--line);border-radius:14px}
   figcaption{font-size:12.5px;color:var(--ink-soft);margin-top:9px;text-align:center}
 
+  /* ---------- local emphasis on the reported-value charts ----------
+     Not a magnifier: the pointer enlarges the element it is actually over —
+     one bar, or one series (its polyline and its points) — and dims the rest
+     of that figure. So the figure is legible at 1x and the pointer answers a
+     single question at a time: which value is this? */
+  .chartfig{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:#fff}
+  .chartfig svg{display:block;width:100%;height:auto;background:transparent;border:0;border-radius:0}
+  .chartfig .barg,
+  .chartfig .serg,
+  .chartfig .pt{transition:transform .2s cubic-bezier(.2,.7,.3,1),opacity .2s,filter .2s}
+  .chartfig .ln{transition:stroke-width .2s}
+  /* a fat invisible twin of each series line: the drawn stroke is 2-3px, which
+     is far too thin to hit with a pointer */
+  .chartfig .hit{fill:none;stroke:transparent;stroke-width:15;stroke-linecap:round}
+  @media(hover:hover){
+    .chartfig .barg:hover{transform:scale(1.07);filter:brightness(1.12)}
+    .chartfig .pt:hover{transform:scale(2.1)}
+    .chartfig .serg:hover .ln{stroke-width:4.6}
+    .chartfig:has(.barg:hover) .barg:not(:hover),
+    .chartfig:has(.serg:hover) .serg:not(:hover){opacity:.32}
+  }
+  @media(prefers-reduced-motion:reduce){.chartfig .barg,.chartfig .serg,.chartfig .pt,.chartfig .ln{transition:none}}
+
+
   ul.tight{margin:8px 0;padding-left:19px}
   ul.tight li{margin:5px 0}
   .ref{font-size:13px;color:var(--ink-soft);padding:7px 0;border-bottom:1px dashed var(--line)}
@@ -187,7 +202,6 @@
   .stepbtn{border:1px solid var(--line2);background:#fff;border-radius:9px;width:38px;height:38px;
            font-size:16px;cursor:pointer;color:var(--ink);transition:.2s}
   .stepbtn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
-  .stepbtn.play{width:auto;padding:0 18px;font-weight:600;font-size:13.5px;background:var(--grad);color:#fff;border:0}
   .stepcap{font-size:13.5px;color:var(--ink-soft)}
   .stepcap b{color:var(--ink)}
   /* ---------- interactive design figure ---------- */
@@ -380,22 +394,9 @@
 <!-- ================= HERO ================= -->
 <header class="hero">
   <div class="wrap">
-    <p class="kicker"><span class="dot"></span> NGCC-CH Submission · hash-10</p>
+    <p class="kicker"><span class="dot"></span> NGCC-CH Submission</p>
     <h1><span>FEILIAN</span></h1>
-    <p class="sub">A 1024-bit ARX hash function submitted to the Next-generation Commercial Cryptographic Algorithms programme. This is the submission's own overview: what the design is, the documents and implementations released with it, and the independent third-party analyses — each finding with its current status.</p>
-    <div class="cta">
-      <a href="#introduction" class="btn p">Introduction →</a>
-      <a href="#demo" class="btn g">Live demo</a>
-      <a href="#downloads" class="btn g">Downloads</a>
-      <a href="#analysis" class="btn g">Third-party analysis</a>
-    </div>
-    <div class="chips">
-      <span class="chip"><b>Revision</b> v1.0.1 · 2026-10-08</span>
-      <span class="chip"><b>Designation</b> hash-10</span>
-      <span class="chip"><b>Digest</b> 512 / 768 / 1024</span>
-      <span class="chip"><b>State</b> 1024-bit</span>
-      <span class="chip"><b>Independent reviews</b> 3</span>
-    </div>
+    <p class="sub">A 1024-bit ARX hash function submitted to the Next-generation Commercial Cryptographic Algorithms programme.</p>
   </div>
 </header>
 
@@ -406,7 +407,6 @@
     <a href="#demo">Live demo</a>
     <a href="#downloads">Downloads</a>
     <a href="#analysis">Third-party analysis</a>
-    <a href="#erratum">Erratum</a>
     <a href="#sources">Sources</a>
   </div>
 </nav>
@@ -417,7 +417,7 @@
 <section id="introduction">
   <p class="eyebrow rv">01 — Introduction</p>
   <h2 class="rv">What FEILIAN is</h2>
-  <p class="lead rv">FEILIAN is a candidate submitted to the Next-generation Commercial Cryptographic Algorithms programme (NGCC-CH) under the designation <span class="mono">hash-10</span>. It runs a 1024-bit chaining state with a 1024-bit message block; the compression function is a tweakable ARX permutation under a Davies–Meyer feed-forward. All three digest lengths reuse the same 1024-bit internal state — only the output is truncated — so one core implementation serves the whole family.</p>
+  <p class="lead rv">FEILIAN is a candidate submitted to the Next-generation Commercial Cryptographic Algorithms programme (NGCC-CH): a tweakable ARX permutation in Davies–Meyer mode over a 1024-bit state and message block. The three digest lengths share that state, keeping a different amount of output, so one core serves the whole family.</p>
 
   <div class="grid4">
     <div class="card stat lift rv d1"><div class="v" data-count="1024" data-suffix="-bit">0</div><div class="l">Chaining state &amp; message block</div></div>
@@ -428,7 +428,6 @@
 
   <div class="card rv" id="designfig" style="margin-top:18px">
     <h3 style="margin-top:0">The design in four views</h3>
-    <p style="color:var(--ink-soft);font-size:13.5px;margin:6px 0 12px">Four views of the same object, redrawn from the specification's own figures. <b>Compression function</b> — the block diagram of FEILIAN-<i>f</i>: five phases, one 1024-bit message block absorbed by all of them, the tweak folded in at every round, and the Davies&ndash;Meyer feed-forward. <b>One round</b> — the 4×4 state matrix walking SubColumn → ShiftRow → SubColumn → ShiftRow → AddConstant. <b>SubColumn</b> — the two stacked tweakable ARX S-boxes and the tweaks they exchange. <b>ARX S-box</b> — the add-rotate-XOR network the whole family is built from.</p>
 
     <div class="stagebar" role="tablist" aria-label="Design views">
       <button class="stagetab on" data-stg="0" role="tab" aria-selected="true">Compression function</button>
@@ -661,12 +660,11 @@
           </g>
         </g>
       </svg>
-      <figcaption>Figure 1 &middot; The design, redrawn from the specification's Figures 2.1&ndash;2.6 and 4.1. The 4&times;4 state matrices are coloured as the specification colours them: colour tracks a column through the round, and in each operand matrix the lit rows are the rows that operand is added to &mdash; a message half into rows 0 and 2, the round constants into row 1 and the tweak into row 3.</figcaption>
+      <figcaption>Figure 1 &middot; The design, redrawn from the specification's Figures 2.1&ndash;2.6 and 4.1.</figcaption>
     </figure>
 
     <div class="steps">
       <button class="stepbtn" id="dprev" aria-label="previous view">&lsaquo;</button>
-      <button class="stepbtn play" id="dplay">&#9654; Play</button>
       <button class="stepbtn" id="dnext" aria-label="next view">&rsaquo;</button>
       <span class="stepcap" id="dcap">Compression function</span>
     </div>
@@ -674,11 +672,11 @@
 
   <div class="card rv" style="margin-top:18px">
     <h3 style="margin-top:0">Performance</h3>
-    <p style="color:var(--ink-soft);font-size:13.5px;margin:6px 0 14px">Chapter 5 of the specification reports the cost of the family: operation counts, memory footprint, software timings on three platforms and FPGA synthesis. The three views below are its reported values — nothing on this page was benchmarked, synthesised or otherwise measured locally. In cycles per byte FEILIAN-1024 settles essentially level with SHA-512 on long messages, ahead of SHA-3-512 and behind BLAKE-64.</p>
+    <p style="color:var(--ink-soft);font-size:13.5px;margin:6px 0 14px">Chapter 5 of the specification reports the cost of the family. Everything below is reproduced from it; nothing here was measured locally. In cycles per byte FEILIAN-1024 settles level with SHA-512 on long messages, ahead of SHA-3-512 and behind BLAKE-64.</p>
 
     <figure style="margin:6px 0 4px">
-      <div id="cpbchart"></div>
-      <figcaption>Figure 2 · Cycles per byte, FEILIAN-1024 against BLAKE-64, SHA-512 and SHA-3-512 (specification Table 5.3, SUPERCOP/eBACS harness).</figcaption>
+      <div class="chartfig" id="cpbchart"></div>
+      <figcaption>Figure 2 · Cycles per byte, FEILIAN-1024 against BLAKE-64, SHA-512 and SHA-3-512 (specification Table 5.3).</figcaption>
     </figure>
 
     <table style="font-size:13.5px;margin-top:6px">
@@ -689,25 +687,24 @@
         <tr><td class="k">Apple M2 Pro @3.50 GHz</td><td>NEON</td><td>macOS 26 · Clang 17.0.0</td><td class="num">55.76</td><td class="num">5.64</td><td class="num">4.19</td><td class="num">4.09</td></tr>
       </tbody>
     </table>
-    <p class="tblcap">FEILIAN-1024, built with <span class="mono">-O3 -march=native</span>, median over thousands of trials. Values are cycles per byte and settle as the message grows.</p>
+    <p class="tblcap">Cycles per byte.</p>
 
     <figure style="margin:16px 0 0">
-      <div id="fpgachart"></div>
-      <figcaption>Figure 3 · FPGA throughput of FEILIAN-<i>f</i> by architecture (§5.5, Table 5.5): 1SC / 2SC / 4SC / 8SC SubColumn units, on Xilinx Virtex-5 xc5vlx110 and AMD Zynq-7000 xc7z100.</figcaption>
+      <div class="chartfig" id="fpgachart"></div>
+      <figcaption>Figure 3 · FPGA throughput of FEILIAN-<i>f</i> by architecture (§5.5, Table 5.5).</figcaption>
     </figure>
-    <p class="tblcap">Synplify Elite W-2024.09, base strategy. Message buffering, padding, bit counters and output registers lie outside the measured block; constants and message selection are hard-wired, not in block RAM. The operation counts, the vectorisation and parallelism notes of §5.1–5.2, and the FPGA resource counts are in the specification.</p>
   </div>
 
   <div class="callout rv">
-    Security claims (specification Table 4.1) and the arguments behind them are <b>not</b> reproduced here — the independent analyses that address them are cited, with links to their own documents, in <a href="#analysis">Third-party analysis ↓</a>.
+    The security claims of specification Table 4.1 are <b>not</b> reproduced here; the analyses that address them are linked in <a href="#analysis">Third-party analysis ↓</a>.
   </div>
 
   <div class="card rv">
     <h3 style="margin-top:0">Revision history of the submission</h3>
     <ul class="tl">
-      <li><span class="d">2026-10-08</span><b>Specification v1.0.1</b> (69 pp.) and the three-page <b>erratum</b>, released together. The erratum records the four typographical corrections of its Table 1, the software and hardware corrections of its Table 2, and five further text changes made in response to the assessments.</li>
-      <li><span class="d">2026-09-27</span>M. Idrassi, <i>FEILIAN: technical assessment of the submitted specification and implementations</i>, v1.0.2 (14 pp., CC BY 4.0). The same day, ePrint 2026/2236 was submitted and approved on 28 September.</li>
-      <li><span class="d">2026-09-26 · 09-23</span>M.-J. O. Saarinen publishes his FEILIAN (hash-10) report on ngcc.dev — entries <span class="mono">hash-10-1 … hash-10-5</span>.</li>
+      <li><span class="d">2026-10-08</span><b>Specification v1.0.1</b> (69 pp.) and the three-page <b>erratum</b>, released together. The erratum lists the corrections of its Tables 1&ndash;2 and five further text changes made in response to the assessments.</li>
+      <li><span class="d">2026-09-27</span>M. Idrassi, <i>FEILIAN: technical assessment of the submitted specification and implementations</i>, v1.0.2 (14 pp., CC BY 4.0); ePrint 2026/2236 submitted the same day, approved 28 September.</li>
+      <li><span class="d">2026-09-26 · 09-23</span>M.-J. O. Saarinen publishes his FEILIAN report on ngcc.dev.</li>
       <li class="mute"><span class="d">2026-06-30</span><b>Original submission v1.0</b> (68 pp.) — the revision examined by the third-party assessment.</li>
     </ul>
   </div>
@@ -789,7 +786,7 @@
 <section id="downloads">
   <p class="eyebrow rv">03 — Downloads</p>
   <h2 class="rv">Artifacts</h2>
-  <p class="lead rv">The submission is distributed as a single <b>version 1.0.1 release package</b> (8 October 2026): the specification, the three-page erratum recording every change from v1.0, and the reference, optimized and RTL implementations, in one archive. The package is published byte-for-byte as distributed, with its SHA-256, so a download can be verified end to end. The erratum is also published on its own, for reading without the archive (<a href="files/FEILIAN_Erratum.pdf" target="_blank" rel="noopener">open the PDF</a>, or see <a href="#erratum">&sect;05</a>). The revision history of the submission is at the end of <a href="#introduction">&sect;01</a>.</p>
+  <p class="lead rv">The submission is distributed as a single <b>version 1.0.1 release package</b> (8 October 2026): the specification, the three-page erratum recording every change from v1.0, and the reference, optimized and RTL implementations, in one archive published byte-for-byte as distributed with its SHA-256. The erratum is also available on its own (<a href="files/FEILIAN_Erratum.pdf" target="_blank" rel="noopener">open the PDF</a>).</p>
   <div id="dlgrid" class="grid-auto rv"></div>
   <p class="tblcap rv" id="dlnote"></p>
 
@@ -803,8 +800,8 @@
           <tr><td><b>Distributed here — v1.0.1</b></td><td class="num">69</td><td class="mono">2d14bcf877eb9fbd…</td></tr>
         </tbody>
       </table>
-      <p class="tblcap">The technical assessment [2] reviewed the 30 June 2026 text. The copy released here is version 1.0.1 (8 October 2026); the erratum recording every change between the two revisions is published on its own as well as inside the release package, and is introduced in §05. The review documents themselves are linked in §04.</p>
-      <div class="note" style="margin-bottom:0"><b>Read this first.</b> Open the specification inside the package before quoting any parameter: the tables on this page are a summary, and where the page and the specification disagree, the specification prevails.</div>
+      <p class="tblcap">The technical assessment [2] reviewed the 30 June 2026 text; the copy released here is version 1.0.1 (8 October 2026).</p>
+      <div class="note" style="margin-bottom:0"><b>Read this first.</b> The tables on this page are a summary; where they and the specification disagree, the specification prevails.</div>
     </div>
   </div>
 </section>
@@ -813,7 +810,7 @@
 <section id="analysis">
   <p class="eyebrow rv">04 &mdash; Third-party analysis</p>
   <h2 class="rv">Independent reviews</h2>
-  <p class="lead rv">Three independent sources have analysed this submission. Their documents are published by their authors, so this page links to the sources rather than restating their findings. None of the three establishes a full-round cryptanalytic break of the correctly encoded software hash.</p>
+  <p class="lead rv">Three independent sources have analysed this submission. Their documents are published by their authors, so this page links to them rather than restating their findings; none establishes a full-round break of the correctly encoded software hash.</p>
 
   <div class="revlist">
     <div class="card revcard lift rv">
@@ -824,7 +821,7 @@
     <div class="card revcard lift rv d1">
       <h3 style="margin-top:0">Markku-Juhani O. Saarinen &mdash; ngcc.dev</h3>
       <p class="who">Personal report on ngcc.dev &middot; entries dated 23 &amp; 26 September 2026 &middot; unaffiliated with NICCS</p>
-      <p class="srcline"><a href="https://ngcc.dev/reports/hash-10.html">ngcc.dev/reports/hash-10.html &rarr;</a></p>
+      <p class="srcline"><a href="https://ngcc.dev/reports/hash-10.html">ngcc.dev &rarr;</a></p>
     </div>
     <div class="card revcard lift rv d2">
       <h3 style="margin-top:0">Mounir Idrassi &mdash; ePrint 2026/2236</h3>
@@ -834,33 +831,15 @@
   </div>
 </section>
 
-<!-- ================= ERRATUM ================= -->
-<section id="erratum">
-  <p class="eyebrow rv">05 &mdash; Erratum</p>
-  <h2 class="rv">The designers' erratum: v1.0 &rarr; v1.0.1</h2>
-  <p class="lead rv">On 8 October 2026 the designers released <b>specification version 1.0.1</b> together with a three-page <b>erratum</b> that records every change made to the June 2026 text. The erratum is not reproduced on this page, but it is published on its own beside it and can be opened directly below. Its opening sentence is the one that matters most, and it is quoted verbatim: <i>&ldquo;The design of hash function FEILIAN does not change. All details should refer to the reference code that illustrates FEILIAN fully and correctly.&rdquo;</i></p>
-
-  <div class="card rv" style="margin-top:18px">
-    <h3 style="margin-top:0">Three short pages &mdash; what they contain</h3>
-    <p style="color:var(--ink-soft);font-size:13.5px;margin:6px 0 16px">The erratum is short enough to read whole. No round, constant, counter rule or iteration count is altered by v1.0.1, and it has three parts.</p>
-    <ul class="tight">
-      <li><b>Table 1 &mdash; four typographical corrections</b> in the specification: the seventh IV word, the word order of the AddConstant row, a bibliography key, and the printed Appendix&nbsp;B.2/B.3 vectors for FEILIAN-768/512. Both design-affecting corrections were already what the reference code did; the printed text carried the older value.</li>
-      <li><b>Table 2 &mdash; corrections to the implementations</b>, grouped into software and hardware: proper handling of exceptional execution situations, masking of non-full-byte input, allocation, length-representability and digest-length checks in software; and in hardware the current block length included in the 1SC/4SC/8SC compression input, transaction-consistent latching of block, final flag and cumulative length, one counter-word order across all RTL cores, and digest output restricted to completed hashes.</li>
-      <li><b>&sect;3 &mdash; five further text changes</b> made after reading the community assessments, among them writing the counter convention out explicitly (<span class="mono">t<sub>0</sub></span> the high word, <span class="mono">t<sub>1</sub></span> the low word) and clarifying that the XOF is a variable-output-length hash function.</li>
-    </ul>
-    <p style="color:var(--ink-soft);font-size:13.5px;margin:16px 0 0">The erratum is published on its own as well, so it can be read without taking the whole archive: <span class="mono">files/FEILIAN_Erratum.pdf</span>, byte-identical to the copy at the top level of the release package, beside the specification. Its SHA-256 begins <span class="mono">98e74ec289636cea&hellip;</span>; the full digest, and the digest of the package, are in <span class="mono">files/SHA256SUMS.txt</span>.</p>
-    <p style="margin:14px 0 0;display:flex;flex-wrap:wrap;gap:14px;align-items:center"><a class="dl-btn" href="files/FEILIAN_Erratum.pdf" target="_blank" rel="noopener">Open the erratum (PDF, 3 pp.) &nearr;</a><a href="#downloads" style="font-size:13.5px">or take the release package v1.0.1 &darr;</a></p>
-  </div>
-</section>
 
 <!-- ================= SOURCES ================= -->
 <section id="sources">
   <p class="eyebrow rv">Sources</p>
   <h2 class="rv">Documents referenced</h2>
   <div class="card rv">
-    <div class="ref"><b>[1]</b> Lei Wang, Ling Song, Yaobin Shen, Kaixuan Wang, Zicheng Shi, Xin Yi. <i>FEILIAN: A Hash Function Proposal</i> — submitted to the Next-generation Cryptographic Algorithms Program, China. Version 1.0.1, 8 October 2026, 69 pp. The specification PDF inside the release package has SHA-256 <span class="mono">2d14bcf877eb9fbdb79fe573be078923445aec373270a16676ebd494ffabf0db</span>. <a href="#downloads">Download the package</a>. A three-page erratum recording every change from v1.0 is issued with it and is also published <a href="files/FEILIAN_Erratum.pdf" target="_blank" rel="noopener">as a document of its own</a> (§05).</div>
+    <div class="ref"><b>[1]</b> Lei Wang, Ling Song, Yaobin Shen, Kaixuan Wang, Zicheng Shi, Xin Yi. <i>FEILIAN: A Hash Function Proposal</i> — submitted to the Next-generation Cryptographic Algorithms Program, China. Version 1.0.1, 8 October 2026, 69 pp. The specification PDF inside the release package has SHA-256 <span class="mono">2d14bcf877eb9fbdb79fe573be078923445aec373270a16676ebd494ffabf0db</span>. <a href="#downloads">Download the package</a>. An erratum recording every change from v1.0 is issued with it and is also published <a href="files/FEILIAN_Erratum.pdf" target="_blank" rel="noopener">as a document of its own</a>.</div>
     <div class="ref"><b>[2]</b> Mounir Idrassi (AM Crypto, Japan). <a href="https://github.com/amcrypto-jp/feilian-cryptanalysis"><i>FEILIAN: technical assessment of the submitted specification and implementations</i></a>, version 1.0.2, 27 September 2026, 14 pp. CC BY 4.0. Findings R1–R8.</div>
-    <div class="ref"><b>[3]</b> Markku-Juhani O. Saarinen. <a href="https://ngcc.dev/reports/hash-10.html"><i>FEILIAN (hash-10)</i></a>, personal report, ngcc.dev, entries dated 23 and 26 September 2026. Unaffiliated with NICCS; identifiers and editorial labels belong to that site. The designers' erratum cites this report as its own reference [2].</div>
+    <div class="ref"><b>[3]</b> Markku-Juhani O. Saarinen. <a href="https://ngcc.dev/reports/hash-10.html"><i>FEILIAN</i></a>, personal report, ngcc.dev, entries dated 23 and 26 September 2026. Unaffiliated with NICCS; identifiers and editorial labels belong to that site. The designers' erratum cites this report as its own reference [2].</div>
     <div class="ref"><b>[4]</b> Mounir Idrassi. <a href="https://eprint.iacr.org/2026/2236"><i>A Complete Classification of Whole-Output Linear Structures in FEILIAN-Type Components</i></a>, Cryptology ePrint Archive, Report 2026/2236, 2026. CC BY 4.0.</div>
     <div class="ref"><b>[5]</b> E. Biham, O. Dunkelman. <a href="https://eprint.iacr.org/2007/278"><i>A Framework for Iterative Hash Functions — HAIFA</i></a>, IACR Cryptology ePrint Archive, Report 2007/278.</div>
     <div class="ref"><b>[6]</b> J. Black, P. Rogaway, T. Shrimpton. <a href="https://doi.org/10.1007/3-540-45708-9_21"><i>Black-Box Analysis of the Block-Cipher-Based Hash-Function Constructions from PGV</i></a>, CRYPTO 2002, LNCS 2442.</div>
@@ -875,8 +854,8 @@
 
 <footer>
   <div class="wrap">
-    <p><b>FEILIAN — Submission Overview</b> · release v1.6.1 · 9 October 2026 · designation hash-10</p>
-    <p>Published for the FEILIAN submission to the NGCC-CH programme: the version 1.0.1 release package as distributed &mdash; specification, erratum and implementations &mdash; and the independent third-party analyses the submission has received, each linked to its own document. Where this page and the specification disagree, the specification prevails. Timings reported by the live demo are JavaScript measurements taken in your browser and say nothing about the implementations themselves.</p>
+    <p><b>FEILIAN — Submission Overview</b> · release v1.6.3 · 12 October 2026</p>
+    <p>Published for the FEILIAN submission to the NGCC-CH programme. Where this page and the specification disagree, the specification prevails. Timings shown by the live demo are JavaScript measurements in your browser, not those of the implementations.</p>
     <p>Page text and figures: <a href="LICENSE">CC BY 4.0</a>. The release package and the erratum are submission material, © its designers, redistributed as distributed — see <a href="NOTICE.md">NOTICE</a>.</p>
     <p>Release package SHA-256 <span class="mono">23d3e6721563a27b15b39b14a3e3042b9c5da6925fb3d540464d85206de05d5c</span> · erratum <span class="mono">98e74ec289636cea…</span> · <a href="files/SHA256SUMS.txt">checksums</a> · <a href="https://github.com/PENNYBENNY/FEILIAN">source repository</a></p>
   </div>
@@ -891,7 +870,7 @@
 /* DOWNLOADS:BEGIN */
 var DOWNLOADS = [
   {id:"v101", title:"Release package v1.0.1",
-   sub:"Specification 1.0.1 (69 pp.) + erratum v1.0→v1.0.1 + reference, optimized and RTL implementations",
+   sub:"Specification 1.0.1 (69 pp.) + erratum + reference, optimized and RTL implementations",
    file:"files/FEILIAN-v1.0.1.zip", size:"856.0 KB", sha:"23d3e6721563a27b…", ready:true}
 ];
 var DL_RELEASE = "";   /* optional mirror base, e.g. a release CDN prefix */
@@ -990,7 +969,7 @@ var DL_RELEASE = "";   /* optional mirror base, e.g. a release CDN prefix */
 
     var BODY=[
       'the compression function FEILIAN-<i>f</i>. The same 1024-bit block <span class="mono">m</span> is absorbed by all five phases; the tweak <span class="mono">tw</span> enters every round; the feed-forward XORs the incoming chaining value into the result, so <span class="mono">h&#8242; = h &#8853; v&#8325;</span>.',
-      'one round <span class="mono">R&#770;<sup>&#8853;</sup></span>: SubColumn, ShiftRow, SubColumn, ShiftRow, AddConstant, with one message half absorbed before each SubColumn. Colour tracks a column &#8212; SubColumn mixes within a column, ShiftRow carries the mixture into a new column.',
+      'one round <span class="mono">R&#770;<sup>&#8853;</sup></span>: SubColumn, ShiftRow, SubColumn, ShiftRow, AddConstant, with one message half absorbed before each SubColumn.',
       'SubColumn: two tweakable ARX S-boxes stacked. <span class="mono">S&#771;&#8321;</span> is driven by <span class="mono">s&#8321; = a&#8320;&#8242;</span>, <span class="mono">S&#771;&#8320;</span> by <span class="mono">s&#8320; = a&#8321; + b&#8321;</span>. Both tweaks are derived inside SubColumn &#8212; no external value enters.',
       'the ARX S-box: addition, rotation and XOR only. <span class="mono">&#931;&#8320;</span> rotates by 5 and 48 after a rotation of 8; <span class="mono">&#931;&#8321;</span> rotates by 11 and 40 after a rotation of 63.'
     ];
@@ -1098,8 +1077,8 @@ var DL_RELEASE = "";   /* optional mirror base, e.g. a release CDN prefix */
     }
 
     var RENDER=[r0,r1,r2,r3];
-    var dcap=document.getElementById('dcap'), dplay=document.getElementById('dplay');
-    var stage=0, k=0, tid=null, ptid=null, visible=false;
+    var dcap=document.getElementById('dcap');
+    var stage=0, k=0, tid=null, visible=false;
 
     function resetAll(){ r0(-1); r1(-1); r2(-1); r3(-1); }
     function paint(){ RENDER[stage](k); dcap.innerHTML='<b>'+STEPS[stage][k]+'</b> &middot; '+BODY[stage]; }
@@ -1115,9 +1094,8 @@ var DL_RELEASE = "";   /* optional mirror base, e.g. a release CDN prefix */
       tid=setInterval(function(){ k=(k+1)%MAXK[stage]; paint(); },TICK[stage]);
     }
     function stop(){ if(tid){clearInterval(tid);tid=null;} }
-    function haltTour(){ if(ptid){clearInterval(ptid);ptid=null;dplay.textContent='\u25B6 Play';} }
     function goto(s){
-      stop(); haltTour();
+      stop();
       fit(s);
       root.querySelectorAll('.stg').forEach(function(e,i){e.classList.toggle('on',i===s);});
       root.querySelectorAll('.stagetab').forEach(function(e,i){
@@ -1133,11 +1111,6 @@ var DL_RELEASE = "";   /* optional mirror base, e.g. a release CDN prefix */
     });
     document.getElementById('dprev').addEventListener('click',function(){ goto((stage+3)%4); });
     document.getElementById('dnext').addEventListener('click',function(){ goto((stage+1)%4); });
-    dplay.addEventListener('click',function(){
-      if(ptid){ haltTour(); return; }
-      dplay.textContent='\u275A\u275A Pause';
-      ptid=setInterval(function(){ goto((stage+1)%4); },15000);
-    });
 
     if(window.IntersectionObserver){
       new IntersectionObserver(function(es){
@@ -1936,9 +1909,14 @@ schedule();
   s.push('<text class="ax" transform="translate(16,'+(MT+ph/2)+') rotate(-90)" text-anchor="middle">cycles / byte</text>');
   SERIES.forEach(function(se){
     var pts=se.d.map(function(v,i){return xs(i)+','+ys(v);}).join(' ');
-    s.push('<polyline points="'+pts+'" fill="none" stroke="'+se.color+'" stroke-width="'+se.w+
+    s.push('<g class="serg">');
+    s.push('<polyline class="hit" points="'+pts+'"/>');
+    s.push('<polyline class="ln" points="'+pts+'" fill="none" stroke="'+se.color+'" stroke-width="'+se.w+
            '" stroke-linejoin="round" stroke-linecap="round"'+(se.w===3?'':' stroke-dasharray="5 4"')+'/>');
-    se.d.forEach(function(v,i){ s.push('<circle cx="'+xs(i)+'" cy="'+ys(v)+'" r="'+(se.w===3?4:2.8)+'" fill="#fff" stroke="'+se.color+'" stroke-width="2"/>'); });
+    se.d.forEach(function(v,i){ s.push('<circle class="pt" cx="'+xs(i)+'" cy="'+ys(v)+'" r="'+(se.w===3?4:2.8)+
+           '" fill="#fff" stroke="'+se.color+'" stroke-width="2" style="transform-box:view-box;transform-origin:'+
+           xs(i).toFixed(1)+'px '+ys(v).toFixed(1)+'px"/>'); });
+    s.push('</g>');
   });
   SERIES.forEach(function(se,i){
     var y=MT+14+i*24;
@@ -1971,8 +1949,11 @@ schedule();
     var cx=ML+slot*i+slot/2;
     SER.forEach(function(se,j){
       var x=cx-slot/2+21+j*(bw+8), v=se.d[i], y=ys(v), h=MT+ph-y;
+      s.push('<g class="barg" style="transform-box:view-box;transform-origin:'+
+             (x+bw/2).toFixed(1)+'px '+(MT+ph).toFixed(1)+'px">');
       s.push('<rect x="'+x+'" y="'+y+'" width="'+bw+'" height="'+Math.max(0,h)+'" rx="5" fill="'+se.color+'"/>');
       s.push('<text class="vl" x="'+(x+bw/2)+'" y="'+(y-6)+'" text-anchor="middle">'+v.toFixed(1)+'</text>');
+      s.push('</g>');
     });
     s.push('<text class="ax" x="'+cx+'" y="'+(MT+ph+22)+'" text-anchor="middle">'+c+'</text>');
   });
