@@ -2,7 +2,7 @@ This repository contains two kinds of material, under two different sets of term
 Please read both before reusing anything here.
 
 1. THE COMPENDIUM -- CC BY 4.0
-   index.html, README.md, DEPLOY.md, NOTICE.md, CHANGELOG.md, LICENSE, the
+   index.html, content.js, README.md, DEPLOY.md, NOTICE.md, CHANGELOG.md, LICENSE, the
    tools/ directory, and all original text and figures they contain, together
    form the "FEILIAN Specification Compendium". This material is licensed under
    the Creative Commons Attribution 4.0 International licence (CC BY 4.0), whose
@@ -12,7 +12,7 @@ Please read both before reusing anything here.
    that you give appropriate credit, link to the licence, and indicate whether
    changes were made. A suggested attribution is:
 
-       FEILIAN Specification Compendium, https://pennybenny.github.io/FEILIAN/
+       FEILIAN Specification Compendium, https://feilian-hash.github.io/
        Licensed under CC BY 4.0.
 
 2. THE SUBMISSION MATERIAL -- ALL RIGHTS RESERVED

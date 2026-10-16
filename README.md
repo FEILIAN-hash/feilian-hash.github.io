@@ -3,7 +3,7 @@
 **The overview page for FEILIAN**, the hash function submitted to the NGCC-CH programme of the
 Institute of Commercial Cryptography Standards (ICCS), China.
 
-**Live site — <https://pennybenny.github.io/FEILIAN/>**
+**Live site — <https://feilian-hash.github.io/>**
 
 The page is organised as five chapters: an **introduction** to the design — with a four-view
 interactive figure (the FEILIAN iteration, the compress function, one phase with two of its rounds
@@ -70,7 +70,7 @@ three-page document of that revision.
 
 ```bash
 python tools/verify_release.py
-python tools/verify_release.py --url https://pennybenny.github.io/FEILIAN/
+python tools/verify_release.py --url https://feilian-hash.github.io/
 ```
 
 The first form checks every digest against the files on disk, that each artifact the page links to
@@ -210,7 +210,7 @@ The component analysis:
 
 The submission's overview page, if you need to point at it:
 
-> *FEILIAN — Submission Overview*, <https://pennybenny.github.io/FEILIAN/>
+> *FEILIAN — Submission Overview*, <https://feilian-hash.github.io/>
 
 ---
 

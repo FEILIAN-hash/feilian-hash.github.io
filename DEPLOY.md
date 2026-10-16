@@ -3,8 +3,8 @@
 Operational notes for this repository. Nothing here is needed to *read* the
 page — it is the maintenance manual for whoever publishes it.
 
-- Live site: <https://pennybenny.github.io/FEILIAN/>
-- Repository: <https://github.com/PENNYBENNY/FEILIAN>
+- Live site: <https://feilian-hash.github.io/>
+- Repository: <https://github.com/FEILIAN-hash/feilian-hash.github.io>
 - Pages source: branch `main`, folder `/ (root)`, `Jekyll` disabled by `.nojekyll`
 
 ## Publishing a change
@@ -37,8 +37,9 @@ matched set, and hand-patching one in isolation will desynchronise them.
 1. **Settings → Pages → Build and deployment → Source: Deploy from a branch**
 2. Branch `main`, folder `/ (root)`, **Save**
 
-`github.com/pennybenny/FEILIAN` redirects to the canonical uppercase owner name
-`PENNYBENNY`; both forms resolve, and the site URL stays lowercase.
+`github.com/feilian-hash/feilian-hash.github.io` is the repository; the
+organisation name is mixed-case, GitHub URLs are case-insensitive, and the
+site URL stays lowercase.
 
 ## Publishing a release package
 
@@ -94,7 +95,7 @@ another revision, an `ASSETS` row to publish another directly linked document.
 
 ```bash
 python tools/verify_release.py
-python tools/verify_release.py --url https://pennybenny.github.io/FEILIAN/
+python tools/verify_release.py --url https://feilian-hash.github.io/
 ```
 
 Checks that every digest in `files/SHA256SUMS.txt` matches the file on disk, that
@@ -165,7 +166,7 @@ Host github.com
   User git
 ```
 
-then switch the remote to `git@github.com:PENNYBENNY/FEILIAN.git` and upload a
+then switch the remote to `git@github.com:FEILIAN-hash/feilian-hash.github.io.git` and upload a
 key. The HTTPS-plus-proxy route above is usually less trouble.
 
 Note that `github.io` is normally reachable even when `github.com` is not, so a
@@ -186,11 +187,11 @@ The site is a single static file, so any static host works.
 
 ## Custom domain
 
-Optional; the `pennybenny.github.io` URL works fine.
+Optional; the `feilian-hash.github.io` URL works fine.
 
 1. Add a `CNAME` file to this directory containing the bare domain, e.g.
    `feilian.example.org`, and commit it.
-2. At your DNS provider add a `CNAME` record: `feilian` → `pennybenny.github.io`.
+2. At your DNS provider add a `CNAME` record: `feilian` → `feilian-hash.github.io`.
 3. **Settings → Pages → Custom domain**, confirm, and tick **Enforce HTTPS**.
 
 Remember to update the `rel="canonical"` and `og:url` values in `index.html` if
