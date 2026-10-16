@@ -428,7 +428,7 @@
 <header class="hero">
   <div class="wrap">
     <h1><span>FEILIAN</span></h1>
-    <p class="sub">A hash function submitted to the Next-generation Commercial Cryptographic Algorithms programme.</p>
+    <p class="sub" data-t="hero.sub"></p>
   </div>
 </header>
 
@@ -448,12 +448,12 @@
 <!-- ================= INTRODUCTION ================= -->
 <section id="introduction">
   <p class="eyebrow rv">01 — Introduction</p>
-  <p class="lead rv">FEILIAN is a candidate submitted to the Next-generation Commercial Cryptographic Algorithms programme (NGCC-CH): a tweakable ARX permutation in Davies–Meyer mode over a 1024-bit state and message block. The three digest lengths share that state, keeping a different amount of output, so one core serves the whole family.</p>
+  <p class="lead rv" data-t="intro.lead"></p>
 
-  <p class="upd-h rv"><b>Updates</b></p>
+  <p class="upd-h rv"><b data-t="intro.updh"></b></p>
   <ul class="upd rv">
-    <li><span class="d">2026-10-08</span> Specification <b>v1.0.1</b> (69&nbsp;pp.) issued with a three-page erratum &mdash; the corrections of Tables&nbsp;1&ndash;2 and five further passages made after the assessments; published as <a href="#dl-v101">release package v1.0.1<span class="jmp" aria-hidden="true">&#8595;</span></a>.</li>
-    <li><span class="d">2026-06-30</span> Original submission <b>v1.0</b> (68&nbsp;pp.), the revision examined by the assessments; published as <a href="#dl-v100">release package v1.0<span class="jmp" aria-hidden="true">&#8595;</span></a>.</li>
+    <li><span class="d">2026-10-08</span> <span data-t="intro.upd1.a"></span> <a href="#dl-v101"><span data-t="intro.upd1.link"></span><span class="jmp" aria-hidden="true">&#8595;</span></a><span data-t="intro.upd1.b"></span></li>
+    <li><span class="d">2026-06-30</span> <span data-t="intro.upd2.a"></span> <a href="#dl-v100"><span data-t="intro.upd2.link"></span><span class="jmp" aria-hidden="true">&#8595;</span></a><span data-t="intro.upd2.b"></span></li>
   </ul>
 
   <div class="card rv" id="designfig">
@@ -789,7 +789,7 @@
     </figure>
 
     <div class="steps">
-      <span class="stepcap" id="dcap">FEILIAN structure</span>
+      <span class="stepcap" id="dcap">FEILIAN — the hash iteration</span>
     </div>
   </div>
 </section>
@@ -868,15 +868,15 @@
 <!-- ================= DOWNLOADS ================= -->
 <section id="documents">
   <p class="eyebrow rv">03 — Documents</p>
-  <p class="lead rv">Both revisions are published as release packages, byte-for-byte as distributed, with their SHA-256. <b>Version 1.0.1</b> (8 October 2026) supersedes <b>version 1.0</b> (30 June 2026), the original submission examined by the third-party assessment.</p>
+  <p class="lead rv" data-t="docs.lead"></p>
   <div id="dlgrid" class="grid-auto rv"></div>
   <p class="tblcap rv" id="dlnote"></p>
 
   <div class="card rv" style="margin-top:18px">
     <h3 style="margin-top:0">Revision history of the submission</h3>
     <ul class="tl">
-      <li><span class="d">2026-10-08</span><b>Specification v1.0.1</b> (69 pp.) and the three-page <b>erratum</b>, released together. The erratum lists the corrections of its Tables 1&ndash;2 and five further text changes made in response to the assessments.</li>
-      <li class="mute"><span class="d">2026-06-30</span><b>Original submission v1.0</b> (68 pp.) — the revision examined by the third-party assessment.</li>
+      <li><span class="d">2026-10-08</span><span data-t="docs.tl1"></span></li>
+      <li class="mute"><span class="d">2026-06-30</span><span data-t="docs.tl2"></span></li>
     </ul>
   </div>
 </section>
@@ -884,7 +884,7 @@
 <!-- ================= PERFORMANCE ================= -->
 <section id="performance">
   <p class="eyebrow rv">04 — Performance</p>
-  <p class="lead rv">What the family costs. Everything below is reproduced from the specification; nothing here was measured locally. In cycles per byte FEILIAN-1024 settles level with SHA-512 on long messages, ahead of SHA-3-512 and behind BLAKE-64.</p>
+  <p class="lead rv" data-t="perf.lead"></p>
 
   <table>
     <thead><tr><th>Software benchmarks, FEILIAN-1024 (specification Table 5.2)</th><th>ISA</th><th>OS / compiler</th><th class="num">10 B</th><th class="num">100 B</th><th class="num">1 kB</th><th class="num">10 kB</th></tr></thead>
@@ -894,35 +894,35 @@
       <tr><td class="k">Apple M2 Pro @3.50 GHz</td><td>NEON</td><td>macOS 26 · Clang 17.0.0</td><td class="num">55.76</td><td class="num">5.64</td><td class="num">4.19</td><td class="num">4.09</td></tr>
     </tbody>
   </table>
-  <p class="tblcap">Cycles per byte.</p>
+  <p class="tblcap" data-t="perf.cap1"></p>
 
-  <p class="tblcap rv" style="margin:24px 0 8px">The same core, synthesised to hardware &mdash; throughput by architecture.</p>
+  <p class="tblcap rv" style="margin:24px 0 8px" data-t="perf.cap2"></p>
   <div class="chartfig rv" id="fpgachart"></div>
 
-  <p class="tblcap rv" style="margin:24px 0 8px">Back in software: cycles per byte against the other 512-bit-class hashes, across message lengths.</p>
+  <p class="tblcap rv" style="margin:24px 0 8px" data-t="perf.cap3"></p>
   <div class="chartfig rv" id="cpbchart"></div>
 </section>
 
 <!-- ================= THIRD-PARTY ANALYSIS ================= -->
 <section id="analysis">
   <p class="eyebrow rv">05 — Third-party analysis</p>
-  <p class="lead rv">Three independent sources have analysed this submission. Their documents are published by their authors, so this page links to them rather than restating their findings; none establishes a full-round break of the correctly encoded software hash.</p>
+  <p class="lead rv" data-t="analysis.lead"></p>
 
   <div class="revlist">
     <div class="card revcard lift rv">
-      <h3 style="margin-top:0">Mounir Idrassi &mdash; technical assessment</h3>
-      <p class="who">Technical assessment of the submitted specification and implementations &middot; v1.0.2 &middot; 27 September 2026 &middot; 14 pp. &middot; AM Crypto, Japan &middot; CC BY 4.0</p>
-      <p class="srcline"><a href="https://github.com/amcrypto-jp/feilian-cryptanalysis">github.com/amcrypto-jp/feilian-cryptanalysis &rarr;</a></p>
+      <h3 style="margin-top:0" data-t="analysis.c1.h3"></h3>
+      <p class="who" data-t="analysis.c1.who"></p>
+      <p class="srcline"><a href="https://github.com/amcrypto-jp/feilian-cryptanalysis" data-t="analysis.c1.link"></a></p>
     </div>
     <div class="card revcard lift rv d1">
-      <h3 style="margin-top:0">Markku-Juhani O. Saarinen &mdash; ngcc.dev</h3>
-      <p class="who">Personal report on ngcc.dev &middot; entries dated 23 &amp; 26 September 2026 &middot; unaffiliated with NICCS</p>
-      <p class="srcline"><a href="https://ngcc.dev/reports/hash-10.html">ngcc.dev &rarr;</a></p>
+      <h3 style="margin-top:0" data-t="analysis.c2.h3"></h3>
+      <p class="who" data-t="analysis.c2.who"></p>
+      <p class="srcline"><a href="https://ngcc.dev/reports/hash-10.html" data-t="analysis.c2.link"></a></p>
     </div>
     <div class="card revcard lift rv d2">
-      <h3 style="margin-top:0">Mounir Idrassi &mdash; ePrint 2026/2236</h3>
-      <p class="who">Component-level analysis &middot; Cryptology ePrint Archive, Report 2026/2236 &middot; submitted 27 September 2026, approved 28 September &middot; CC BY 4.0</p>
-      <p class="srcline"><a href="https://eprint.iacr.org/2026/2236">eprint.iacr.org/2026/2236 &rarr;</a></p>
+      <h3 style="margin-top:0" data-t="analysis.c3.h3"></h3>
+      <p class="who" data-t="analysis.c3.who"></p>
+      <p class="srcline"><a href="https://eprint.iacr.org/2026/2236" data-t="analysis.c3.link"></a></p>
     </div>
   </div>
 </section>
@@ -939,6 +939,24 @@
 </footer>
 
 <a href="#" class="toplink" id="top">↑</a>
+
+<!-- ===== PAGE COPY =====
+     All editable prose lives in content.js - words only. Tags, links, dates
+     and classes stay here; each slot is an empty element carrying a
+     data-t key, filled by the renderer below. -->
+<script src="content.js"></script>
+<script>
+(function(){
+  "use strict";
+  var T=window.T; if(!T)return;
+  function dig(o,p){ for(var i=0;i<p.length;i++){ if(o==null)return null; o=o[p[i]]; } return o; }
+  var els=document.querySelectorAll('[data-t]');
+  for(var i=0;i<els.length;i++){
+    var v=dig(T,els[i].getAttribute('data-t').split('.'));
+    if(typeof v==='string')els[i].innerHTML=v;
+  }
+})();
+</script>
 
 <!-- ===== DOWNLOAD MANIFEST =====
      Regenerated by tools/make_downloads.py — edit that script rather than this
@@ -1042,17 +1060,14 @@ var DL_RELEASE = "";   /* optional mirror base, e.g. a release CDN prefix */
     "use strict";
     var root=document.getElementById('designfig');
     if(!root)return;
+    if(!window.T)return;   /* content.js is required */
     var fig=document.getElementById('dsvg');
     var NS='http://www.w3.org/2000/svg';
     var CELL=16, OCELL=12;
     var reduce=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
-    var BODY=[
-      'FEILIAN: the padded message is split into 1024-bit blocks and each block meets one compression call; the tweak <span class="mono">tw</span> &#8212; the block counter and, on the last block, the message length &#8212; enters every call.',
-      'the compress function. The same 1024-bit block <span class="mono">m</span> is absorbed by all five phases; the tweak <span class="mono">tw</span> enters every round; the feed-forward XORs the incoming chaining value into the result, so <span class="mono">h&#8242; = h &#8853; v&#8325;</span>.',
-      'one phase <span class="mono">P(v, m)</span> &#8212; the absorbing round <span class="mono">R&#770;<sup>&#8853;</sup></span> takes the message in, three plain rounds <span class="mono">R</span> follow. The walk lights round 1 and opens it up below; it then lights round 2 and opens a plain round <span class="mono">R</span> in the same place &#8212; the same five steps, no message. Five phases chain into the compression function &#8212; 20 rounds in all.',
-      'SubColumn: two tweakable ARX S-boxes stacked. <span class="mono">S&#771;&#8321;</span> is driven by <span class="mono">s&#8321; = a&#8320;&#8242;</span>, <span class="mono">S&#771;&#8320;</span> by <span class="mono">s&#8320; = a&#8321; + b&#8321;</span>. Both tweaks are derived inside SubColumn &#8212; no external value enters.'
-    ];
+    /* the four view captions are page copy - they live in content.js */
+    var BODY=[window.T.fig.v0,window.T.fig.v1,window.T.fig.v2,window.T.fig.v3];
     var STEPS=[
       ['IV','block 0','block i','block &#8467;','output'],
       ['h enters','phase 0 absorbs m','phase 1','phase 2','phase 3','phase 4','feed-forward','h&#8242; out'],

@@ -7,7 +7,7 @@ Institute of Commercial Cryptography Standards (ICCS), China.
 
 The page is organised as five chapters: an **introduction** to the design — with a four-view
 interactive figure (the FEILIAN iteration, the compress function, one phase with two of its rounds
-drawn out inside it, and SubColumn), closing with a short **Updates** list whose dated lines link to
+drawn out inside it, and SubColumn), closing with a short **Specification updates** list whose dated lines link to
 the release packages — a **live demo** that computes digests in the browser, the
 **documents** (both release packages, each checksummed, holding the specification, the erratum and
 every implementation, plus the revision history of the submission), the **performance** the
@@ -21,7 +21,7 @@ the ngcc.dev report by Markku-Juhani O. Saarinen, and the component-level analys
 ePrint 2026/2236 — each linked to its own document. None of them establishes a full-round
 cryptanalytic break, and the page states that boundary as plainly as they do.
 
-It is one HTML file with **no build step, no framework and no external dependencies**. Every figure
+It is one HTML file plus one copy file (`content.js`), with **no build step, no framework and no external dependencies**. Every figure
 is inline SVG or plain JavaScript, and the live demo's hash core is inlined into the same file, so
 the page renders and the demo runs identically offline, from `file://`, and from any static host.
 
@@ -31,7 +31,7 @@ the page renders and the demo runs identically offline, from `file://`, and from
 
 | § | Section | What it covers |
 |---|---|---|
-| 1 | Introduction | The design in brief — 1024-bit state and block, the tweakable ARX permutation, Davies–Meyer — with a **four-view interactive figure**: the FEILIAN iteration (message blocks, chaining value, tweak), the compress function (five phases, the tweak, the feed-forward), one phase (four rounds, with round 1 and round 2 opened up underneath), and SubColumn; closing with a short **Updates** list — one dated line per release, each linking to its package in §3 |
+| 1 | Introduction | The design in brief — 1024-bit state and block, the tweakable ARX permutation, Davies–Meyer — with a **four-view interactive figure**: the FEILIAN iteration (message blocks, chaining value, tweak), the compress function (five phases, the tweak, the feed-forward), one phase (four rounds, with round 1 and round 2 opened up underneath), and SubColumn; closing with a short **Specification updates** list — one dated line per release, each linking to its package in §3 |
 | 2 | Live demo | A JavaScript port of the compression function running in the page: text / hex / bit-string input, 512 / 768 / 1024 output, a known-answer self-test against the Appendix B vectors, and the timings it measures itself |
 | 3 | Documents | Both **release packages** — **v1.0.1** (specification, erratum and all implementations in one archive) and the original **v1.0** — each with its SHA-256; and the **revision history of the submission** |
 | 4 | Performance | The cost the specification reports: software benchmarks on three platforms, FPGA throughput by architecture, and cycles per byte against BLAKE-64 / SHA-512 / SHA-3-512 |
@@ -75,7 +75,7 @@ python tools/verify_release.py --url https://pennybenny.github.io/FEILIAN/
 
 The first form checks every digest against the files on disk, that each artifact the page links to
 exists — both those in the download manifest and the documents linked straight from the text — that
-the navigation and in-page anchors resolve — to sections, and to the download cards the Updates lines jump to — that the tags balance, and that the release metadata
+the navigation and in-page anchors resolve — to sections, and to the download cards the update lines jump to — that the tags balance, and that the release metadata
 is present. The second additionally fetches the deployed page and every artifact
 and compares the served bytes against the local copies. Exit status is non-zero if anything fails.
 
@@ -97,10 +97,45 @@ python -m http.server 8000     # then visit http://localhost:8000/
 
 ---
 
+## Editing the page copy
+
+Every piece of prose on the page — the leads, the specification-updates lines, the
+revision timeline, the table and figure captions, the review cards and the design
+figure's four view captions — lives in **`content.js`**, one object keyed by
+section. Reword a string there, commit, and GitHub Pages publishes it in a minute
+or two. **No other file needs to change to edit the words.**
+
+The rule that keeps this safe: `content.js` holds *words only*. Tags, classes,
+link targets, dates and glyphs stay in `index.html`, where each slot is an empty
+element carrying a `data-t` key. Editing copy therefore cannot break the layout,
+the design figure or a link — every `href` and every `id` is still in the HTML,
+and `tools/verify_release.py` checks them exactly as before. Inline `<b>` /
+`<span>` markup inside a value is fine where the original had it; do not put an
+`href` in one.
+
+Deliberately not in `content.js`:
+
+| Text | Where it lives | Why |
+|---|---|---|
+| Navigation labels, view tabs and their tooltips | `index.html` | bound to section and view ids |
+| Labels inside the design figure (IV, block 0, round 1 of 4 …) | `index.html`, figure script | positioned by the drawing code |
+| The live demo's own copy | `index.html` §2 | a matched set, regenerated as one — see `DEPLOY.md` |
+| Download-card subtitles and the checksum note | manifest block / page script | owned by `tools/make_downloads.py` |
+| Chart axis and legend labels | the chart scripts | tied to the plotted data |
+| Footer — licence, checksum, repository link | `index.html` | legal and provenance text |
+
+Workflow: a copy edit goes straight to `main`. Anything that changes structure,
+styling, the figure or the demo goes through a pull request, verified locally
+first — `python tools/verify_release.py` (24 checks) and a look at the rendered
+page.
+
+---
+
 ## Repository layout
 
 ```
-index.html                    the entire site — single file, no dependencies
+index.html                    the site: structure, styles, scripts, figures
+content.js                    every piece of editable prose (words only)
 files/                        the published release packages and their checksums
   FEILIAN-v1.0.1.zip
   FEILIAN-v1.0.zip

@@ -20,8 +20,9 @@ There are no release tags and no version numbers for the page itself — what
 carries versions is the submission, tracked in §3 of the page. Commits are the
 history.
 
-There is no build step. `index.html` is the whole site — one file, no external
-dependencies, no bundler, no CDN. What you commit is what is served.
+There is no build step. `index.html` is the site — structure, styles, scripts and
+figures — and `content.js` is its prose; no external dependencies, no bundler, no
+CDN. What you commit is what is served.
 
 The live demonstration in §2 is inlined into that same file, so the page stays
 self-contained: its stylesheet is scoped under `#demo` and its script is wrapped
