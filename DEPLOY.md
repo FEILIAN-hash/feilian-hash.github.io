@@ -16,6 +16,10 @@ git add -A && git commit -m "..." && git push
 Pages rebuilds in about a minute. `git push` alone is enough once the upstream is
 tracked; use `git push -u origin main` the first time.
 
+There are no release tags and no version numbers for the page itself — what
+carries versions is the submission, tracked in §3 of the page. Commits are the
+history.
+
 There is no build step. `index.html` is the whole site — one file, no external
 dependencies, no bundler, no CDN. What you commit is what is served.
 

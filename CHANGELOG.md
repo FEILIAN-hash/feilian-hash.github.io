@@ -1,11 +1,11 @@
 # Changelog
 
-All notable changes to this page are recorded here. The revision history of the
-submission itself — its specification releases — is the update log in §3 of the
-page.
+**Frozen at v1.6.5 (12 October 2026).** The page itself is no longer versioned: a
+change is committed to `main` and published by GitHub Pages, and the git history
+is the record. What still carries versions is the submission — its specification
+releases are the update log in §3 of the page.
 
-This project uses [semantic versioning](https://semver.org/); the major version
-tracks the specification revision it was built against.
+The entries below are kept as the record of how the page was built.
 
 ## [1.6.5] — 2026-10-12
 

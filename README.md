@@ -111,7 +111,7 @@ tools/
 README.md                     this file
 DEPLOY.md                     publishing and maintenance
 NOTICE.md                     provenance, authorship and rights
-CHANGELOG.md                  release history
+CHANGELOG.md                  frozen at v1.6.5 — how the page was built
 LICENSE                       CC BY 4.0 (compendium only)
 ```
 
@@ -175,17 +175,19 @@ The component analysis:
 
 The submission's overview page, if you need to point at it:
 
-> *FEILIAN — Submission Overview* (v1.6.5), <https://pennybenny.github.io/FEILIAN/>
+> *FEILIAN — Submission Overview*, <https://pennybenny.github.io/FEILIAN/>
 
 ---
 
 ## Corrections
 
 Errors in the presentation are the responsibility of this repository. Please open an issue for any
-discrepancy — a wrong constant, a mistyped vector, a misattributed figure — and it will be fixed and
-recorded in [`CHANGELOG.md`](CHANGELOG.md).
+discrepancy — a wrong constant, a mistyped vector, a misattributed figure — and it will be fixed.
 
-## Release history
+## Change history
 
-See [`CHANGELOG.md`](CHANGELOG.md). Current release: **v1.6.5** (12 October 2026), tracking
-specification **v1.0.1** (8 October 2026).
+The page carries no version numbers of its own: a change is committed to `main`,
+GitHub Pages publishes it, and the git history is the record.
+[`CHANGELOG.md`](CHANGELOG.md) is frozen at v1.6.5 and kept as the account of how
+the page was built. The revision history of the submission itself — its
+specification releases — is the update log in §3 of the page.
