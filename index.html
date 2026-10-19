@@ -64,7 +64,7 @@
        line-height:1.62;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   a{color:var(--accent);text-decoration:none}
   a:hover{text-decoration:underline}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
   h2,h3,h4{line-height:1.25}
   h3{font-size:20px}
 
@@ -79,7 +79,7 @@
   header.hero .wrap{position:relative;z-index:2}
   header.hero h1{margin:0;font-size:64px;font-weight:700;letter-spacing:-.02em;line-height:1}
   header.hero h1 span{color:#fff}
-  header.hero p.sub{margin:14px 0 0;font-size:18px;color:#c6d1de;max-width:640px}
+  header.hero p.sub{margin:14px 0 0;font-size:18px;color:#c6d1de;max-width:960px;text-wrap:balance}
   .btn{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;
        padding:11px 20px;border-radius:10px;cursor:pointer;border:1px solid transparent;transition:.2s}
 
@@ -93,7 +93,7 @@
   section{padding:56px 0 8px}
   .eyebrow{font-size:18px;font-weight:700;letter-spacing:.115em;text-transform:uppercase;color:var(--accent);margin:0 0 17px}
   section h2{font-size:32px;margin:0 0 10px;letter-spacing:-.015em}
-  .lead{color:var(--ink-soft);margin:10px 0 28px;max-width:840px;font-size:18px;line-height:1.65}
+  .lead{color:var(--ink-soft);margin:10px 0 28px;font-size:18px;line-height:1.65;text-wrap:pretty}
 
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;
         box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s}
@@ -184,7 +184,7 @@
 
   /* Updates -- the dated releases, each line pointing at its package in Documents */
   .upd-h{margin:28px 0 10px;font-size:18px;font-weight:700;color:var(--ink)}
-  .upd{list-style:none;margin:0;padding:0;max-width:840px}
+  .upd{list-style:none;margin:0;padding:0}
   .upd li{position:relative;padding:0 0 12px 18px;font-size:18px;line-height:1.7;color:var(--ink-soft)}
   .upd li:last-child{padding-bottom:0}
   .upd li::before{content:"";position:absolute;left:2px;top:11px;width:4px;height:4px;border-radius:50%;background:var(--accent)}
@@ -200,8 +200,8 @@
   #documents{margin-top:56px;padding-top:26px;border-top:1px solid var(--line)}
   .ref a{color:var(--accent)}
 
-  .steps{margin:6px 0 14px}
-  .stepcap{font-size:14.5px;color:var(--ink-soft)}
+  .steps{margin:6px 0 14px;max-width:900px}
+  .stepcap{font-size:14.5px;color:var(--ink-soft);text-wrap:pretty}
   .stepcap b{color:var(--ink)}
   /* ---------- interactive design figure ---------- */
   #designfig .stagebar{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 12px}
