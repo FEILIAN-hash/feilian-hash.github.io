@@ -22,8 +22,9 @@ list at the foot of the page. Commits are the
 history.
 
 There is no build step. `index.html` is the site — structure, styles, scripts and
-figures — and `content.js` is its prose; no external dependencies, no bundler, no
-CDN. What you commit is what is served.
+figures — and `content.js` is its prose. `fonts/` holds the two typefaces the page
+uses (IBM Plex Sans and Plex Mono, latin subsets, SIL OFL 1.1) as ordinary files:
+no external dependencies, no bundler, no CDN. What you commit is what is served.
 
 The live demonstration in §3 is inlined into that same file, so the page stays
 self-contained: its stylesheet is scoped under `#demo` and its script is wrapped
@@ -184,7 +185,7 @@ The site is a single static file, so any static host works.
 | **Cloudflare Pages** | Create project → Direct Upload → drop the folder |
 | **Netlify Drop** | Drag the folder onto <https://app.netlify.com/drop> |
 | **Vercel** | `npx vercel` in this folder |
-| **Any web server** | Copy `index.html`, `files/`, `LICENSE`, `NOTICE.md` |
+| **Any web server** | Copy `index.html`, `content.js`, `fonts/`, `files/`, `LICENSE`, `NOTICE.md` |
 
 ## Custom domain
 

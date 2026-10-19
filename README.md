@@ -21,7 +21,8 @@ the ngcc.dev report by Markku-Juhani O. Saarinen, and the component-level analys
 ePrint 2026/2236 — each linked to its own document. None of them establishes a full-round
 cryptanalytic break, and the page states that boundary as plainly as they do.
 
-It is one HTML file plus one copy file (`content.js`), with **no build step, no framework and no external dependencies**. Every figure
+It is one HTML file, one copy file (`content.js`) and seven self-hosted font files, with **no build
+step, no framework and no external dependencies** — not even a font CDN or a Google Fonts request. Every figure
 is inline SVG or plain JavaScript, and the live demo's hash core is inlined into the same file, so
 the page renders and the demo runs identically offline, from `file://`, and from any static host.
 
@@ -100,9 +101,9 @@ python -m http.server 8000     # then visit http://localhost:8000/
 
 ## Editing the page copy
 
-Every piece of prose on the page — the leads, the specification-updates lines, the
-revision timeline, the table and figure captions, the review cards and the design
-figure's four view captions — lives in **`content.js`**, one object keyed by
+Every piece of prose on the page — the leads, the two dated lists, the table and
+figure captions and the design figure's four view captions — lives in
+**`content.js`**, one object keyed by
 section. Reword a string there, commit, and GitHub Pages publishes it in a minute
 or two. **No other file needs to change to edit the words.**
 
@@ -121,7 +122,7 @@ Deliberately not in `content.js`:
 | Navigation labels, view tabs and their tooltips | `index.html` | bound to section and view ids |
 | Labels inside the design figure (IV, block 0, round 1 of 4 …) | `index.html`, figure script | positioned by the drawing code |
 | The live demo's own copy | `index.html` §3 | a matched set, regenerated as one — see `DEPLOY.md` |
-| Download-card subtitles and the checksum note | manifest block / page script | owned by `tools/make_downloads.py` |
+| Release-package titles, dates and the checksum note | manifest block / page script | owned by `tools/make_downloads.py` |
 | Chart axis and legend labels | the chart scripts | tied to the plotted data |
 | Footer — licence, checksum, repository link | `index.html` | legal and provenance text |
 
@@ -137,6 +138,7 @@ page.
 ```
 index.html                    the site: structure, styles, scripts, figures
 content.js                    every piece of editable prose (words only)
+fonts/                        IBM Plex Sans / Plex Mono subsets, self-hosted (SIL OFL 1.1)
 files/                        the published release packages and their checksums
   FEILIAN-v1.0.1.zip
   FEILIAN-v1.0.zip

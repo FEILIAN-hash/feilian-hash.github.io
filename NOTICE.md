@@ -79,6 +79,15 @@ designers' erratum either; it links to each third-party document directly. Where
 statement on the page and a source document disagree, the source document
 prevails.
 
+## Typefaces
+
+The page sets its text in **IBM Plex Sans** and **IBM Plex Mono**, latin subsets,
+served from `fonts/` as WOFF2. Both are © IBM, released under the **SIL Open Font
+License 1.1**; the licence text travels with them as `fonts/OFL.txt`. They are
+vendored rather than fetched from a font CDN so that the page has no dependencies
+at runtime. Nothing in `LICENSE` (CC BY 4.0, page text and figures) applies to
+these files.
+
 ## Rights in the files under `files/`
 
 `files/FEILIAN-v1.0.1.zip` is the **submission material**. Copyright in the

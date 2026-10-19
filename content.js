@@ -35,12 +35,14 @@ window.T = {
   docs: {lead: "Both revisions are published as release packages, byte-for-byte as distributed, with their SHA-256. <b>Version 1.0.1</b> (8 October 2026) supersedes <b>version 1.0</b> (30 June 2026), the original submission examined by the third-party assessment."},
   /* ---- §4 Performance — lead and the two captions ---- */
   perf: {lead: "What the family costs. Everything below is reproduced from the specification; nothing here was measured locally. In cycles per byte FEILIAN-1024 settles level with SHA-512 on long messages, ahead of SHA-3-512 and behind BLAKE-64.", cap1: "Cycles per byte.", cap3: "Back in software: cycles per byte against the other 512-bit-class hashes, across message lengths."},
-  /* ---- §5 Third Party Analysis — lead and three dated lines ---- */
+  /* ---- §5 Third Party Analysis — lead and three dated lines.
+   *      Each line is date / name / kind / link and nothing else; the
+   *      documents themselves carry the detail. "who" here is the kind. ---- */
   analysis: {
     lead: "Three independent sources have analysed this submission. Their documents are published by their authors, so this page links to them rather than restating their findings; none establishes a full-round break of the correctly encoded software hash.",
-    c1: {h3: "Mounir Idrassi &mdash; technical assessment", who: "the submitted specification and implementations &middot; v1.0.2 &middot; 14 pp. &middot; AM Crypto, Japan &middot; CC BY 4.0", link: "github.com/amcrypto-jp/feilian-cryptanalysis &rarr;"},
-    c2: {h3: "Markku-Juhani O. Saarinen &mdash; ngcc.dev", who: "a personal report &middot; entries dated 23 &amp; 26 September 2026 &middot; unaffiliated with NICCS", link: "ngcc.dev &rarr;"},
-    c3: {h3: "Mounir Idrassi &mdash; ePrint 2026/2236", who: "component-level analysis &middot; Cryptology ePrint Archive, Report 2026/2236 &middot; submitted 27 September, approved 28 September &middot; CC BY 4.0", link: "eprint.iacr.org/2026/2236 &rarr;"},
+    c1: {h3: "Mounir Idrassi", who: "technical assessment", link: "github.com/amcrypto-jp/feilian-cryptanalysis &rarr;"},
+    c2: {h3: "Markku-Juhani O. Saarinen", who: "a personal report", link: "ngcc.dev &rarr;"},
+    c3: {h3: "Mounir Idrassi", who: "ePrint 2026/2236", link: "eprint.iacr.org/2026/2236 &rarr;"},
   },
   /* ---- the design figure's four view captions ---- */
   fig: {v0: "FEILIAN: the padded message is split into 1024-bit blocks and each block meets one compression call; the tweak <span class=\"mono\">tw</span> &#8212; the block counter and, on the last block, the message length &#8212; enters every call.", v1: "the compress function. The same 1024-bit block <span class=\"mono\">m</span> is absorbed by all five phases; the tweak <span class=\"mono\">tw</span> enters every round; the feed-forward XORs the incoming chaining value into the result, so <span class=\"mono\">h&#8242; = h &#8853; v&#8325;</span>.", v2: "one phase <span class=\"mono\">P(v, m)</span> &#8212; the absorbing round <span class=\"mono\">R&#770;<sup>&#8853;</sup></span> takes the message in, three plain rounds <span class=\"mono\">R</span> follow. The walk lights round 1 and opens it up below; it then lights round 2 and opens a plain round <span class=\"mono\">R</span> in the same place &#8212; the same five steps, no message. Five phases chain into the compression function &#8212; 20 rounds in all.", v3: "SubColumn: two tweakable ARX S-boxes stacked. <span class=\"mono\">S&#771;&#8321;</span> is driven by <span class=\"mono\">s&#8321; = a&#8320;&#8242;</span>, <span class=\"mono\">S&#771;&#8320;</span> by <span class=\"mono\">s&#8320; = a&#8321; + b&#8321;</span>. Both tweaks are derived inside SubColumn &#8212; no external value enters."},
