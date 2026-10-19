@@ -91,7 +91,8 @@
   nav.toc a.on{background:var(--accent);color:#fff}
 
   section{padding:56px 0 8px}
-  .eyebrow{font-size:18px;font-weight:700;letter-spacing:.115em;text-transform:uppercase;color:var(--accent);margin:0 0 17px}
+  .eyebrow{font-size:24px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+           line-height:1.2;color:var(--accent);margin:0 0 20px;text-wrap:pretty}
   section h2{font-size:32px;margin:0 0 10px;letter-spacing:-.015em}
   .lead{color:var(--ink-soft);margin:10px 0 28px;font-size:18px;line-height:1.65;text-wrap:pretty}
 
@@ -103,6 +104,7 @@
   .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
   @media(max-width:900px){.grid3,.grid4{grid-template-columns:1fr 1fr}}
   @media(max-width:640px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
+  @media(max-width:640px){.eyebrow{font-size:20px;letter-spacing:.05em;margin-bottom:15px}}
 
   .stat{text-align:left}
   .stat .v{font-size:32px;font-weight:700;letter-spacing:-.02em;
