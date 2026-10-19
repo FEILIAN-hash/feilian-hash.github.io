@@ -5,14 +5,14 @@ Institute of Commercial Cryptography Standards (ICCS), China.
 
 **Live site — <https://feilian-hash.github.io/>**
 
-The page is organised as five chapters: an **introduction** to the design — with a four-view
-interactive figure (the FEILIAN iteration, the compress function, one phase with two of its rounds
-drawn out inside it, and SubColumn), closing with a short **Specification updates** list whose dated lines link to
-the release packages — a **live demo** that computes digests in the browser, the
-**documents** (both release packages, each checksummed, holding the specification, the erratum and
-every implementation, plus the revision history of the submission), the **performance** the
-specification reports, and the
-**independent third-party analyses**, each linked to its own document. Detailed specification tables are deliberately kept out of the page and left to
+The page is organised as five chapters: an **introduction** to the design, closing with a short
+**Updates** list whose dated lines link to the release packages; a **design animation**, the
+four-view interactive figure (the FEILIAN iteration, the compress function, one phase with two of
+its rounds drawn out inside it, and SubColumn); **live hashing**, which computes digests in the
+browser; the **performance** the specification reports; and the **third party analysis** — one
+dated line per source, each linked to its own document. The **release packages** close the page in
+an untitled block: both revisions, each checksummed, holding the specification, the erratum and
+every implementation. Detailed specification tables are deliberately kept out of the page and left to
 the PDF. The palette is deliberately plain — one accent colour and neutral greys — and every figure
 keeps its own proportions rather than being stretched to the width of the card.
 
@@ -31,11 +31,12 @@ the page renders and the demo runs identically offline, from `file://`, and from
 
 | § | Section | What it covers |
 |---|---|---|
-| 1 | Introduction | The design in brief — 1024-bit state and block, the tweakable ARX permutation, Davies–Meyer — with a **four-view interactive figure**: the FEILIAN iteration (message blocks, chaining value, tweak), the compress function (five phases, the tweak, the feed-forward), one phase (four rounds, with round 1 and round 2 opened up underneath), and SubColumn; closing with a short **Specification updates** list — one dated line per release, each linking to its package in §3 |
-| 2 | Live demo | A JavaScript port of the compression function running in the page: text / hex / bit-string input, 512 / 768 / 1024 output, a known-answer self-test against the Appendix B vectors, and the timings it measures itself |
-| 3 | Documents | Both **release packages** — **v1.0.1** (specification, erratum and all implementations in one archive) and the original **v1.0** — each with its SHA-256; and the **revision history of the submission** |
-| 4 | Performance | The cost the specification reports: software benchmarks on three platforms, FPGA throughput by architecture, and cycles per byte against BLAKE-64 / SHA-512 / SHA-3-512 |
-| 5 | Third-party analysis | The three independent sources, listed one per row and each linked to its own document. Their findings are not reproduced on the page |
+| 1 | Introduction | The design in brief — 1024-bit state and block, the tweakable ARX permutation, Davies–Meyer — closing with a short **Updates** list: one dated line per release, each linking to its package at the foot of the page |
+| 2 | Design Animation | The **four-view interactive figure**: the FEILIAN iteration (message blocks, chaining value, tweak), the compress function (five phases, the tweak, the feed-forward), one phase (four rounds, with round 1 and round 2 opened up underneath), and SubColumn |
+| 3 | Live Hashing | A JavaScript port of the compression function running in the page: text / hex / bit-string input, 512 / 768 / 1024 output, a known-answer self-test against the Appendix B vectors, and the timings it measures itself |
+| 4 | Performance | The cost the specification reports: software benchmarks on three platforms, and cycles per byte against BLAKE-64 / SHA-512 / SHA-3-512 |
+| 5 | Third Party Analysis | The three independent sources, one dated line each, each linked to its own document. Their findings are not reproduced on the page |
+| — | Release packages (untitled) | Both **release packages** — **v1.0.1** (specification, erratum and all implementations in one archive) and the original **v1.0** — each with its SHA-256 |
 
 ---
 
@@ -119,7 +120,7 @@ Deliberately not in `content.js`:
 |---|---|---|
 | Navigation labels, view tabs and their tooltips | `index.html` | bound to section and view ids |
 | Labels inside the design figure (IV, block 0, round 1 of 4 …) | `index.html`, figure script | positioned by the drawing code |
-| The live demo's own copy | `index.html` §2 | a matched set, regenerated as one — see `DEPLOY.md` |
+| The live demo's own copy | `index.html` §3 | a matched set, regenerated as one — see `DEPLOY.md` |
 | Download-card subtitles and the checksum note | manifest block / page script | owned by `tools/make_downloads.py` |
 | Chart axis and legend labels | the chart scripts | tied to the plotted data |
 | Footer — licence, checksum, repository link | `index.html` | legal and provenance text |
@@ -225,4 +226,5 @@ The page carries no version numbers of its own: a change is committed to `main`,
 GitHub Pages publishes it, and the git history is the record.
 [`CHANGELOG.md`](CHANGELOG.md) is frozen at v1.6.5 and kept as the account of how
 the page was built. The revision history of the submission itself — its
-specification releases — is the update log in §3 of the page.
+specification releases — is the update log in the Introduction and the
+release list at the foot of the page.

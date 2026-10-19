@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FEILIAN — Introduction, Live Demo, Documents, Performance and Analysis</title>
+<title>FEILIAN — Introduction, Design Animation, Live Hashing, Performance and Third Party Analysis</title>
 <meta name="description" content="FEILIAN, the 1024-bit ARX hash function submitted to the NGCC-CH programme: its design and reported performance, a live in-browser digest demo, the released documents and implementations, and the independent third-party analyses of it.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://feilian-hash.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FEILIAN — Submission Overview">
-<meta property="og:title" content="FEILIAN — Introduction, Live Demo, Documents, Performance and Analysis">
+<meta property="og:title" content="FEILIAN — Introduction, Design Animation, Live Hashing, Performance and Third Party Analysis">
 <meta property="og:description" content="An introduction to the FEILIAN hash function (NGCC-CH) and its reported performance, a live in-browser digest demo, the documents that record it, and the independent third-party analyses it has received.">
 <meta property="og:url" content="https://feilian-hash.github.io/">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FEILIAN — Introduction, Live Demo, Documents, Performance and Analysis">
+<meta name="twitter:title" content="FEILIAN — Introduction, Design Animation, Live Hashing, Performance and Third Party Analysis">
 <meta name="twitter:description" content="Introduction, a live in-browser hash demo, downloadable documents, and the third-party security analyses of the FEILIAN hash function.">
 <!-- Scholarly indexing metadata for the underlying specification. -->
 <meta name="citation_title" content="FEILIAN: A Hash Function Proposal (submitted specification, version 1.0.1, 8 October 2026)">
@@ -62,15 +62,6 @@
   .btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;
        padding:11px 20px;border-radius:10px;cursor:pointer;border:1px solid transparent;transition:.2s}
 
-  .dl-sub{font-size:15px;color:var(--ink-soft);margin:6px 0 10px;min-height:40px}
-  .dl-meta{font-size:11.5px;color:var(--ink-soft);margin:0 0 14px;word-break:break-all;line-height:1.5}
-  .dl-btn{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;
-          padding:9px 16px;border-radius:9px;border:1px solid var(--accent);
-          background:var(--accent);color:#fff;cursor:pointer;transition:background .18s,transform .18s}
-  .dl-btn:hover{background:#16304f;text-decoration:none;transform:translateY(-1px)}
-  .dl-btn.off{border-color:var(--line2);background:transparent;color:var(--ink-soft);cursor:not-allowed}
-  .dl-btn.off:hover{transform:none;background:transparent}
-
   nav.toc{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);
           border-bottom:1px solid var(--line)}
   nav.toc .wrap{display:flex;gap:2px;padding:9px 24px;overflow-x:auto}
@@ -88,8 +79,6 @@
   .lift:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
   .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .grid-auto{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
-  #dlgrid{grid-template-columns:1fr}
   .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
   @media(max-width:900px){.grid3,.grid4{grid-template-columns:1fr 1fr}}
   @media(max-width:640px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
@@ -185,27 +174,10 @@
   @media(hover:hover){.upd a:hover .jmp,.upd a:focus-visible .jmp{transform:translateY(3px)}}
   @media(prefers-reduced-motion:reduce){.upd a .jmp{transition:none}}
 
-  .revcard{display:flex;flex-direction:column}
-  .revcard .who{font-size:12px;color:var(--ink-soft);margin:0 0 10px;font-family:var(--mono);font-size:11.5px}
-  .revcard blockquote{margin:0 0 10px;padding:10px 14px;background:#f6f8fa;border-left:3px solid var(--accent);
-                      border-radius:0 8px 8px 0;font-size:14.5px;color:var(--ink)}
-  .revcard p{font-size:14.5px;color:var(--ink-soft);margin:8px 0 0}
-  .revcard .srcline{margin:auto 0 0;padding-top:11px;border-top:1px dashed var(--line);
-                    font-size:11.5px;font-family:var(--mono);overflow-wrap:anywhere}
+  /* The release packages close the page untitled: a rule and a wider gap mark
+     them as end matter rather than a sixth chapter. */
+  #documents{margin-top:56px;padding-top:26px;border-top:1px solid var(--line)}
   .ref a{color:var(--accent)}
-
-  /* independent reviews — three rows, one column */
-  .revlist{display:grid;grid-template-columns:1fr;gap:12px}
-  .revlist .revcard{display:grid;grid-template-columns:1fr auto;gap:3px 26px;align-items:center}
-  .revlist .revcard h3{grid-column:1;margin:0}
-  .revlist .revcard .who{grid-column:1;margin:2px 0 0}
-  .revlist .revcard .srcline{grid-column:2;grid-row:1 / span 2;margin:0;padding:0;border:0;
-                              text-align:right;white-space:nowrap}
-  @media(max-width:720px){
-    .revlist .revcard{grid-template-columns:1fr}
-    .revlist .revcard .srcline{grid-column:1;grid-row:auto;text-align:left;white-space:normal;
-                               padding-top:9px;border-top:1px dashed var(--line)}
-  }
 
   .steps{margin:6px 0 14px}
   .stepcap{font-size:13.5px;color:var(--ink-soft)}
@@ -436,10 +408,10 @@
 <nav class="toc" id="toc">
   <div class="wrap">
     <a href="#introduction">Introduction</a>
-    <a href="#demo">Live demo</a>
-    <a href="#documents">Documents</a>
+    <a href="#design">Design Animation</a>
+    <a href="#demo">Live Hashing</a>
     <a href="#performance">Performance</a>
-    <a href="#analysis">Third-party analysis</a>
+    <a href="#analysis">Third Party Analysis</a>
   </div>
 </nav>
 
@@ -455,9 +427,13 @@
     <li><span class="d">2026-10-08</span> <span data-t="intro.upd1.a"></span> <a href="#dl-v101"><span data-t="intro.upd1.link"></span><span class="jmp" aria-hidden="true">&#8595;</span></a><span data-t="intro.upd1.b"></span></li>
     <li><span class="d">2026-06-30</span> <span data-t="intro.upd2.a"></span> <a href="#dl-v100"><span data-t="intro.upd2.link"></span><span class="jmp" aria-hidden="true">&#8595;</span></a><span data-t="intro.upd2.b"></span></li>
   </ul>
+</section>
 
-  <div class="card rv" id="designfig">
-    <h3 style="margin-top:0">The design in picture views</h3>
+<!-- ================= DESIGN ANIMATION ================= -->
+<section id="design">
+  <p class="eyebrow rv">Design Animation</p>
+
+  <div id="designfig">
 
     <div class="stagebar" role="tablist" aria-label="Design views">
       <button class="stagetab on" data-stg="0" role="tab" aria-selected="true" title="FEILIAN &#8212; the hash iteration">FEILIAN</button>
@@ -796,7 +772,7 @@
 
 <!-- ================= LIVE DEMO ================= -->
 <section id="demo">
-  <p class="eyebrow rv"> Live demo</p>
+  <p class="eyebrow rv">Live Hashing</p>
 
   <div class="demo">
     <div class="demo-head">
@@ -865,22 +841,6 @@
   </div>
 </section>
 
-<!-- ================= DOWNLOADS ================= -->
-<section id="documents">
-  <p class="eyebrow rv"> Documents</p>
-  <p class="lead rv" data-t="docs.lead"></p>
-  <div id="dlgrid" class="grid-auto rv"></div>
-  <p class="tblcap rv" id="dlnote"></p>
-
-  <div class="card rv" style="margin-top:18px">
-    <h3 style="margin-top:0">Revision history of the submission</h3>
-    <ul class="tl">
-      <li><span class="d">2026-10-08</span><span data-t="docs.tl1"></span></li>
-      <li class="mute"><span class="d">2026-06-30</span><span data-t="docs.tl2"></span></li>
-    </ul>
-  </div>
-</section>
-
 <!-- ================= PERFORMANCE ================= -->
 <section id="performance">
   <p class="eyebrow rv"> Performance</p>
@@ -896,36 +856,30 @@
   </table>
   <p class="tblcap" data-t="perf.cap1"></p>
 
-  <p class="tblcap rv" style="margin:24px 0 8px" data-t="perf.cap2"></p>
-  <div class="chartfig rv" id="fpgachart"></div>
-
   <p class="tblcap rv" style="margin:24px 0 8px" data-t="perf.cap3"></p>
   <div class="chartfig rv" id="cpbchart"></div>
 </section>
 
 <!-- ================= THIRD-PARTY ANALYSIS ================= -->
 <section id="analysis">
-  <p class="eyebrow rv">Third-party analysis</p>
+  <p class="eyebrow rv">Third Party Analysis</p>
   <p class="lead rv" data-t="analysis.lead"></p>
 
-  <div class="revlist">
-    <div class="card revcard lift rv">
-      <h3 style="margin-top:0" data-t="analysis.c1.h3"></h3>
-      <p class="who" data-t="analysis.c1.who"></p>
-      <p class="srcline"><a href="https://github.com/amcrypto-jp/feilian-cryptanalysis" data-t="analysis.c1.link"></a></p>
-    </div>
-    <div class="card revcard lift rv d1">
-      <h3 style="margin-top:0" data-t="analysis.c2.h3"></h3>
-      <p class="who" data-t="analysis.c2.who"></p>
-      <p class="srcline"><a href="https://ngcc.dev/reports/hash-10.html" data-t="analysis.c2.link"></a></p>
-    </div>
-    <div class="card revcard lift rv d2">
-      <h3 style="margin-top:0" data-t="analysis.c3.h3"></h3>
-      <p class="who" data-t="analysis.c3.who"></p>
-      <p class="srcline"><a href="https://eprint.iacr.org/2026/2236" data-t="analysis.c3.link"></a></p>
-    </div>
-  </div>
+  <ul class="upd rv">
+    <li><span class="d">2026-09-28</span> <span data-t="analysis.c3.h3"></span> &mdash; <span data-t="analysis.c3.who"></span> &mdash; <a href="https://eprint.iacr.org/2026/2236"><span data-t="analysis.c3.link"></span></a></li>
+    <li><span class="d">2026-09-27</span> <span data-t="analysis.c1.h3"></span> &mdash; <span data-t="analysis.c1.who"></span> &mdash; <a href="https://github.com/amcrypto-jp/feilian-cryptanalysis"><span data-t="analysis.c1.link"></span></a></li>
+    <li><span class="d">2026-09-26</span> <span data-t="analysis.c2.h3"></span> &mdash; <span data-t="analysis.c2.who"></span> &mdash; <a href="https://ngcc.dev/reports/hash-10.html"><span data-t="analysis.c2.link"></span></a></li>
+  </ul>
 </section>
+
+<!-- ================= RELEASE PACKAGES =================
+     Deliberately untitled. It closes the page, and its lines are what the
+     Updates list in the Introduction points at (#dl-<manifest id>). -->
+<div id="documents">
+  <p class="lead rv" data-t="docs.lead"></p>
+  <ul class="upd rv" id="dlgrid"></ul>
+  <p class="tblcap rv" id="dlnote" style="margin-top:16px"></p>
+</div>
 
 </div>
 
@@ -964,10 +918,10 @@
 <script>
 /* DOWNLOADS:BEGIN */
 var DOWNLOADS = [
-  {id:"v101", title:"Release package v1.0.1",
+  {id:"v101", date:"2026-10-08", title:"Release package v1.0.1",
    sub:"Specification 1.0.1 (69 pp.) + erratum + reference, optimized and RTL implementations",
    file:"files/FEILIAN-v1.0.1.zip", size:"856.0 KB", sha:"23d3e6721563a27b…", ready:true},
-  {id:"v100", title:"Release package v1.0",
+  {id:"v100", date:"2026-06-30", title:"Release package v1.0",
    sub:"Specification 1.0 (68 pp.) — the revision examined by the assessments — with the reference, optimized and RTL implementations, test vectors and IP statements",
    file:"files/FEILIAN-v1.0.zip", size:"44.26 MB", sha:"876082a40ecf3b25…", ready:true}
 ];
@@ -994,17 +948,16 @@ var DL_RELEASE = "";   /* optional mirror base, e.g. a release CDN prefix */
     var dlnote=document.getElementById('dlnote'), live=0;
     DOWNLOADS.forEach(function(d){
       if(d.ready)live++;
-      var meta=[];
-      if(d.size)meta.push(d.size);
-      meta.push(d.sha?('<span class="mono">'+d.sha+'</span>'):'checksum on publish');
-      var c=document.createElement('div');
-      c.className='card lift rv'; c.id='dl-'+d.id;   /* anchorable as #dl-<manifest id> */
-      c.innerHTML='<h3 style="margin-top:0">'+d.title+'</h3>'+
-        '<p class="dl-sub">'+d.sub+'</p>'+
-        '<p class="dl-meta">'+meta.join(' · ')+'</p>'+
+      /* One line per package, cut to the same shape as the Updates list:
+         date, what the package holds, then the file itself. Anchorable as
+         #dl-<manifest id>, which is what the Updates lines point at. */
+      var fname=d.file.split('/').pop();
+      var c=document.createElement('li'); c.id='dl-'+d.id;
+      c.innerHTML='<span class="d">'+(d.date||'')+'</span> '+
+        '<span>'+d.title+' &mdash; '+d.sub+(d.size?', '+d.size:'')+'</span> '+
         (d.ready
-          ? '<a class="dl-btn" href="'+d.file+'" download>Download ↓</a>'
-          : '<span class="dl-btn off">Not published</span>');
+          ? 'published as <a href="'+d.file+'" download>'+fname+'<span class="jmp" aria-hidden="true">&#8595;</span></a>.'
+          : '<span class="mono">not published yet</span>');
       dlg.appendChild(c);
     });
     dlnote.innerHTML = live
@@ -2078,46 +2031,6 @@ schedule();
   legs.forEach(function(g,i){wire(g,i);});
 })();
 
-/* ---------- Performance · FPGA throughput grouped bars (spec Table 5.5) ---------- */
-(function(){
-  var host=document.getElementById('fpgachart'); if(!host)return;
-  var CAT=['[8SC]','[4SC]','[2SC]','[1SC]'];
-  var SER=[
-    {name:'Virtex-5 xc5vlx110', color:'#1e3a5f', d:[2925.7,2105.4,986.1,644.3]},
-    {name:'Zynq-7000 xc7z100',  color:'#3d6fa5', d:[4139.8,3566.5,1443.7,886.0]}
-  ];
-  var W=900,H=380,ML=70,MR=190,MT=26,MB=58, pw=W-ML-MR, ph=H-MT-MB, YMAX=4500, TICKS=5;
-  var slot=pw/CAT.length, bw=Math.min(74,(slot-42)/2);
-  var ys=function(v){return MT+ph*(1-v/YMAX);};
-  var s=['<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="FPGA throughput by architecture">'];
-  s.push('<style>.ax{font-family:Inter,Segoe UI,Arial;font-size:12px;fill:#5b6470}.tk{font-family:SFMono-Regular,Consolas,monospace;font-size:11px;fill:#7d8794}.vl{font-family:SFMono-Regular,Consolas,monospace;font-size:11px;fill:#39424e}.lg{font-family:Inter,Arial;font-size:12.5px;font-weight:600}</style>');
-  for(var t=0;t<=TICKS;t++){
-    var v=YMAX*t/TICKS, y=ys(v);
-    s.push('<line x1="'+ML+'" y1="'+y+'" x2="'+(ML+pw)+'" y2="'+y+'" stroke="'+(t===0?'#cbd1d9':'#f0f2f5')+'"/>');
-    s.push('<text class="tk" x="'+(ML-9)+'" y="'+(y+4)+'" text-anchor="end">'+v+'</text>');
-  }
-  CAT.forEach(function(c,i){
-    var cx=ML+slot*i+slot/2;
-    SER.forEach(function(se,j){
-      var x=cx-slot/2+21+j*(bw+8), v=se.d[i], y=ys(v), h=MT+ph-y;
-      s.push('<g class="barg" style="transform-box:view-box;transform-origin:'+
-             (x+bw/2).toFixed(1)+'px '+(MT+ph).toFixed(1)+'px">');
-      s.push('<rect x="'+x+'" y="'+y+'" width="'+bw+'" height="'+Math.max(0,h)+'" rx="5" fill="'+se.color+'"/>');
-      s.push('<text class="vl" x="'+(x+bw/2)+'" y="'+(y-6)+'" text-anchor="middle">'+v.toFixed(1)+'</text>');
-      s.push('</g>');
-    });
-    s.push('<text class="ax" x="'+cx+'" y="'+(MT+ph+22)+'" text-anchor="middle">'+c+'</text>');
-  });
-  s.push('<text class="ax" x="'+(ML+pw/2)+'" y="'+(H-8)+'" text-anchor="middle">architectures: number of SubColumn units instantiated</text>');
-  s.push('<text class="ax" transform="translate(18,'+(MT+ph/2)+') rotate(-90)" text-anchor="middle">throughput [Mbps]</text>');
-  SER.forEach(function(se,i){
-    var y=MT+18+i*24;
-    s.push('<rect x="'+(ML+pw+18)+'" y="'+(y-7)+'" width="12" height="12" rx="3" fill="'+se.color+'"/>');
-    s.push('<text class="lg" x="'+(ML+pw+37)+'" y="'+(y+4)+'" fill="#5b6470">'+se.name+'</text>');
-  });
-  s.push('</svg>');
-  host.innerHTML=s.join('');
-})();
 </script>
 </body>
 </html>

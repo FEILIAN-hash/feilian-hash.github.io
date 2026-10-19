@@ -17,14 +17,15 @@ Pages rebuilds in about a minute. `git push` alone is enough once the upstream i
 tracked; use `git push -u origin main` the first time.
 
 There are no release tags and no version numbers for the page itself — what
-carries versions is the submission, tracked in §3 of the page. Commits are the
+carries versions is the submission, tracked in the Updates list and the release
+list at the foot of the page. Commits are the
 history.
 
 There is no build step. `index.html` is the site — structure, styles, scripts and
 figures — and `content.js` is its prose; no external dependencies, no bundler, no
 CDN. What you commit is what is served.
 
-The live demonstration in §2 is inlined into that same file, so the page stays
+The live demonstration in §3 is inlined into that same file, so the page stays
 self-contained: its stylesheet is scoped under `#demo` and its script is wrapped
 in an IIFE, so neither can reach the rest of the page. The block is generated
 from the standalone demo (`feilian-live-demo.html`) kept alongside the submission
@@ -64,15 +65,15 @@ it — nothing here rebuilds an archive, and nothing here can make the digest dr
 
 Two tables at the top of the script drive it:
 
-| Table | Published | Gets a download card |
+| Table | Published | Appears in the release list |
 |---|---|---|
-| `PACKAGES` | yes, verbatim, plus a SHA-256 | yes — rendered by the manifest block |
+| `PACKAGES` | yes, verbatim, plus a SHA-256 | yes — one dated line, from the manifest block |
 | `ASSETS` | yes, verbatim, plus a SHA-256 | no — the page links it from the text |
 
 `ASSETS` exists for documents the page opens directly instead of offering as a
 card: they are published and checksummed exactly like a package but get no card.
 Nothing uses it at present — the erratum used to be the case in point, linked
-straight from §3 while living in `files/`, but it now travels inside the release
+straight from the text while living in `files/`, but it now travels inside the release
 package alone. The table is kept because it is how such a document should be
 published if the page ever links one directly: a same-origin `href` keeps working
 from `file://`, from Pages and from any mirror, and survives a move to another

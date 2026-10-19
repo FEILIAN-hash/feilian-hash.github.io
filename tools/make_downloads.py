@@ -42,15 +42,15 @@ REPO  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FILES = os.path.join(REPO, "files")
 INDEX = os.path.join(REPO, "index.html")
 
-# (id, title, subtitle, served filename, workspace-relative source)
+# (id, date, title, subtitle, served filename, workspace-relative source)
 # One row per published revision. Add a row to publish another revision; the
-# grid on the page lays itself out for however many rows there are.
+# release list lays itself out for however many rows there are.
 PACKAGES = [
-    ("v101", "Release package v1.0.1",
+    ("v101", "2026-10-08", "Release package v1.0.1",
      "Specification 1.0.1 (69 pp.) + erratum + reference, "
      "optimized and RTL implementations",
      "FEILIAN-v1.0.1.zip", os.path.join("v1.0.1", "FEILIAN-v1.0.1.zip")),
-    ("v100", "Release package v1.0",
+    ("v100", "2026-06-30", "Release package v1.0",
      "Specification 1.0 (68 pp.) \u2014 the revision examined by the "
      "assessments \u2014 with the reference, optimized and RTL "
      "implementations, test vectors and IP statements",
@@ -80,12 +80,12 @@ def sha256_file(path):
 
 def manifest_block(results):
     rows = []
-    for (pid, title, sub, served, _src), info in zip(PACKAGES, results):
+    for (pid, date, title, sub, served, _src), info in zip(PACKAGES, results):
         size = human(info["bytes"]) if info else ""
         sha = info["sha"][:16] + "\u2026" if info else ""
         ready = "true" if info else "false"
         rows.append(
-            f'  {{id:"{pid}", title:"{title}",\n'
+            f'  {{id:"{pid}", date:"{date}", title:"{title}",\n'
             f'   sub:"{sub}",\n'
             f'   file:"files/{served}", size:"{size}", sha:"{sha}", ready:{ready}}}'
         )
@@ -116,7 +116,7 @@ def main():
 
     wanted = PACKAGES
     if args.package:
-        by_src = {os.path.normpath(src): row for row in PACKAGES for src in [row[4]]}
+        by_src = {os.path.normpath(src): row for row in PACKAGES for src in [row[5]]}
         picked = []
         for p in args.package:
             key = os.path.normpath(p)
@@ -125,8 +125,8 @@ def main():
             else:
                 base = os.path.basename(p)
                 pid = re.sub(r"[^A-Za-z0-9]+", "", os.path.splitext(base)[0]).lower()[:8] or "pkg"
-                picked.append((pid, f"Release package {base}", "Release package",
-                               base, p))
+                picked.append((pid, "", f"Release package {base}",
+                               "Release package", base, p))
         wanted = picked
 
     if not os.path.exists(INDEX):
@@ -138,7 +138,7 @@ def main():
     print(f"mode      : {'PUBLISH (writes files)' if args.publish else 'DRY RUN (no writes)'}\n")
 
     resolved = []
-    for pid, title, _sub, served, src in wanted:
+    for pid, _date, title, _sub, served, src in wanted:
         p = os.path.abspath(os.path.join(ws, src))
         resolved.append((pid, title, served, src, p))
         if os.path.exists(p):
