@@ -22,7 +22,7 @@
  * ========================================================================== */
 window.T = {
   /* ---- the hero line under the wordmark ---- */
-  hero: {sub: "A hash function submitted to the Next-generation Commercial Cryptographic Algorithms programme."},
+  hero: {sub: "A hash function submitted to the Next-generation Commercial Cryptographic Algorithms programme (NGCC), China"},
   /* ---- §1 Introduction — lead and the specification-updates list ---- */
   intro: {
     lead: "FEILIAN is a candidate submitted to the Next-generation Commercial Cryptographic Algorithms programme (NGCC-CH): a tweakable ARX permutation in Davies–Meyer mode over a 1024-bit state and message block. The three digest lengths share that state, keeping a different amount of output, so one core serves the whole family.",
