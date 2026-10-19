@@ -34,7 +34,7 @@ window.T = {
    *      sits at the foot of the page ---- */
   docs: {lead: "Both revisions are published as release packages, byte-for-byte as distributed, with their SHA-256. <b>Version 1.0.1</b> (8 October 2026) supersedes <b>version 1.0</b> (30 June 2026), the original submission examined by the third-party assessment."},
   /* ---- §4 Performance — lead and the two captions ---- */
-  perf: {lead: "What the family costs. Everything below is reproduced from the specification; nothing here was measured locally. In cycles per byte FEILIAN-1024 settles level with SHA-512 on long messages, ahead of SHA-3-512 and behind BLAKE-64.", cap1: "Cycles per byte.", cap3: "Back in software: cycles per byte against the other 512-bit-class hashes, across message lengths."},
+  perf: {lead: "What the family costs. Everything below is reproduced from the specification; nothing here was measured locally. In cycles per byte FEILIAN-1024 settles level with SHA-512 on long messages, ahead of SHA-3-512 and behind BLAKE-64.", cap1: "FEILIAN-1024, cycles per byte on 10 kB messages. From specification Table 5.2.", cap3: "Back in software: cycles per byte against the other 512-bit-class hashes, across message lengths."},
   /* ---- §5 Third Party Analysis — lead and three dated lines.
    *      Each line is date / name / kind / link and nothing else; the
    *      documents themselves carry the detail. "who" here is the kind. ---- */
