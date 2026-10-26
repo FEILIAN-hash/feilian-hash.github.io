@@ -870,10 +870,10 @@
   <p class="lead rv" data-t="perf.lead"></p>
 
   <table>
-    <thead><tr><th>X86/ARM</th><th>CPU</th><th>ISA</th><th>OS / compiler</th><th class="num">Cycles per byte</th></tr></thead>
+    <thead><tr><th>X86/ARM</th><th>Message</th><th class="num">FEILIAN-1024</th><th class="num">SHA-512</th><th class="num">SHA-3-512</th><th class="num">BLAKE-64</th></tr></thead>
     <tbody>
-      <tr><td class="k">x86</td><td>Intel i7-10750H @2.60 GHz</td><td>AVX2</td><td>Windows 11 · GCC 16.1.0</td><td class="num">3.57</td></tr>
-      <tr><td class="k">ARM</td><td>Apple M2 Pro @3.50 GHz</td><td>NEON</td><td>macOS 26 · Clang 17.0.0</td><td class="num">4.09</td></tr>
+      <tr><td class="k">x86</td><td>64 KiB</td><td class="num k">4.55</td><td class="num">4.29</td><td class="num">11.81</td><td class="num">4.42</td></tr>
+      <tr><td class="k">ARM</td><td>64 KiB</td><td class="num k">5.31</td><td class="num">2.60</td><td class="num">11.53</td><td class="num">5.21</td></tr>
     </tbody>
   </table>
   <p class="tblcap" data-t="perf.cap1"></p>
@@ -2014,18 +2014,18 @@ schedule();
 })();
 })();
 
-/* ---------- Performance · cycles/byte line chart (spec Table 5.3) ---------- */
+/* ---------- Performance · cycles/byte line chart (eBACS, x86 host) ---------- */
 (function(){
   var host=document.getElementById('cpbchart'); if(!host)return;
   var LEN=[64,128,576,1024,1536,4096,64576];
   var SERIES=[
-    {name:'FEILIAN-1024', color:'#1e3a5f', w:3,   d:[8.6875,4.34375,4.210069,3.735352,3.694661,3.669678,3.63632]},
-    {name:'SHA-512',      color:'#2f6b56', w:2,   d:[10.453125,8.640625,4.177083,4.077148,3.873698,3.591797,3.44004]},
-    {name:'BLAKE-64',     color:'#3d6fa5', w:2,   d:[6.640625,6.054688,3.255208,3.252930,3.108724,2.743408,2.661205]},
-    {name:'SHA-3-512',    color:'#8a6316', w:2,   d:[15.140625,10.742188,7.508681,6.689453,6.363932,5.970703,5.831408]}
+    {name:'FEILIAN-1024', color:'#1e3a5f', w:3, d:[9.734375,4.578125,5.111111,4.541016,4.546875,4.564453,4.548578]},
+    {name:'SHA-512', color:'#2f6b56', w:2, d:[28.953125,19.289062,7.616319,6.174805,5.561849,4.759277,4.286856]},
+    {name:'BLAKE-64', color:'#3d6fa5', w:2, d:[10.984375,9.90625,5.217014,5.069336,4.81901,4.556396,4.416873]},
+    {name:'SHA-3-512', color:'#8a6316', w:2, d:[14.9375,15.523438,13.692708,12.797852,11.994792,12.027588,11.811137]}
   ];
   var W=916,H=430,ML=62,MR=166,MT=28,MB=54;
-  var pw=W-ML-MR, ph=H-MT-MB, YMAX=16, TICKS=8;
+  var pw=W-ML-MR, ph=H-MT-MB, YMAX=30, TICKS=6;
   var xs=function(i){return ML+pw*i/(LEN.length-1);};
   var ys=function(v){return MT+ph*(1-v/YMAX);};
   var s=['<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Cycles per byte by message length">'];

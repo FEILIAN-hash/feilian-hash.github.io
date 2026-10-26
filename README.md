@@ -35,7 +35,7 @@ the page renders and the demo runs identically offline, from `file://`, and from
 | 1 | Introduction | The design in brief — 1024-bit state and block, the tweakable ARX permutation, Davies–Meyer — closing with a short **Updates** list: one dated line per release, each linking to its package at the foot of the page |
 | 2 | Design Animation | The **four-view interactive figure**: the FEILIAN iteration (message blocks, chaining value, tweak), the compress function (five phases, the tweak, the feed-forward), one phase (four rounds, with round 1 and round 2 opened up underneath), and SubColumn |
 | 3 | Online Hashing | A JavaScript port of the compression function running in the page: text / hex / bit-string input, 512 / 768 / 1024 output, a known-answer self-test against the Appendix B vectors, and the timings it measures itself |
-| 4 | Performance | The cost the specification reports: cycles per byte at 10 kB on one x86 and one ARM machine (specification Table 5.2), then a chart against BLAKE-64 / SHA-512 / SHA-3-512 across message lengths |
+| 4 | Performance | What eBACS (SUPERCOP) measures for the published implementations: cycles per byte at 64 KiB on an x86 and an ARM host, FEILIAN-1024 beside SHA-512 / SHA3-512 / BLAKE-64, then the same x86 runs charted across message lengths |
 | 5 | Third Party Analysis | The three independent sources, one dated line each, each linked to its own document. Their findings are not reproduced on the page |
 | — | Release packages (untitled) | Both **release packages** — **v1.0.1** (specification, erratum and all implementations in one archive) and the original **v1.0** — each with its SHA-256 |
 
