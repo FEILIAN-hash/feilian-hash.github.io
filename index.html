@@ -265,6 +265,10 @@
   #designfig polygon.tf{stroke:none;fill:#dde1e7}
   #designfig .tf.on{stroke:var(--p1)}
   #designfig polygon.tf.on{fill:var(--p1)}
+  /* the trunks stay whole: a grey track under all five taps, with the lit run
+     drawn on top of it so the part not yet reached still reads as a wire */
+  #designfig .mflit{fill:none;stroke:url(#fadeM);stroke-width:1.5;stroke-linecap:butt}
+  #designfig .tflit{fill:none;stroke:url(#fadeT);stroke-width:1.4;stroke-linecap:butt}
   #designfig .dg-box{fill:#fafbfc;stroke:#e3e7ec;stroke-width:1.4;transition:.45s}
   #designfig .dg-node{fill:#fff;stroke:#c7cdd6;stroke-width:1.5;transition:.45s}
   #designfig .dg-node.on{fill:var(--accent-soft);stroke:var(--accent)}
@@ -471,6 +475,22 @@
     <figure style="margin:4px 0 0">
       <svg viewBox="0 0 700 300" id="dsvg" role="img" aria-label="Four interactive views of the FEILIAN design: the FEILIAN iteration, the compress function, one phase with two of its rounds opened up, and SubColumn">
 
+        <defs>
+          <!-- The lit run on a trunk fades towards the part already consumed,
+               so the eye stays at the phase being absorbed now. Both stops sit
+               in user space and are re-anchored to the lit span from script. -->
+          <linearGradient id="fadeM" gradientUnits="userSpaceOnUse" x1="192" y1="0" x2="504" y2="0">
+            <stop offset="0" style="stop-color:var(--p2)" stop-opacity=".18"/>
+            <stop offset=".5" style="stop-color:var(--p2)" stop-opacity=".62"/>
+            <stop offset="1" style="stop-color:var(--p2)" stop-opacity="1"/>
+          </linearGradient>
+          <linearGradient id="fadeT" gradientUnits="userSpaceOnUse" x1="192" y1="0" x2="504" y2="0">
+            <stop offset="0" style="stop-color:var(--p1)" stop-opacity=".16"/>
+            <stop offset=".5" style="stop-color:var(--p1)" stop-opacity=".58"/>
+            <stop offset="1" style="stop-color:var(--p1)" stop-opacity="1"/>
+          </linearGradient>
+        </defs>
+
         <!-- ================= VIEW 1 — HAIFA STRUCTURE ================= -->
         <g class="stg on" id="stg0" data-view="0">
           <text class="dg-sb mid" x="384" y="24">message, padded and split into 1024-bit blocks</text>
@@ -548,9 +568,10 @@
         <g class="stg" id="stg1" data-view="1">
           <text class="dg-lb end mfin" x="330" y="19">m</text>
           <text class="dg-sb mfin" x="338" y="19">1024-bit</text>
-          <line class="dg-w mfin" x1="348" y1="25" x2="348" y2="46"/>
-          <polygon class="dg-tip mfin" points="348,52 344,45 352,45"/>
+          <line class="dg-w mfin mstem" x1="348" y1="25" x2="348" y2="46"/>
+          <polygon class="dg-tip mfin mstem" points="348,52 344,45 352,45"/>
           <line class="mf" x1="192" y1="52" x2="504" y2="52"/>
+          <line class="mflit" x1="192" y1="52" x2="192" y2="52"/>
 
           <line class="mf" data-cf="0" x1="192" y1="52" x2="192" y2="88"/><polygon class="mf" data-cf="0" points="192,94 188,87 196,87"/>
           <line class="mf" data-cf="1" x1="270" y1="52" x2="270" y2="88"/><polygon class="mf" data-cf="1" points="270,94 266,87 274,87"/>
@@ -559,12 +580,13 @@
           <line class="mf" data-cf="4" x1="504" y1="52" x2="504" y2="88"/><polygon class="mf" data-cf="4" points="504,94 500,87 508,87"/>
 
           <line class="tf" x1="192" y1="180" x2="504" y2="180"/>
+          <line class="tflit" x1="192" y1="180" x2="192" y2="180"/>
           <line class="tf" data-cf="0" x1="192" y1="150" x2="192" y2="180"/><polygon class="tf" data-cf="0" points="192,143 188,150 196,150"/>
           <line class="tf" data-cf="1" x1="270" y1="150" x2="270" y2="180"/><polygon class="tf" data-cf="1" points="270,143 266,150 274,150"/>
           <line class="tf" data-cf="2" x1="348" y1="150" x2="348" y2="180"/><polygon class="tf" data-cf="2" points="348,143 344,150 352,150"/>
           <line class="tf" data-cf="3" x1="426" y1="150" x2="426" y2="180"/><polygon class="tf" data-cf="3" points="426,143 422,150 430,150"/>
           <line class="tf" data-cf="4" x1="504" y1="150" x2="504" y2="180"/><polygon class="tf" data-cf="4" points="504,143 500,150 508,150"/>
-          <line class="tf" x1="348" y1="180" x2="348" y2="198"/>
+          <line class="tf tflex" x1="348" y1="180" x2="348" y2="198"/>
           <text class="dg-sb mid" x="348" y="210">tw = (ver, flag, t&#8320;, t&#8321;)</text>
 
           <text class="dg-lb end hfin" x="102" y="122">h</text>
@@ -584,11 +606,11 @@
           <rect class="cfblk" data-cf="4" x="473" y="96" width="62" height="44" rx="8"/>
           <text class="dg-lb mid" data-cf="4" x="504" y="121">P&#8324;</text>
 
-          <line class="dg-w" x1="225" y1="118" x2="230" y2="118"/><polygon class="dg-tip" points="237,118 230,114 230,122"/>
-          <line class="dg-w" x1="303" y1="118" x2="308" y2="118"/><polygon class="dg-tip" points="315,118 308,114 308,122"/>
-          <line class="dg-w" x1="381" y1="118" x2="386" y2="118"/><polygon class="dg-tip" points="393,118 386,114 386,122"/>
-          <line class="dg-w" x1="459" y1="118" x2="464" y2="118"/><polygon class="dg-tip" points="471,118 464,114 464,122"/>
-          <line class="dg-w" x1="537" y1="118" x2="544" y2="118"/><polygon class="dg-tip" points="551,118 544,114 544,122"/>
+          <line class="dg-w" data-cf="0" x1="225" y1="118" x2="230" y2="118"/><polygon class="dg-tip" data-cf="0" points="237,118 230,114 230,122"/>
+          <line class="dg-w" data-cf="1" x1="303" y1="118" x2="308" y2="118"/><polygon class="dg-tip" data-cf="1" points="315,118 308,114 308,122"/>
+          <line class="dg-w" data-cf="2" x1="381" y1="118" x2="386" y2="118"/><polygon class="dg-tip" data-cf="2" points="393,118 386,114 386,122"/>
+          <line class="dg-w" data-cf="3" x1="459" y1="118" x2="464" y2="118"/><polygon class="dg-tip" data-cf="3" points="471,118 464,114 464,122"/>
+          <line class="dg-w" data-cf="4" x1="537" y1="118" x2="544" y2="118"/><polygon class="dg-tip" data-cf="4" points="551,118 544,114 544,122"/>
 
           <g class="hfo">
             <circle class="dg-node" cx="566" cy="118" r="13"/>
@@ -1145,16 +1167,46 @@ var DL_RELEASE = "";   /* optional mirror base, e.g. a release CDN prefix */
       });
     }
 
+    /* Both trunks deliver one value to five phases in turn, so they are drawn
+       only as far as the walk has reached: a line that is merely switched on
+       says nothing about how much of the message has been consumed. The taps
+       hang at 192+78i and both labels feed in at 348, hence the symmetric
+       growth -- left half first, then past the feed point. */
+    function trunk(a){
+      if(!G1)return;
+      a = Math.max(-1, Math.min(4, a));   /* clamp: the last tap is at 504 */
+      var lo = a>=0 ? 192 : 348, hi = a>=3 ? 192+78*a : 348;
+      G1.querySelectorAll('.mflit,.tflit').forEach(function(e){
+        e.setAttribute('x1',lo); e.setAttribute('x2',hi);
+      });
+      ['fadeM','fadeT'].forEach(function(id){
+        var g=document.getElementById(id);
+        if(g){ g.setAttribute('x1',lo); g.setAttribute('x2',Math.max(hi,lo+1)); }
+      });
+      G1.querySelectorAll('.mstem,.tflex').forEach(function(e){
+        e.classList.toggle('on',a>=0);});
+    }
+
     function r1(k){                       /* compress function */
       if(!G1)return;
+      /* one rule for blocks, taps and connectors: a phase that has been
+         reached stays reached, so the drawing always shows what is behind
+         the walk rather than only the instant it is in */
       for(var i=0;i<5;i++){
         var n=G1.querySelectorAll('[data-cf="'+i+'"]');
         for(var j=0;j<n.length;j++){
-          var e=n[j], tap=e.classList.contains('mf')||e.classList.contains('tf');
-          e.classList.toggle('on', tap ? (k>=1&&k<=5&&(k-1)===i) : (k>=1&&(k-1)>=i));
+          var e=n[j], age=(k-1)-i, on=k>=1&&age>=0;
+          e.classList.toggle('on',on);
+          /* Only the wires step back. A block that has been fed stays fed --
+             that is the record of progress -- while an arrow pointing at a
+             phase left behind is just noise. Released once the feed-forward
+             begins, so the closing frame matches the resting still. */
+          var wire = !e.classList.contains('cfblk') && e.tagName.toLowerCase()!=='text';
+          e.style.opacity = (wire&&age>0&&k<=5) ? String(Math.max(.28,1-.34*age)) : '';
         }
       }
       G1.querySelectorAll('.hfin,.mfin').forEach(function(e){e.classList.toggle('on',k===0);});
+      trunk(k>=1 ? k-1 : -1);
       G1.querySelectorAll('.hfff').forEach(function(e){e.classList.toggle('on',k>=6);});
       G1.querySelectorAll('.hfo,.hfout').forEach(function(e){e.classList.toggle('on',k===7);});
     }
@@ -1217,9 +1269,10 @@ var DL_RELEASE = "";   /* optional mirror base, e.g. a release CDN prefix */
     function finalState(){
       resetAll();
       if(G0)G0.querySelectorAll('.hfa').forEach(function(e){e.classList.add('on');});
-      if(G1)['[data-cf]','.hfin','.mfin','.hfff','.hfo','.hfout'].forEach(function(sel){
+      if(G1)['[data-cf]','.hfin','.mfin','.mstem','.tflex','.hfff','.hfo','.hfout'].forEach(function(sel){
         G1.querySelectorAll(sel).forEach(function(e){e.classList.add('on');});
       });
+      trunk(4);
       if(G2)G2.querySelectorAll('.phn').forEach(function(e){e.classList.add('on');});
       /* resting state: accent, dashed -- the dashes say enlarged */
       if(G2)G2.querySelectorAll('.expand').forEach(function(e){
