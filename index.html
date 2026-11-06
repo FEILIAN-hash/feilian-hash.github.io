@@ -314,6 +314,11 @@
   #designfig .phn.on{opacity:1}
   #designfig .phn.on .dg-lb{fill:var(--accent)}
   #designfig .phn.on .cfblk{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2.2}
+  /* the arrows between rounds are part of the round they lead into: lighting
+     only the label and the box left the wires grey, so the phase chain never
+     read as a path being followed */
+  #designfig .phn.on .dg-w{stroke:var(--accent)}
+  #designfig .phn.on .dg-tip{fill:var(--accent)}
 
   .bar-row{display:grid;grid-template-columns:132px 1fr 100px;align-items:center;gap:12px;margin:8px 0;font-size:14px}
   .bar-track{background:#f2f4f7;border-radius:6px;height:22px;overflow:hidden}
