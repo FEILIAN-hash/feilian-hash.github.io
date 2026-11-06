@@ -253,6 +253,9 @@
   #designfig .rmode .rhide{display:none}
   /* elision on the HAIFA chain: three dots sitting on the broken leader */
   #designfig .dgd{fill:#6f7885;transition:fill .55s}
+  /* branch dots on the round detail: same colour as the wire they sit on,
+     so a live junction never reads as a dead one */
+  #designfig .dgj{fill:var(--accent)}
   #designfig .dgn.on .dgd{fill:var(--accent)}
   #designfig .mf{fill:none;stroke:#cbd1d9;stroke-width:1.4;transition:.55s}
   #designfig polygon.mf{stroke:none;fill:#cbd1d9}
@@ -568,7 +571,7 @@
           <text class="dg-sb end hfin" x="102" y="136">1024-bit</text>
           <line class="dg-w hfin" x1="108" y1="118" x2="152" y2="118"/>
           <polygon class="dg-tip hfin" points="159,118 152,114 152,122"/>
-          <circle cx="120" cy="118" r="3" fill="#c7cdd6"/>
+          <circle class="dg-tip hfin" cx="120" cy="118" r="3"/>
 
           <rect class="cfblk" data-cf="0" x="161" y="96" width="62" height="44" rx="8"/>
           <text class="dg-lb mid" data-cf="0" x="192" y="121">P&#8320;</text>
@@ -755,9 +758,9 @@
             <line class="dg-w" x1="481" y1="80" x2="481" y2="73"/><polygon class="dg-tip" points="481,66 477,73 485,73"/>
             <line class="dg-w" x1="481" y1="128" x2="481" y2="119"/><polygon class="dg-tip" points="481,112 477,119 485,119"/>
             <line class="dg-w" x1="144" y1="128" x2="144" y2="73"/><polygon class="dg-tip" points="144,66 140,73 148,73"/>
-            <circle cx="144" cy="128" r="3" fill="#c7cdd6"/>
+            <circle class="dgj" cx="144" cy="128" r="3"/>
             <line class="dg-w" x1="176" y1="56" x2="176" y2="270"/><polygon class="dg-tip" points="176,277 172,270 180,270"/>
-            <circle cx="176" cy="56" r="3" fill="#c7cdd6"/>
+            <circle class="dgj" cx="176" cy="56" r="3"/>
             <text class="dg-sb" x="190" y="170">s&#8320; = a&#8321; + b&#8321;</text>
           </g>
           <g class="dgn dgs0">
@@ -777,9 +780,9 @@
             <line class="dg-w" x1="315" y1="240" x2="315" y2="225"/><polygon class="dg-tip" points="315,218 311,225 319,225"/>
             <line class="dg-w" x1="315" y1="288" x2="315" y2="279"/><polygon class="dg-tip" points="315,272 311,279 319,279"/>
             <line class="dg-w" x1="112" y1="288" x2="112" y2="225"/><polygon class="dg-tip" points="112,218 108,225 116,225"/>
-            <circle cx="112" cy="288" r="3" fill="#c7cdd6"/>
+            <circle class="dgj" cx="112" cy="288" r="3"/>
             <line class="dg-w" x1="360" y1="208" x2="360" y2="146"/><polygon class="dg-tip" points="360,139 356,146 364,146"/>
-            <circle cx="360" cy="208" r="3" fill="#c7cdd6"/>
+            <circle class="dgj" cx="360" cy="208" r="3"/>
             <text class="dg-sb" x="374" y="170">s&#8321; = a&#8320;&#8242;</text>
           </g>
         </g>
@@ -1221,7 +1224,12 @@ var DL_RELEASE = "";   /* optional mirror base, e.g. a release CDN prefix */
       /* resting state: accent, dashed -- the dashes say enlarged */
       if(G2)G2.querySelectorAll('.expand').forEach(function(e){
         e.classList.add('on');});
-      r3plain(false); r3(5); r4(0);
+      r3plain(false); r3(5);
+      /* with motion off the drawing rests as a still, so it must show both
+         S-boxes: lighting only S-tilde-0 read as if half of SubColumn were
+         disabled rather than merely later in the walk */
+      if(G4)G4.querySelectorAll('.dgs0, .dgs1').forEach(function(e){
+        e.classList.add('on');});
     }
     function start(){
       if(reduce||!visible||tid)return;
