@@ -253,9 +253,10 @@
   #designfig .rmode .rhide{display:none}
   /* elision on the HAIFA chain: three dots sitting on the broken leader */
   #designfig .dgd{fill:#6f7885;transition:fill .55s}
-  /* branch dots on the round detail: same colour as the wire they sit on,
-     so a live junction never reads as a dead one */
-  #designfig .dgj{fill:var(--accent)}
+  /* branch dots follow the box they sit in, not the theme: a junction in a
+     panel that has not been reached yet must not read as live */
+  #designfig .dgj{fill:#c7cdd6;transition:fill .55s}
+  #designfig .dgn.on .dgj{fill:var(--accent)}
   #designfig .dgn.on .dgd{fill:var(--accent)}
   #designfig .mf{fill:none;stroke:#cbd1d9;stroke-width:1.4;transition:.55s}
   #designfig polygon.mf{stroke:none;fill:#cbd1d9}
